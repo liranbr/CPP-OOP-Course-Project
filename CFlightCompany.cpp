@@ -1,19 +1,14 @@
 #include "FlightCompany.h"
 
-class CFlightCompany {
-private:
-	char* nameOfCompany;
-public:
-	CFlightCompany(const char* nameOfCompany) {
-		strcpy(this->nameOfCompany, nameOfCompany);
-	}
-	char* GetNameOfCompany() {
-		return strdup(nameOfCompany);
-	}
-	void SetName(const char* nameOfCompany) {
-		strcpy(this->nameOfCompany, nameOfCompany);
-	}
-	void Print(ostream& outstream) {
-		outstream << "Flight company: " << nameOfCompany;
-	}
-};
+CFlightCompany::CFlightCompany(const char* nameOfCompany) {
+	strcpy_s(this->nameOfCompany, strlen(nameOfCompany), nameOfCompany);
+}
+char* CFlightCompany::GetNameOfCompany() {
+	return _strdup(nameOfCompany);
+}
+void CFlightCompany::SetName(const char* nameOfCompany) {
+	strcpy_s(this->nameOfCompany, strlen(nameOfCompany), nameOfCompany);
+}
+void CFlightCompany::Print(ostream& outstream) {
+	outstream << "Flight company: " << nameOfCompany;
+}

@@ -2,7 +2,7 @@
 
 CAddress::CAddress(int houseNum, const char* street, const char* city) {
 	this->houseNum = houseNum;
-	strcpy_s(this->city, strlen(city), city);
+	strcpy_s(this->city, strlen(city), city); // MAYBE +1 TO STRLEN?
 	strcpy_s(this->street, strlen(street), street);
 }
 char* CAddress::GetCity() {
