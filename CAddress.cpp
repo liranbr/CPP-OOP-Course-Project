@@ -2,8 +2,8 @@
 
 CAddress::CAddress(int houseNum, const char* street, const char* city) {
 	this->houseNum = houseNum;
-	strcpy_s(this->city, strlen(city), city); // MAYBE +1 TO STRLEN?
-	strcpy_s(this->street, strlen(street), street);
+	strcpy(this->city,  city); // MAYBE +1 TO STRLEN?
+	strcpy(this->street, street);
 }
 char* CAddress::GetCity() {
 	return _strdup(city);
@@ -15,10 +15,10 @@ int CAddress::GetHouseNum() {
 	return houseNum;
 }
 void CAddress::Print(ostream& outstream) {
-	outstream << street << " " << houseNum << ", " << city;
+	outstream << street << " " << houseNum << ", " << city << "\n";
 }
 void CAddress::UpdateAddress(const char* city, const char* street, int houseNum) {
-	strcpy_s(this->city, strlen(city), city);
-	strcpy_s(this->street, strlen(street), street);
+	strcpy(this->city, city);
+	strcpy(this->street, street);
 	this->houseNum = houseNum;
 }

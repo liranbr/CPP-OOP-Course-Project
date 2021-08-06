@@ -1,6 +1,10 @@
+#ifndef __FLIGHT_INFO_H
+#define __FLIGHT_INFO_H
+
+
 #include <iostream>
+#include "helper.h"
 using namespace std;
-constexpr auto MAX = 63;
 
 class CFlightInfo {
 private:
@@ -9,7 +13,7 @@ private:
 	int duration;
 	int distance;
 public:
-	CFlightInfo(const char destination[MAX], int flightNum, int duration, int distance);
+	CFlightInfo(const char* destination, int flightNum, int duration, int distance);
 	bool IsEqual(int otherFlightNum);
 	void Print(ostream& outstream);
 	int GetFlightNum();
@@ -17,7 +21,8 @@ public:
 	int GetDuration();
 	int GetDistance();
 	void SetFlightNum(int flightNum);
-	void SetDest(const char destination[MAX]);
+	void SetDest(const char* destination);
 	void SetDuration(int duration);
 	void SetDistance(int distance);
 };
+#endif

@@ -1,7 +1,7 @@
 #include "FlightInfo.h"
 
-CFlightInfo::CFlightInfo(const char destination[MAX], int flightNum, int duration, int distance) {
-	strcpy_s(this->destination, strlen(destination), destination);
+CFlightInfo::CFlightInfo(const char* destination, int flightNum, int duration, int distance) {
+	strcpy(this->destination, destination);
 	this->flightNum = flightNum;
 	this->duration = duration;
 	this->distance = distance;
@@ -10,7 +10,7 @@ bool CFlightInfo::IsEqual(int otherFlightNum) {
 	return this->flightNum == otherFlightNum;
 }
 void CFlightInfo::Print(ostream& outstream) {
-	outstream << "Flight Info dest: " << destination << " Number " << flightNum << " minutes " << duration << " KM " << distance;
+	outstream << "Flight Info dest: " << destination << " Number " << flightNum << " minutes " << duration << " KM " << distance << "\n";
 }
 int CFlightInfo::GetFlightNum() {
 	return flightNum;
@@ -27,8 +27,8 @@ int CFlightInfo::GetDistance() {
 void CFlightInfo::SetFlightNum(int flightNum) {
 	this->flightNum = flightNum;
 }
-void CFlightInfo::SetDest(const char destination[MAX]) {
-	strcpy_s(this->destination, strlen(destination), destination);
+void CFlightInfo::SetDest(const char* destination) {
+	strcpy(this->destination, destination);
 }
 void CFlightInfo::SetDuration(int duration) {
 	this->duration = duration;

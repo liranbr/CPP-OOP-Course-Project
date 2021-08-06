@@ -1,10 +1,14 @@
+#ifndef __CREW_MEMBER_H
+#define __CREW_MEMBER_H
+
 #include <iostream>
 #include <string.h>
+#include "helper.h"
 using namespace std;
 
 class CCrewMember {
 private:
-	char* crewMemberName;
+	char crewMemberName[MAX];
 	int airMinutes;
 public:
 	CCrewMember(const char* crewMemberName, int airMinutes = 0);
@@ -15,3 +19,4 @@ public:
 		void Print(ostream& outstream);
 		bool IsEqual(CCrewMember otherCrewMember);
 };
+#endif
