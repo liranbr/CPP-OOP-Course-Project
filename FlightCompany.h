@@ -7,11 +7,12 @@ using namespace std;
 
 class CFlightCompany {
 private:
-	char nameOfCompany[MAX];
+	char* nameOfCompany;
 public:
 	CFlightCompany(const char* nameOfCompany);
-	char* GetNameOfCompany();
-	void SetName(const char* nameOfCompany);
-	void Print(ostream& outstream);
+	CFlightCompany(const CFlightCompany& other);
+		char* GetNameOfCompany();
+		void SetName(const char* nameOfCompany);
+		void Print(ostream& outstream);
 };
 #endif // !__FLIGHT_COMPANY_H

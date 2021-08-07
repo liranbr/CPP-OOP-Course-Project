@@ -8,10 +8,11 @@ using namespace std;
 
 class CCrewMember {
 private:
-	char crewMemberName[MAX];
+	char* crewMemberName;
 	int airMinutes;
 public:
 	CCrewMember(const char* crewMemberName, int airMinutes = 0);
+	CCrewMember(const CCrewMember& other);
 		bool UpdateMinutes(int newAirMinutes);
 		int GetMinutes();
 		void SetCrewMemberName(const char* newCrewMemberName);

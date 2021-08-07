@@ -8,8 +8,8 @@ using namespace std;
 
 class CAddress {
 private:
-	char city[MAX];
-	char street[MAX];
+	char* city;
+	char* street;
 	int houseNum;
 public:
 	CAddress(int houseNum, const char* street, const char* city = "Tel Aviv");
