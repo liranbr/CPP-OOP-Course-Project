@@ -4,6 +4,12 @@ CCrewMember::CCrewMember(const char* crewMemberName, int airMinutes) {
 	strcpy(this->crewMemberName, crewMemberName);
 	this->airMinutes = airMinutes;
 }
+
+CCrewMember::CCrewMember(const CCrewMember& other) {
+	strcpy(this->crewMemberName, other.crewMemberName);
+	this->airMinutes = other.airMinutes;
+}
+
 bool CCrewMember::UpdateMinutes(int additionalAirMinutes) {
 	if (additionalAirMinutes > 0) {
 		airMinutes += additionalAirMinutes;
@@ -11,27 +17,25 @@ bool CCrewMember::UpdateMinutes(int additionalAirMinutes) {
 	}
 	return false;
 }
+
 int CCrewMember::GetMinutes() {
 	return airMinutes;
 }
+
 void CCrewMember::SetCrewMemberName(const char* newCrewMemberName) {
 	strcpy(this->crewMemberName, newCrewMemberName);
 }
+
 char* CCrewMember::GetCrewMemberName() {
 	return _strdup(crewMemberName);
 }
+
 void CCrewMember::Print(ostream& outstream) {
 	outstream << "Crewmember " << crewMemberName << " minutes " << airMinutes << "\n";
 }
+
 bool CCrewMember::IsEqual(CCrewMember otherCrewMember) {
-	char* tempCrewMemberName= otherCrewMember.GetCrewMemberName();
-	/*this->crewMemberName == otherCrewMember.GetCrewMemberName();*/
-	
-	if (strlen(crewMemberName) != strlen(tempCrewMemberName))
-		return false;
-	for (int i = 0; i < strlen(crewMemberName); i++)
-		if (*(crewMemberName + i) != *(tempCrewMemberName + i))
-			return false;
-	return true;
-	
+	if (strcmp(this->crewMemberName, otherCrewMember.GetCrewMemberName()) == 0)
+		return true; // strcmp returns 0 if they're equal
+	return false;
 }
