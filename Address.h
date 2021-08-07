@@ -9,10 +9,11 @@ using namespace std;
 class CAddress {
 private:
 	char city[MAX];
-	char street[100];
+	char street[MAX];
 	int houseNum;
 public:
 	CAddress(int houseNum, const char* street, const char* city = "Tel Aviv");
+	CAddress(const CAddress& other);
 		char* GetCity();
 		char* GetStreet();
 		int GetHouseNum();
