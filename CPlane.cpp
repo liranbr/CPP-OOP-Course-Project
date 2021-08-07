@@ -3,13 +3,14 @@
 CPlane::CPlane(int id, int numOfChairs, const char* modelName) {
 	this->id = id;
 	this->numOfChairs = numOfChairs;
-	this->modelName = new char[strlen(modelName) + 1];
+	this->modelName = new char[BUFFER];
 	strcpy(this->modelName, modelName);
 }
 
 CPlane::CPlane(const CPlane& other) {
 	this->id = other.id;
 	this->numOfChairs = other.numOfChairs;
+	this->modelName = new char[BUFFER];
 	strcpy(this->modelName, other.modelName);
 }
 

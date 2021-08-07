@@ -1,12 +1,13 @@
 #include "CrewMember.h"
 
 CCrewMember::CCrewMember(const char* crewMemberName, int airMinutes) {
-	this->crewMemberName = new char[strlen(crewMemberName) + 1];
+	this->crewMemberName = new char[BUFFER];
 	strcpy(this->crewMemberName, crewMemberName);
 	this->airMinutes = airMinutes;
 }
 
 CCrewMember::CCrewMember(const CCrewMember& other) {
+	this->crewMemberName = new char[BUFFER];
 	strcpy(this->crewMemberName, other.crewMemberName);
 	this->airMinutes = other.airMinutes;
 }
