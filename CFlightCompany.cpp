@@ -1,11 +1,16 @@
 #include "FlightCompany.h"
 
 CFlightCompany::CFlightCompany(const char* nameOfCompany) {
+	this->nameOfCompany = new char[strlen(nameOfCompany) + 1];
 	strcpy(this->nameOfCompany, nameOfCompany);
 }
 
 CFlightCompany::CFlightCompany(const CFlightCompany& other) {
 	strcpy(this->nameOfCompany, other.nameOfCompany);
+}
+
+CFlightCompany::~CFlightCompany() {
+	delete[]nameOfCompany;
 }
 
 char* CFlightCompany::GetNameOfCompany() {

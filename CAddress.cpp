@@ -2,14 +2,24 @@
 
 CAddress::CAddress(int houseNum, const char* street, const char* city) {
 	this->houseNum = houseNum;
-	strcpy(this->city,  city); // MAYBE +1 TO STRLEN?
+	this->city = new char[strlen(street) + 1];
+	this->city = new char[strlen(street) + 1];
+	strcpy(this->city,  city);
 	strcpy(this->street, street);
 }
 
 CAddress::CAddress(const CAddress& other) {
 	houseNum = other.houseNum;
+	this->city = new char[strlen(street) + 1];
+	this->city = new char[strlen(street) + 1];
 	strcpy(city, other.city);
 	strcpy(street, other.street);
+}
+
+
+CAddress::~CAddress() {
+	delete[]street;
+	delete[]city;
 }
 
 char* CAddress::GetCity() {

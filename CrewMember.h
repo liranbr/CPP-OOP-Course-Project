@@ -13,6 +13,7 @@ private:
 public:
 	CCrewMember(const char* crewMemberName, int airMinutes = 0);
 	CCrewMember(const CCrewMember& other);
+	~CCrewMember();
 		bool UpdateMinutes(int newAirMinutes);
 		int GetMinutes();
 		void SetCrewMemberName(const char* newCrewMemberName);

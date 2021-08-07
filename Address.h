@@ -14,6 +14,7 @@ private:
 public:
 	CAddress(int houseNum, const char* street, const char* city = "Tel Aviv");
 	CAddress(const CAddress& other);
+	~CAddress();
 		char* GetCity();
 		char* GetStreet();
 		int GetHouseNum();

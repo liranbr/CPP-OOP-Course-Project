@@ -1,6 +1,7 @@
 #include "CrewMember.h"
 
 CCrewMember::CCrewMember(const char* crewMemberName, int airMinutes) {
+	this->crewMemberName = new char[strlen(crewMemberName) + 1];
 	strcpy(this->crewMemberName, crewMemberName);
 	this->airMinutes = airMinutes;
 }
@@ -8,6 +9,9 @@ CCrewMember::CCrewMember(const char* crewMemberName, int airMinutes) {
 CCrewMember::CCrewMember(const CCrewMember& other) {
 	strcpy(this->crewMemberName, other.crewMemberName);
 	this->airMinutes = other.airMinutes;
+}
+CCrewMember::~CCrewMember() {
+	delete[]crewMemberName;
 }
 
 bool CCrewMember::UpdateMinutes(int additionalAirMinutes) {

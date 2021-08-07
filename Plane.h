@@ -13,6 +13,7 @@ private:
 public:
 	CPlane(int id, int numOfChairs, const char* modelName);
 	CPlane(const CPlane& other);
+	~CPlane();
 		int GetId();
 		char* GetModelName();
 		int GetNumOfChairs();
