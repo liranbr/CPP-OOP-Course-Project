@@ -1,7 +1,8 @@
 #include "Plane.h"
- 
-CPlane::CPlane(int id, int numOfChairs, const char* modelName) {
-	this->id = id;
+
+CPlane::CPlane(int numOfChairs, const char* modelName) {
+	this->id = staticID;
+	staticID++;
 	this->numOfChairs = numOfChairs;
 	this->modelName = new char[BUFFER];
 	strcpy(this->modelName, modelName);
@@ -34,12 +35,15 @@ void CPlane::Print(ostream& outstream) {
 	outstream << "Plane " << id << " degem " << modelName << " seats " << numOfChairs << "\n";
 }
 
-void CPlane::Print(ostream& outstream) {
-	outstream << "Plane " << id << " degem " << modelName << " seats " << numOfChairs << "\n";
+void CPlane::operator++() {
+	++numOfChairs;
 }
 
-ostream& operator>>(ostream& outstream, const CPlane& plane)
-{
+void CPlane::operator++(int) {
+	numOfChairs++;
+}
+
+ostream& operator>>(ostream& outstream, const CPlane& plane) {
 	return outstream << "Plane " << plane.id << " degem " << plane.modelName << " seats " << plane.numOfChairs << "\n";
 }
 
