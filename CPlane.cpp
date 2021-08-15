@@ -34,6 +34,15 @@ void CPlane::Print(ostream& outstream) {
 	outstream << "Plane " << id << " degem " << modelName << " seats " << numOfChairs << "\n";
 }
 
+void CPlane::Print(ostream& outstream) {
+	outstream << "Plane " << id << " degem " << modelName << " seats " << numOfChairs << "\n";
+}
+
+ostream& operator>>(ostream& outstream, const CPlane& plane)
+{
+	return outstream << "Plane " << plane.id << " degem " << plane.modelName << " seats " << plane.numOfChairs << "\n";
+}
+
 bool CPlane::IsEqual(CPlane otherPlane) {
 	return this->id == otherPlane.GetId();
 }

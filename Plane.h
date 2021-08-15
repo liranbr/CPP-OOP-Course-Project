@@ -18,6 +18,7 @@ public:
 		char* GetModelName();
 		int GetNumOfChairs();
 		void Print(ostream& outstream);
+		friend ostream& operator>>(ostream& outstream, const CPlane& plane);
 		bool IsEqual(CPlane otherPlane);
 };
 #endif
