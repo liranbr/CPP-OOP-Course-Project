@@ -18,8 +18,12 @@ public:
 		char* GetCity();
 		char* GetStreet();
 		int GetHouseNum();
-		void Print(ostream& outstream);
-		void UpdateAddress(const char* city, const char* street, int houseNum);
+		//void Print(ostream& outstream);
+		//void UpdateAddress(const char* city, const char* street, int houseNum);
+		char* GetCurrentAddress();
 		friend ostream& operator<<(ostream& outstream, const CAddress& otherAddress);
+		friend istream& operator>>(istream& instream, const CAddress& address);
+		bool operator==(const CAddress& otherAddress) const;
+		bool operator!=(const CAddress& otherAddress) const;
 };
 #endif
