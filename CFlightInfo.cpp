@@ -22,6 +22,11 @@ void CFlightInfo::Print(ostream& outstream) {
 	outstream << "Flight Info dest: " << destination << " Number " << flightNum << " minutes " << duration << " KM " << distance << "\n";
 }
 
+ostream& operator<<(ostream& outstream, const CFlightInfo& otherFlightInfo) {
+	outstream << "Flight Info dest: " << otherFlightInfo.destination << " Number " <<
+		otherFlightInfo.flightNum << " minutes " << otherFlightInfo.duration << " KM " << otherFlightInfo.distance << "\n";
+}
+
 int CFlightInfo::GetFlightNum() {
 	return flightNum;
 }

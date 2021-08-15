@@ -25,5 +25,6 @@ public:
 		void SetDest(const char* destination);
 		void SetDuration(int duration);
 		void SetDistance(int distance);
+		friend ostream& operator<<(ostream& outstream, const CFlightInfo& otherFlightInfo);
 };
 #endif

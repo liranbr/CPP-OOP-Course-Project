@@ -20,5 +20,6 @@ public:
 		int GetHouseNum();
 		void Print(ostream& outstream);
 		void UpdateAddress(const char* city, const char* street, int houseNum);
+		friend ostream& operator<<(ostream& outstream, const CAddress& otherAddress);
 };
 #endif
