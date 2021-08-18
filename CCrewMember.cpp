@@ -4,9 +4,12 @@ CCrewMember::CCrewMember(const char* crewMemberName, int airMinutes) {
 	this->crewMemberName = new char[BUFFER];
 	strcpy(this->crewMemberName, crewMemberName);
 	this->airMinutes = airMinutes;
+	this->id = staticID;
+	staticID++;
 }
 
 CCrewMember::CCrewMember(const CCrewMember& other) {
+	this->id = other.id;
 	this->crewMemberName = new char[BUFFER];
 	strcpy(this->crewMemberName, other.crewMemberName);
 	this->airMinutes = other.airMinutes;
@@ -21,6 +24,10 @@ bool CCrewMember::UpdateMinutes(int additionalAirMinutes) {
 		return true;
 	}
 	return false;
+}
+
+void CCrewMember::operator+=(int newAirMinutes) {
+	this->airMinutes += newAirMinutes;
 }
 
 int CCrewMember::GetMinutes() {
@@ -40,7 +47,5 @@ void CCrewMember::Print(ostream& outstream) {
 }
 
 bool CCrewMember::IsEqual(CCrewMember otherCrewMember) {
-	if (strcmp(this->crewMemberName, otherCrewMember.GetCrewMemberName()) == 0)
-		return true; // strcmp returns 0 if they're equal
-	return false;
+	return this->id == otherCrewMember.id;
 }

@@ -10,8 +10,8 @@ private:
 	int id;
 	char* modelName;
 	int numOfChairs;
-public:
 	static int staticID;
+public:
 	CPlane(int numOfChairs, const char* modelName);
 	CPlane(const CPlane& other);
 	~CPlane();
