@@ -58,15 +58,15 @@ istream& operator>>(istream& instream,  CAddress& address) {
 	return instream;
 }
 
-//void CAddress::UpdateAddress(const char* newCity, const char* newStreet, int newHouseNum) {
-//	//delete[]city;
-//	//delete[]street;
-//	//this->city = new char[BUFFER];
-//	//this->street = new char[BUFFER];
-//	strcpy(this->city, newCity);
-//	strcpy(this->street, newStreet);
-//	this->houseNum = newHouseNum;
-//}
+void CAddress::UpdateAddress(const char* newCity, const char* newStreet, int newHouseNum) {
+	delete[]city;
+	delete[]street;
+	this->city = new char[BUFFER];
+	this->street = new char[BUFFER];
+	strcpy(this->city, newCity);
+	strcpy(this->street, newStreet);
+	this->houseNum = newHouseNum;
+}
 
 bool CAddress::operator==(const CAddress& otherAddress) const {
 	return strcmp(this->city, otherAddress.city) == 0 && strcmp(this->street, otherAddress.street) == 0 && this->houseNum == otherAddress.houseNum;
