@@ -25,8 +25,8 @@ public:
 		void SetDest(const char* destination);
 		void SetDuration(int duration);
 		void SetDistance(int distance);
-		friend ostream& operator<<(ostream& outstream, const CFlightInfo& otherFlightInfo);
-		bool operator!=(const CFlightInfo& otherAddress) const;
+		friend ostream& operator<<(ostream& outstream, const CFlightInfo& flightInfo);
+		bool operator!=(const CFlightInfo& otherFlightInfo) const;
 		operator int() const;
 };
 #endif

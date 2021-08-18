@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="Address.h" />
     <ClInclude Include="CrewMember.h" />
+    <ClInclude Include="Flight.h" />
     <ClInclude Include="FlightCompany.h" />
     <ClInclude Include="FlightInfo.h" />
     <ClInclude Include="helper.h" />
@@ -152,6 +153,7 @@
     <ClCompile Include="CFlightCompany.cpp" />
     <ClCompile Include="CFlightInfo.cpp" />
     <ClCompile Include="CPlane.cpp" />
+    <ClCompile Include="CFlight.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

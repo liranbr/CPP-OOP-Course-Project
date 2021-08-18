@@ -33,6 +33,9 @@
     <ClInclude Include="helper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Flight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CAddress.cpp">
@@ -51,6 +54,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CPlane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CFlight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
