@@ -16,7 +16,7 @@ CPlane::CPlane(const CPlane& other) {
 }
 
 CPlane::~CPlane() {
-	delete[]modelName;
+	delete[] modelName;
 }
 
 int CPlane::GetId() {

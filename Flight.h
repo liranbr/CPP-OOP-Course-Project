@@ -12,9 +12,9 @@ using namespace std;
 class CFlight
 {
 private:
-	CFlightInfo flightInfo;
-	CPlane plane;
-	CCrewMember crewMembers[MAX_CREW];
+	CFlightInfo* flightInfo;
+	CPlane* plane;
+	CCrewMember* crewMembers[MAX_CREW];
 	int crewMemberAmount;
 
 public:
@@ -24,6 +24,7 @@ public:
 	void operator+(CCrewMember& newCrewMember);
 	friend ostream& operator<<(ostream& outstream, const CFlight& flight);
 	bool operator==(const CFlight& otherFlight) const;
+	~CFlight();
 };
 
 #endif
