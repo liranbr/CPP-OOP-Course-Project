@@ -18,9 +18,9 @@ bool CFlightInfo::IsEqual(int otherFlightNum) {
 	return this->flightNum == otherFlightNum;
 }
 
-void CFlightInfo::Print(ostream& outstream) {
-	outstream << "Flight Info dest: " << destination << " Number " << flightNum << " minutes " << duration << " KM " << distance << "\n";
-}
+//void CFlightInfo::Print(ostream& outstream) {
+//	outstream << "Flight Info dest: " << destination << " Number " << flightNum << " minutes " << duration << " KM " << distance << "\n";
+//}
 
 ostream& operator<<(ostream& outstream, const CFlightInfo& otherFlightInfo) {
 	outstream << "Flight Info dest: " << otherFlightInfo.destination << " Number " <<
@@ -57,4 +57,13 @@ void CFlightInfo::SetDuration(int duration) {
 
 void CFlightInfo::SetDistance(int distance) {
 	this->distance = distance;
+}
+
+bool CFlightInfo::operator!=(const CFlightInfo& otherAddress) const {
+	return strcmp(this->destination, otherAddress.destination) != 0 || this->flightNum != otherAddress.flightNum ||
+		this->duration != otherAddress.duration || this->distance != otherAddress.distance;
+}
+
+CFlightInfo::operator int() const {
+	return duration;
 }

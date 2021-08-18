@@ -16,7 +16,7 @@ public:
 	CFlightInfo(const char* destination, int flightNum, int duration, int distance);
 	CFlightInfo(const CFlightInfo& other);
 		bool IsEqual(int otherFlightNum);
-		void Print(ostream& outstream);
+		//void Print(ostream& outstream);
 		int GetFlightNum();
 		char* GetDest();
 		int GetDuration();
@@ -26,5 +26,7 @@ public:
 		void SetDuration(int duration);
 		void SetDistance(int distance);
 		friend ostream& operator<<(ostream& outstream, const CFlightInfo& otherFlightInfo);
+		bool operator!=(const CFlightInfo& otherAddress) const;
+		operator int() const;
 };
 #endif
