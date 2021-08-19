@@ -26,8 +26,11 @@ bool CCrewMember::UpdateMinutes(int additionalAirMinutes) {
 	return false;
 }
 
-void CCrewMember::operator+=(int newAirMinutes) {
-	this->airMinutes += newAirMinutes;
+bool CCrewMember::operator+=(int additionalAirMinutes) {
+    if (additionalAirMinutes <= 0)
+        return false;
+    this->airMinutes += additionalAirMinutes;
+    return true;
 }
 
 int CCrewMember::GetMinutes() {

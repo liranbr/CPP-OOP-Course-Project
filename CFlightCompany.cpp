@@ -1,4 +1,5 @@
 #include "FlightCompany.h"
+#include "CrewMember.h"
 
 CFlightCompany::CFlightCompany(const char* nameOfCompany) {
 	this->nameOfCompany = new char[BUFFER];
@@ -24,4 +25,37 @@ void CFlightCompany::SetName(const char* nameOfCompany) {
 
 void CFlightCompany::Print(ostream& outstream) {
 	outstream << "Flight company: " << nameOfCompany << "\n";
+}
+
+bool CFlightCompany::AddCrewMember(CCrewMember newMember) {
+    if (crewMemberAmount >= MAX_CREWS)
+        return false;
+    for (CCrewMember cm : this->crewMembers) // check for duplicate
+        if (cm == newMember)
+            return false;
+    this->crewMembers[crewMemberAmount] = new CCrewMember(newMember);
+    crewMemberAmount++;
+    return true;
+}
+
+bool CFlightCompany::AddPlane(CPlane newPlane) {
+    if (planeAmount >= MAX_PLANES)
+        return false;
+    for (CPlane cp : this->planes) // check for duplicate
+        if (cp == newPlane)
+            return false;
+    this->planes[PlaneAmount] = new CPlane(newPlane);
+    planeAmount++;
+    return true;
+}
+
+bool CFlightCompany::AddFlight(CFlight newFlight) {
+    if (flightAmount >= MAX_FLIGHTS)
+        return false;
+    for (CFlight cf : this->flights) // check for duplicate
+        if (cf == newFlight)
+            return false;
+    this->flights[flightAmount] = new CFlight(newFlight);
+    flightAmount++;
+    return true;
 }

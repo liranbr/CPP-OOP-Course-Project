@@ -43,7 +43,7 @@ void CPlane::operator++(int) {
 	numOfChairs++;
 }
 
-ostream& operator>>(ostream& outstream, const CPlane& plane) {
+ostream& operator<<(ostream& outstream, const CPlane& plane) {
 	return outstream << "Plane " << plane.id << " degem " << plane.modelName << " seats " << plane.numOfChairs << "\n";
 }
 

@@ -15,7 +15,7 @@ using namespace std;
 // Change IsEqual to == in other classes
 // Verify delete with [] or without.
 
-void main()
+int main()
 {
 	cout << endl << "Checking Address" << endl;
 	CAddress a(0, NULL, NULL);
@@ -37,7 +37,7 @@ void main()
 
 	if (!((*pCmArr[1]) += 200))
 		cout << "error update minutes" << endl;
-
+/*
 	for (int i = 0; i < 3; i++)
 		if (!pDelta->AddCrewMember(*pCmArr[i]))
 			cout << "Problem adding crew member " << i + 1 << endl;
@@ -104,11 +104,11 @@ void main()
 	FArr[0] = new CFlight(fInfo1);
 	FArr[1] = new CFlight(fInfo2, pDelta->GetPlane(1));
 
-	cout << "Before seting plane" << endl;
+	cout << "Before setting plane" << endl;
 	cout << *FArr[0];
 	FArr[0]->SetPlane(pDelta->GetPlane(0));
 
-	cout << "After seting plane " << endl;
+	cout << "After setting plane " << endl;
 	cout << *FArr[0];
 
 	for (int i = 0; i < 2; i++)
@@ -131,6 +131,6 @@ void main()
 
 
 	delete pDelta;
-
+*/
 	system("pause");
 }

@@ -17,7 +17,7 @@ public:
 	CCrewMember(const CCrewMember& other);
 	~CCrewMember();
 		bool UpdateMinutes(int newAirMinutes);
-		void operator+=(int newAirMinutes);
+		bool operator+=(int newAirMinutes);
 		int GetMinutes();
 		void SetCrewMemberName(const char* newCrewMemberName);
 		char* GetCrewMemberName();

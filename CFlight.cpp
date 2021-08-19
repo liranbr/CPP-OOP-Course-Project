@@ -25,7 +25,7 @@ void CFlight::operator+(CCrewMember &newCrewMember) {
 
     //Check for duplicate crew members.
     for (CCrewMember *crewMember : this->crewMembers)
-        if (crewMember->IsEqual(newCrewMember))
+        if (crewMember == newCrewMember)
             return;
 
     this->crewMembers[crewMemberAmount] = &newCrewMember;
