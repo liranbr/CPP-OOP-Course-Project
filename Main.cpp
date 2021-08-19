@@ -10,6 +10,10 @@ using namespace std;
 #include "Address.h"
 #include "FlightCompany.h"
 
+//TODO continue work form here...
+// Add AddCrewMember to FlightCompany, and other things
+// Change IsEqual to == in other classes
+// Verify delete with [] or without.
 
 void main()
 {
