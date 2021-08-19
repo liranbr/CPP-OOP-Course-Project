@@ -4,8 +4,8 @@ CCrewMember::CCrewMember(const char* crewMemberName, int airMinutes) {
 	this->crewMemberName = new char[BUFFER];
 	strcpy(this->crewMemberName, crewMemberName);
 	this->airMinutes = airMinutes;
-	this->id = staticID;
-	staticID++;
+	this->id = START_ID;
+	START_ID++;
 }
 
 CCrewMember::CCrewMember(const CCrewMember& other) {
@@ -31,6 +31,10 @@ bool CCrewMember::operator+=(int additionalAirMinutes) {
         return false;
     this->airMinutes += additionalAirMinutes;
     return true;
+}
+
+int CCrewMember::GetId() {
+    return id;
 }
 
 int CCrewMember::GetMinutes() {

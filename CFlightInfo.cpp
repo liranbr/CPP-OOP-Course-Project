@@ -28,7 +28,7 @@ ostream &operator<<(ostream &outstream, const CFlightInfo &otherFlightInfo) {
     " KM " << otherFlightInfo.distance << "\n";
 }
 
-int CFlightInfo::GetFlightNum() {
+int CFlightInfo::GetFNum() {
     return flightNum;
 }
 

@@ -11,19 +11,20 @@ private:
 	char* crewMemberName;
 	int airMinutes;
 	int id;
-	static int staticID;
 public:
+    static int START_ID;
 	CCrewMember(const char* crewMemberName, int airMinutes = 0);
 	CCrewMember(const CCrewMember& other);
 	~CCrewMember();
 		bool UpdateMinutes(int newAirMinutes);
 		bool operator+=(int newAirMinutes);
         bool operator==(CCrewMember& otherCrewMember);
+        int GetId();
 		int GetMinutes();
 		void SetCrewMemberName(const char* newCrewMemberName);
 		char* GetCrewMemberName();
 		void Print(ostream& outstream);
 //		bool IsEqual(CCrewMember otherCrewMember);
 };
-int CCrewMember::staticID = 1000;
+int CCrewMember::START_ID = 1000;
 #endif

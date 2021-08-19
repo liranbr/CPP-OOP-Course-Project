@@ -58,3 +58,7 @@ CFlight::~CFlight() {
     plane->~CPlane();
     delete flightInfo;
 }
+
+int CFlight::GetFNum() {
+    return this->flightInfo->GetFNum();
+}

@@ -24,6 +24,7 @@ public:
 	void operator+(CCrewMember& newCrewMember);
 	friend ostream& operator<<(ostream& outstream, const CFlight& flight);
 	bool operator==(const CFlight& otherFlight) const;
+	int GetFNum();
 	~CFlight();
 }
 

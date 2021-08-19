@@ -1,5 +1,8 @@
 #include "FlightCompany.h"
 #include "CrewMember.h"
+#include "Plane.h"
+#include "Flight.h"
+#include "FlightInfo.h"
 
 CFlightCompany::CFlightCompany(const char* nameOfCompany) {
 	this->nameOfCompany = new char[BUFFER];
@@ -58,4 +61,30 @@ bool CFlightCompany::AddFlight(CFlight newFlight) {
     this->flights[flightAmount] = new CFlight(newFlight);
     flightAmount++;
     return true;
+}
+
+CFlight& CFlightCompany::GetFlight(int flightID) {
+    for (CFlight& cf : this->flights) {
+        if (cf.GetFNum() == flightID)
+            return cf;
+    }
+    return nullptr;
+}
+
+CCrewMember& CFlightCompany::GetCrewMember(int memberID) {
+    for (CCrewMember& cm : this->crewMembers) {
+        if (cm.GetId() == memberID)
+            return cm;
+    }
+    return nullptr;
+}
+
+void CFlightCompany::AddCrewToFlight(int flightID, int memberID) {
+    CFlight* flight = GetFlight(flightID);
+    flight = flight + GetCrewMember(memberID);
+}
+
+CPlane& CFlightCompany::GetPlane(int planeIndex) {
+    if (planeIndex > 0 && planeIndex <= planeAmount - 1)
+        return planes[planeIndex];
 }

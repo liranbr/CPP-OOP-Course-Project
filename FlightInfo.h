@@ -17,7 +17,7 @@ public:
 	CFlightInfo(const CFlightInfo& other);
 		bool IsEqual(int otherFlightNum);
 		//void Print(ostream& outstream);
-		int GetFlightNum();
+		int GetFNum();
 		char* GetDest();
 		int GetDuration();
 		int GetDistance();

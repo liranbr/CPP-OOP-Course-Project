@@ -14,6 +14,7 @@ using namespace std;
 // Add AddCrewMember to FlightCompany, and other things
 // Change IsEqual to == in other classes
 // Verify delete with [] or without.
+// General refactoring
 
 int main()
 {
@@ -37,7 +38,7 @@ int main()
 
 	if (!((*pCmArr[1]) += 200))
 		cout << "error update minutes" << endl;
-/*
+
 	for (int i = 0; i < 3; i++)
 		if (!pDelta->AddCrewMember(*pCmArr[i]))
 			cout << "Problem adding crew member " << i + 1 << endl;
@@ -131,6 +132,6 @@ int main()
 
 
 	delete pDelta;
-*/
+
 	system("pause");
 }
