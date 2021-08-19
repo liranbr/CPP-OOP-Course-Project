@@ -49,6 +49,10 @@ void CCrewMember::Print(ostream& outstream) {
 	outstream << "Crewmember " << crewMemberName << " minutes " << airMinutes << "\n";
 }
 
-bool CCrewMember::IsEqual(CCrewMember otherCrewMember) {
-	return this->id == otherCrewMember.id;
+//bool CCrewMember::IsEqual(CCrewMember otherCrewMember) {
+//	return this->id == otherCrewMember.id;
+//}
+
+bool CCrewMember::operator==(CCrewMember& otherCrewMember) {
+    return this->id == otherCrewMember.id;
 }

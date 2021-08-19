@@ -18,11 +18,12 @@ public:
 	~CCrewMember();
 		bool UpdateMinutes(int newAirMinutes);
 		bool operator+=(int newAirMinutes);
+        bool operator==(CCrewMember& otherCrewMember);
 		int GetMinutes();
 		void SetCrewMemberName(const char* newCrewMemberName);
 		char* GetCrewMemberName();
 		void Print(ostream& outstream);
-		bool IsEqual(CCrewMember otherCrewMember);
+//		bool IsEqual(CCrewMember otherCrewMember);
 };
 int CCrewMember::staticID = 1000;
 #endif

@@ -27,6 +27,7 @@ public:
 		void SetDistance(int distance);
 		friend ostream& operator<<(ostream& outstream, const CFlightInfo& flightInfo);
 		bool operator!=(const CFlightInfo& otherFlightInfo) const;
+		bool operator==(const CFlightInfo& otherFlightInfo) const;
 		operator int() const;
 };
 #endif

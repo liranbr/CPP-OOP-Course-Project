@@ -36,10 +36,9 @@ int CAddress::GetHouseNum() {
 
 char *CAddress::GetCurrentAddress() {
     char tempString[MAX];
-    sprintf(tempString, "%s %s %d", this->street, this->houseNum, this->city);
+    sprintf(tempString, "%s %s %d", this->street, this->city, this->houseNum);
     return tempString;
 }
-
 
 //void CAddress::Print(ostream& outstream) {
 //	outstream << street << " " << houseNum << ", " << city << "\n";

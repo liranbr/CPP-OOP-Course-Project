@@ -3,14 +3,14 @@
 CFlight::CFlight(CFlightInfo &flightInfo) {
     this->flightInfo = new CFlightInfo(flightInfo);
     this->plane = NULL;
-    *(this->crewMembers + 0) = NULL;
+    *(this->crewMembers + 0) = nullptr;
     this->crewMemberAmount = 0;
 }
 
 CFlight::CFlight(CFlightInfo &flightInfo, CPlane &plane) {
     this->flightInfo = new CFlightInfo(flightInfo);
     this->plane = new CPlane(plane);
-    *(this->crewMembers + 0) = NULL;
+    *(this->crewMembers + 0) = nullptr;
     this->crewMemberAmount = 0;
 }
 
