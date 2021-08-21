@@ -18,12 +18,24 @@ CCrewMember::~CCrewMember() {
 	delete[]crewMemberName;
 }
 
-bool CCrewMember::UpdateMinutes(int additionalAirMinutes) {
-	if (additionalAirMinutes > 0) {
-		airMinutes += additionalAirMinutes;
-		return true;
-	}
-	return false;
+int CCrewMember::GetId() {
+    return id;
+}
+
+int CCrewMember::GetMinutes() {
+	return airMinutes;
+}
+
+char* CCrewMember::GetCrewMemberName() {
+    return _strdup(crewMemberName);
+}
+
+void CCrewMember::SetCrewMemberName(const char* newCrewMemberName) {
+	strcpy(this->crewMemberName, newCrewMemberName);
+}
+
+friend ostream& operator<<(ostream& outstream, const CCrewMember& crewMember) {
+    return outstream << "Crewmember " << crewMemberName << " minutes " << airMinutes << "\n";
 }
 
 bool CCrewMember::operator+=(int additionalAirMinutes) {
@@ -33,30 +45,22 @@ bool CCrewMember::operator+=(int additionalAirMinutes) {
     return true;
 }
 
-int CCrewMember::GetId() {
-    return id;
+bool CCrewMember::operator==(CCrewMember& otherCrewMember) {
+    return this->id == otherCrewMember.id;
 }
 
-int CCrewMember::GetMinutes() {
-	return airMinutes;
+bool CCrewMember::UpdateMinutes(int additionalAirMinutes) {
+    if (additionalAirMinutes > 0) {
+        airMinutes += additionalAirMinutes;
+        return true;
+    }
+    return false;
 }
 
-void CCrewMember::SetCrewMemberName(const char* newCrewMemberName) {
-	strcpy(this->crewMemberName, newCrewMemberName);
-}
-
-char* CCrewMember::GetCrewMemberName() {
-	return _strdup(crewMemberName);
-}
-
-void CCrewMember::Print(ostream& outstream) {
-	outstream << "Crewmember " << crewMemberName << " minutes " << airMinutes << "\n";
-}
+//void CCrewMember::Print(ostream& outstream) {
+//    outstream << "Crewmember " << crewMemberName << " minutes " << airMinutes << "\n";
+//}
 
 //bool CCrewMember::IsEqual(CCrewMember otherCrewMember) {
 //	return this->id == otherCrewMember.id;
 //}
-
-bool CCrewMember::operator==(CCrewMember& otherCrewMember) {
-    return this->id == otherCrewMember.id;
-}

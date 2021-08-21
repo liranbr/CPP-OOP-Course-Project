@@ -26,6 +26,6 @@ public:
 	bool operator==(const CFlight& otherFlight) const;
 	int GetFNum();
 	~CFlight();
-}
+};
 
 #endif

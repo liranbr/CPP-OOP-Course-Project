@@ -18,11 +18,12 @@ public:
 		int GetId();
 		char* GetModelName();
 		int GetNumOfChairs();
-		void Print(ostream& outstream);
 		friend ostream& operator<<(ostream& outstream, const CPlane& plane);
+		bool operator==(CPlane& otherPlane);
 		void operator++();
 		void operator++(int);
-		bool IsEqual(CPlane otherPlane);
+//		void Print(ostream& outstream);
+//		bool IsEqual(CPlane otherPlane);
 };
 int CPlane::staticID = 100;
 #endif
