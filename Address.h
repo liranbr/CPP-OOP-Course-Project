@@ -19,7 +19,7 @@ public:
     char* GetStreet();
     int GetHouseNum();
     friend ostream& operator<<(ostream& outstream, const CAddress& otherAddress);
-    friend istream& operator>>(istream& instream, const CAddress& address);
+    friend istream& operator>>(istream& instream,  CAddress& address);
     bool operator==(const CAddress& otherAddress) const;
     bool operator!=(const CAddress& otherAddress) const;
     void UpdateAddress(const char* city, const char* street, int houseNum);

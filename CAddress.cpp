@@ -4,8 +4,10 @@ CAddress::CAddress(int houseNum, const char *street, const char *city) {
     this->houseNum = houseNum;
     this->city = new char[BUFFER];
     this->street = new char[BUFFER];
-    strcpy(this->city, city);
-    strcpy(this->street, street);
+    if (street != NULL) 
+        strcpy(this->street, street);
+    if (city != NULL) 
+        strcpy(this->city, city);
 }
 
 CAddress::CAddress(const CAddress &other) {
@@ -37,7 +39,7 @@ ostream& operator<<(ostream &outstream, const CAddress &otherAddress) {
     return outstream << otherAddress.street << " " << otherAddress.houseNum << ", " << otherAddress.city << "\n";
 }
 
-istream &operator>>(istream &instream, CAddress &address) {
+istream &operator>>(istream &instream,  CAddress &address) {
     char tempCity[MAX];
     char tempStreet[MAX];
     int tempHouseNum = 0;

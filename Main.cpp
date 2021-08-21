@@ -18,15 +18,18 @@ using namespace std;
 
 int main()
 {
+	
+
 	cout << endl << "Checking Address" << endl;
 	CAddress a(0, NULL, NULL);
+	
 	cin >> a;
 	cout << a;
 	cout << endl << "Checking CFlightCompany" << endl;
+
 	CFlightCompany* pDelta = new CFlightCompany("Delta");
 	cout << endl << "First company" << endl;
 	pDelta->Print(cout);
-
 
 	CCrewMember* pCmArr[3];
 
@@ -36,22 +39,24 @@ int main()
 
 	if (!((*pCmArr[1]) += 200))
 		cout << "error update minutes" << endl;
-
+	
 	for (int i = 0; i < 3; i++)
 		if (!pDelta->AddCrewMember(*pCmArr[i]))
 			cout << "Problem adding crew member " << i + 1 << endl;
 
 	cout << "******** try adding CrewMembers again *********" << endl;
+	
 	//Create another array that is equal to the first array
 	CCrewMember* crewsDup[3];
 	for (int i = 0; i < 3; i++)
 		crewsDup[i] = new CCrewMember(*pCmArr[i]);
+	   
 
 	for (int i = 0; i < 3; i++) {
 		if (!pDelta->AddCrewMember(*pCmArr[i]))
 			cout << "Problem adding crew member " << i + 1 << endl;
 	}
-
+	
 	for (int i = 0; i < 3; i++)
 		delete crewsDup[i];
 
@@ -116,7 +121,7 @@ int main()
 
 	for (int i = 0; i < 2; i++)
 		delete FArr[i];
-
+	/*
 	cout << "******** After adding Flights *********" << endl;
 	pDelta->Print(cout);
 
@@ -127,8 +132,7 @@ int main()
 
 	cout << "******** After adding Crew to Flight *********" << endl;
 	pDelta->Print(cout);
-
-
+	*/
 	delete pDelta;
 	system("pause");
 }
