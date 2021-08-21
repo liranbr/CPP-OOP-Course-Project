@@ -20,12 +20,12 @@ void CFlight::SetPlane(CPlane &newPlane) {
 
 void CFlight::operator+(CCrewMember &newCrewMember) {
     //If there's no place on flight.
-    if (crewMemberAmount == MAX_CREW)
+    if (crewMemberAmount == MAX_CREWS)
         return;
 
     //Check for duplicate crew members.
     for (int i = 0; i < this->crewMemberAmount; i++)
-        if (crewMembers[i] == newCrewMember)
+        if (*crewMembers[i] == newCrewMember)
             return;
 
     this->crewMembers[crewMemberAmount] = &newCrewMember;
@@ -33,7 +33,7 @@ void CFlight::operator+(CCrewMember &newCrewMember) {
 }
 
 ostream &operator<<(ostream &outstream, const CFlight &flight) {
-    outstream << "Flight" << flight.flightInfo << flight.plane << crewString;
+    outstream << "Flight" << flight.flightInfo << flight.plane;
     outstream << "There are " << flight.crewMemberAmount << " crew members in flight:\n";
     for (int i = 0; i < flight.crewMemberAmount; i++)
         outstream << flight.crewMembers[i];
@@ -54,7 +54,7 @@ bool CFlight::operator==(const CFlight &otherFlight) const {
 
 CFlight::~CFlight() {
     for (int i = 0; i < this->crewMemberAmount; i++)
-        ~(crewMembers[i]);
+        crewMembers[i]->~CCrewMember();
     plane->~CPlane();
     delete flightInfo;
 }

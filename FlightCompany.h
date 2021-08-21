@@ -8,11 +8,11 @@ using namespace std;
 class CFlightCompany {
 private:
 	char* nameOfCompany;
-	CCrewMember* crewMembers[MAX_CREWS];
+	CCrewMember** crewMembers;
 	int crewMemberAmount;
-	CPlane* planes[MAX_PLANES];
+	CPlane** planes;
 	int planeAmount;
-	CFlight* flights[MAX_FLIGHTS];
+	CFlight** flights;
 	int flightAmount;
 public:
 	CFlightCompany(const char* nameOfCompany);
@@ -24,9 +24,9 @@ public:
 		bool AddCrewMember(CCrewMember newMember);
 		bool AddPlane(CPlane newPlane);
 		bool AddFlight(CFlight newFlight);
-		CPlane& GetPlane(int planeIndex);
-		CFlight& GetFlight(int flightID);
-		CCrewMember& GetCrewMember(int memberID);
+		CPlane* GetPlane(int planeIndex);
+		CFlight* GetFlight(int flightID);
+		CCrewMember* GetCrewMember(int memberID);
 		void AddCrewToFlight(int planeID, int memberID);
 };
 #endif // !__FLIGHT_COMPANY_H

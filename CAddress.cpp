@@ -33,7 +33,7 @@ int CAddress::GetHouseNum() {
     return houseNum;
 }
 
-ostream &operator<<(ostream &outstream, const CAddress &otherAddress) {
+ostream& operator<<(ostream &outstream, const CAddress &otherAddress) {
     return outstream << otherAddress.street << " " << otherAddress.houseNum << ", " << otherAddress.city << "\n";
 }
 

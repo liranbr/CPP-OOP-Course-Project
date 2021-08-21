@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string.h>
 #include "helper.h"
+using namespace std;
 
 class CAddress {
 private:
