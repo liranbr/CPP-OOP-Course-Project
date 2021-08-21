@@ -15,19 +15,17 @@ private:
 public:
 	CFlightInfo(const char* destination, int flightNum, int duration, int distance);
 	CFlightInfo(const CFlightInfo& other);
-		bool IsEqual(int otherFlightNum);
-		//void Print(ostream& outstream);
-		int GetFNum();
-		char* GetDest();
-		int GetDuration();
-		int GetDistance();
-		void SetFlightNum(int flightNum);
-		void SetDest(const char* destination);
-		void SetDuration(int duration);
-		void SetDistance(int distance);
-		friend ostream& operator<<(ostream& outstream, const CFlightInfo& flightInfo);
-		bool operator!=(const CFlightInfo& otherFlightInfo) const;
-		bool operator==(const CFlightInfo& otherFlightInfo) const;
-		operator int() const;
+    int GetFNum();
+    void SetFNum(int flightNum);
+    char* GetDest();
+    void SetDest(const char* destination);
+    int GetDuration();
+    void SetDuration(int duration);
+    int GetDistance();
+    void SetDistance(int distance);
+    friend ostream& operator<<(ostream& outstream, const CFlightInfo& flightInfo);
+    bool operator==(const CFlightInfo& otherFlightInfo) const;
+    bool operator!=(const CFlightInfo& otherFlightInfo) const;
+    operator int() const;
 };
 #endif

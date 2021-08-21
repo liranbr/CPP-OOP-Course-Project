@@ -16,7 +16,6 @@ CAddress::CAddress(const CAddress &other) {
     strcpy(this->street, other.street);
 }
 
-
 CAddress::~CAddress() {
     delete[]street;
     delete[]city;
@@ -34,16 +33,6 @@ int CAddress::GetHouseNum() {
     return houseNum;
 }
 
-char *CAddress::GetCurrentAddress() {
-    char tempString[MAX];
-    sprintf(tempString, "%s %s %d", this->street, this->city, this->houseNum);
-    return tempString;
-}
-
-//void CAddress::Print(ostream& outstream) {
-//	outstream << street << " " << houseNum << ", " << city << "\n";
-//}
-
 ostream &operator<<(ostream &outstream, const CAddress &otherAddress) {
     return outstream << otherAddress.street << " " << otherAddress.houseNum << ", " << otherAddress.city << "\n";
 }
@@ -57,6 +46,16 @@ istream &operator>>(istream &instream, CAddress &address) {
     return instream;
 }
 
+bool CAddress::operator==(const CAddress &otherAddress) const {
+    return strcmp(this->city, otherAddress.city) == 0 &&
+           strcmp(this->street, otherAddress.street) == 0 &&
+           this->houseNum == otherAddress.houseNum;
+}
+
+bool CAddress::operator!=(const CAddress &otherAddress) const {
+    return !(*this == otherAddress);
+}
+
 void CAddress::UpdateAddress(const char *newCity, const char *newStreet, int newHouseNum) {
     delete[]city;
     delete[]street;
@@ -67,12 +66,9 @@ void CAddress::UpdateAddress(const char *newCity, const char *newStreet, int new
     this->houseNum = newHouseNum;
 }
 
-bool CAddress::operator==(const CAddress &otherAddress) const {
-    return strcmp(this->city, otherAddress.city) == 0 &&
-           strcmp(this->street, otherAddress.street) == 0 &&
-           this->houseNum == otherAddress.houseNum;
-}
-
-bool CAddress::operator!=(const CAddress &otherAddress) const {
-    return !(*this == otherAddress);
+char *CAddress::GetCurrentAddress() {
+//    char tempString[MAX];
+//    sprintf(tempString, "%s %s %d", this->street, this->city, this->houseNum);
+//    return tempString;
+    return *this;
 }
