@@ -1,5 +1,7 @@
 #include "FlightCompany.h"
 
+int CPlane::staticID = 100;
+
 CFlightCompany::CFlightCompany(const char* nameOfCompany) {
 	this->nameOfCompany = new char[BUFFER];
 	strcpy(this->nameOfCompany, nameOfCompany);

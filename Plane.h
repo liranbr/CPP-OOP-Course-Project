@@ -25,5 +25,4 @@ public:
 //		void Print(ostream& outstream);
 //		bool IsEqual(CPlane otherPlane);
 };
-int CPlane::staticID = 100;
 #endif

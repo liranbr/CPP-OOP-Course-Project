@@ -27,5 +27,4 @@ public:
 //		void Print(ostream& outstream);
 //		bool IsEqual(CCrewMember otherCrewMember);
 };
-int CCrewMember::START_ID = 1000;
 #endif

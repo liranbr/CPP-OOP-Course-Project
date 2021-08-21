@@ -1,5 +1,7 @@
 #include "CrewMember.h"
 
+int CCrewMember::START_ID = 1000;
+
 CCrewMember::CCrewMember(const char* crewMemberName, int airMinutes) {
 	this->crewMemberName = new char[BUFFER];
 	strcpy(this->crewMemberName, crewMemberName);
