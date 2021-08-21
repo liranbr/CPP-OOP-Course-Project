@@ -1,14 +1,14 @@
 #define _CRT_SECURE_NO_DEPRECATE
 
 #include <iostream>
-using namespace std;
-
 #include "Plane.h"
 #include "FlightInfo.h"
 #include "CrewMember.h"
 #include "Flight.h"
 #include "Address.h"
 #include "FlightCompany.h"
+
+using namespace std;
 
 //TODO continue work form here...
 // Add AddCrewMember to FlightCompany, and other things

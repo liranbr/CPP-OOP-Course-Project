@@ -6,13 +6,11 @@ CFlightCompany::CFlightCompany(const char* nameOfCompany) {
 	this->nameOfCompany = new char[BUFFER];
 	strcpy(this->nameOfCompany, nameOfCompany);
     this->crewMembers = new CCrewMember*[MAX_CREWS];
+    this->crewMemberAmount = 0;
     this->planes = new CPlane*[MAX_PLANES];
+    this->planeAmount = 0;
     this->flights = new CFlight*[MAX_FLIGHTS];
-}
-
-CFlightCompany::CFlightCompany(const CFlightCompany& other) {
-	this->nameOfCompany = new char[BUFFER];
-	strcpy(this->nameOfCompany, other.nameOfCompany);
+    this->flightAmount = 0;
 }
 
 CFlightCompany::~CFlightCompany() {
@@ -84,6 +82,7 @@ CCrewMember CFlightCompany::GetCrewMember(int memberID) {
 CPlane* CFlightCompany::GetPlane(int planeIndex) {
     if (planeIndex > 0 && planeIndex <= planeAmount - 1)
         return planes[planeIndex];
+    return nullptr;
 }
 
 void CFlightCompany::AddCrewToFlight(int flightID, int memberID) {
