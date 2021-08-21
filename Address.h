@@ -23,7 +23,7 @@ public:
     bool operator==(const CAddress& otherAddress) const;
     bool operator!=(const CAddress& otherAddress) const;
     void UpdateAddress(const char* city, const char* street, int houseNum);
-    char* GetCurrentAddress();
+    CAddress& GetCurrentAddress();
 
 };
 #endif

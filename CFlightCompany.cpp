@@ -47,7 +47,7 @@ bool CFlightCompany::AddPlane(CPlane newPlane) {
     if (planeAmount >= MAX_PLANES)
         return false;
     for (int i = 0; i < planeAmount; i++) 
-        if (*(*(this->planes + i)) == newPlane)
+        if (*(*(this->planes + i)) == &newPlane)
             return false;
     
     this->planes[planeAmount] = new CPlane(newPlane);

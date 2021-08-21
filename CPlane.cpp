@@ -8,11 +8,11 @@ CPlane::CPlane(int numOfChairs, const char* modelName) {
 	strcpy(this->modelName, modelName);
 }
 
-CPlane::CPlane(const CPlane& other) {
-	this->id = other.id;
-	this->numOfChairs = other.numOfChairs;
+CPlane::CPlane(const CPlane* other) {
+	this->id = other->id;
+	this->numOfChairs = other->numOfChairs;
 	this->modelName = new char[BUFFER];
-	strcpy(this->modelName, other.modelName);
+	strcpy(this->modelName, other->modelName);
 }
 
 CPlane::~CPlane() {
@@ -35,8 +35,8 @@ ostream& operator<<(ostream& outstream, const CPlane& plane) {
 	return outstream << "Plane " << plane.id << " degem " << plane.modelName << " seats " << plane.numOfChairs << "\n";
 }
 
-bool CPlane::operator==(CPlane &otherPlane) {
-    return this->id == otherPlane.id;
+bool CPlane::operator==(CPlane* otherPlane) {
+    return this->id == otherPlane->id;
 }
 
 void CPlane::operator++() {

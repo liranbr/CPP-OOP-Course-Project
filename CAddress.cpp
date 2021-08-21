@@ -52,8 +52,8 @@ bool CAddress::operator==(const CAddress &otherAddress) const {
            this->houseNum == otherAddress.houseNum;
 }
 
-bool CAddress::operator!=(const CAddress &otherAddress) const {
-    return !(*this == otherAddress);
+bool CAddress::operator!=(const CAddress& otherAddress) const {
+    return *this == otherAddress;
 }
 
 void CAddress::UpdateAddress(const char *newCity, const char *newStreet, int newHouseNum) {
@@ -66,8 +66,6 @@ void CAddress::UpdateAddress(const char *newCity, const char *newStreet, int new
     this->houseNum = newHouseNum;
 }
 
-char *CAddress::GetCurrentAddress() {
-    char tempString[MAX];
-    sprintf(tempString, "%s %s %d", this->street, this->city, this->houseNum);
-    return tempString;
+CAddress& CAddress::GetCurrentAddress() {
+    return *this;
 }

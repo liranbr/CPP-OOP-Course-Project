@@ -23,7 +23,6 @@ int main()
 	cin >> a;
 	cout << a;
 	cout << endl << "Checking CFlightCompany" << endl;
-/*
 	CFlightCompany* pDelta = new CFlightCompany("Delta");
 	cout << endl << "First company" << endl;
 	pDelta->Print(cout);
@@ -131,6 +130,5 @@ int main()
 
 
 	delete pDelta;
-*/
 	system("pause");
 }

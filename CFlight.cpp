@@ -7,15 +7,15 @@ CFlight::CFlight(CFlightInfo &flightInfo) {
     this->crewMemberAmount = 0;
 }
 
-CFlight::CFlight(CFlightInfo &flightInfo, CPlane &plane) {
+CFlight::CFlight(CFlightInfo &flightInfo, CPlane* plane) {
     this->flightInfo = new CFlightInfo(flightInfo);
     this->plane = new CPlane(plane);
     this->crewMembers = new CCrewMember*[MAX_CREWS];
     this->crewMemberAmount = 0;
 }
 
-void CFlight::SetPlane(CPlane &newPlane) {
-    this->plane = new CPlane(*plane);
+void CFlight::SetPlane(CPlane* newPlane) {
+    this->plane = new CPlane(plane);
 }
 
 void CFlight::operator+(CCrewMember newCrewMember) {

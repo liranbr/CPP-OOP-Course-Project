@@ -13,13 +13,13 @@ private:
 	static int staticID;
 public:
 	CPlane(int numOfChairs, const char* modelName);
-	CPlane(const CPlane& other);
+	CPlane(const CPlane* other);
 	~CPlane();
 		int GetId();
 		char* GetModelName();
 		int GetNumOfChairs();
 		friend ostream& operator<<(ostream& outstream, const CPlane& plane);
-		bool operator==(CPlane& otherPlane);
+		bool operator==(CPlane* otherPlane);
 		void operator++();
 		void operator++(int);
 //		void Print(ostream& outstream);
