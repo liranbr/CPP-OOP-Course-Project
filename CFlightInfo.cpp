@@ -53,10 +53,10 @@ ostream &operator<<(ostream &outstream, const CFlightInfo &otherFlightInfo) {
 }
 
 bool CFlightInfo::operator==(const CFlightInfo &otherFlightInfo) const {
-    return strcmp(this->destination, otherAddress.destination) == 0 &&
-           this->flightNum == otherAddress.flightNum &&
-           this->duration == otherAddress.duration &&
-           this->distance == otherAddress.distance;
+    return strcmp(this->destination, otherFlightInfo.destination) == 0 &&
+           this->flightNum == otherFlightInfo.flightNum &&
+           this->duration == otherFlightInfo.duration &&
+           this->distance == otherFlightInfo.distance;
 }
 
 bool CFlightInfo::operator!=(const CFlightInfo &otherFlightInfo) const {

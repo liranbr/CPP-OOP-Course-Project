@@ -67,8 +67,7 @@ void CAddress::UpdateAddress(const char *newCity, const char *newStreet, int new
 }
 
 char *CAddress::GetCurrentAddress() {
-//    char tempString[MAX];
-//    sprintf(tempString, "%s %s %d", this->street, this->city, this->houseNum);
-//    return tempString;
-    return *this;
+    char tempString[MAX];
+    sprintf(tempString, "%s %s %d", this->street, this->city, this->houseNum);
+    return tempString;
 }

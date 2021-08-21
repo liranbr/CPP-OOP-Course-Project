@@ -34,8 +34,9 @@ void CCrewMember::SetCrewMemberName(const char* newCrewMemberName) {
 	strcpy(this->crewMemberName, newCrewMemberName);
 }
 
-friend ostream& operator<<(ostream& outstream, const CCrewMember& crewMember) {
-    return outstream << "Crewmember " << crewMemberName << " minutes " << airMinutes << "\n";
+ostream& operator<<(ostream& outstream, const CCrewMember& crewMember) {
+    return outstream << "Crewmember " << crewMember.crewMemberName <<
+        " minutes " << crewMember.airMinutes << "\n";
 }
 
 bool CCrewMember::operator+=(int additionalAirMinutes) {

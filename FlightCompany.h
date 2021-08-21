@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include "helper.h"
+#include "CrewMember.h"
+#include "Plane.h"
+#include "Flight.h"
 using namespace std;
 
 class CFlightCompany {

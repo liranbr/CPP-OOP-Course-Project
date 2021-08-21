@@ -18,7 +18,7 @@ void CFlight::SetPlane(CPlane &newPlane) {
     this->plane = new CPlane(*plane);
 }
 
-void CFlight::operator+(CCrewMember &newCrewMember) {
+void CFlight::operator+(CCrewMember *newCrewMember) {
     //If there's no place on flight.
     if (crewMemberAmount == MAX_CREWS)
         return;
@@ -40,13 +40,13 @@ ostream &operator<<(ostream &outstream, const CFlight &flight) {
     return outstream;
 }
 
-bool CFlight::operator==(const CFlight &otherFlight) const {
-    if (!(this->flightInfo == otherFlight.flightInfo &&
-          this->plane == otherFlight.plane &&
-          this->crewMemberAmount == otherFlight.crewMemberAmount))
+bool CFlight::operator==(const CFlight *otherFlight) const {
+    if (!(this->flightInfo == otherFlight->flightInfo &&
+          this->plane == otherFlight->plane &&
+          this->crewMemberAmount == otherFlight->crewMemberAmount))
         return false;
     for (int i = 0; i < crewMemberAmount; i++) {
-        if (!(this->crewMembers[i] == otherFlight.crewMembers[i]))
+        if (!(this->crewMembers[i] == otherFlight->crewMembers[i]))
             return false;
     }
     return true;

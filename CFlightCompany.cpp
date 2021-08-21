@@ -1,8 +1,4 @@
 #include "FlightCompany.h"
-#include "CrewMember.h"
-#include "Plane.h"
-#include "Flight.h"
-#include "FlightInfo.h"
 
 CFlightCompany::CFlightCompany(const char* nameOfCompany) {
 	this->nameOfCompany = new char[BUFFER];
