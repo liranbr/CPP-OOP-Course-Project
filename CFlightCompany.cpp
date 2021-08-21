@@ -72,10 +72,10 @@ CFlight* CFlightCompany::GetFlight(int flightID) {
     return nullptr;
 }
 
-CCrewMember* CFlightCompany::GetCrewMember(int memberID) {
+CCrewMember CFlightCompany::GetCrewMember(int memberID) {
     for (int i = 0; i < flightAmount; i++)
         if (crewMembers[i]->GetId() == memberID)
-            return crewMembers[i];
+            return *crewMembers[i];
     return nullptr;
 }
 
@@ -85,6 +85,6 @@ CPlane* CFlightCompany::GetPlane(int planeIndex) {
 }
 
 void CFlightCompany::AddCrewToFlight(int flightID, int memberID) {
-    CFlight* flight = GetFlight(flightID);
-    flight = flight + GetCrewMember(memberID);
+    CFlight flight = *GetFlight(flightID);
+    flight + GetCrewMember(memberID);
 }
