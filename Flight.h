@@ -14,7 +14,7 @@ class CFlight
 private:
 	CFlightInfo* flightInfo;
 	CPlane* plane;
-	CCrewMember* crewMembers[MAX_CREWS];
+	CCrewMember** crewMembers;
 	int crewMemberAmount;
 
 public:

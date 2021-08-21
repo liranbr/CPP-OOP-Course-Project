@@ -3,14 +3,14 @@
 CFlight::CFlight(CFlightInfo &flightInfo) {
     this->flightInfo = new CFlightInfo(flightInfo);
     this->plane = NULL;
-    *(this->crewMembers + 0) = nullptr;
+    this->crewMembers = new CCrewMember*[MAX_CREWS];
     this->crewMemberAmount = 0;
 }
 
 CFlight::CFlight(CFlightInfo &flightInfo, CPlane &plane) {
     this->flightInfo = new CFlightInfo(flightInfo);
     this->plane = new CPlane(plane);
-    *(this->crewMembers + 0) = nullptr;
+    this->crewMembers = new CCrewMember*[MAX_CREWS];
     this->crewMemberAmount = 0;
 }
 
@@ -24,8 +24,8 @@ void CFlight::operator+(CCrewMember &newCrewMember) {
         return;
 
     //Check for duplicate crew members.
-    for (CCrewMember *crewMember : this->crewMembers)
-        if (crewMember == newCrewMember)
+    for (int i = 0; i < this->crewMemberAmount; i++)
+        if (crewMembers[i] == newCrewMember)
             return;
 
     this->crewMembers[crewMemberAmount] = &newCrewMember;
@@ -35,8 +35,8 @@ void CFlight::operator+(CCrewMember &newCrewMember) {
 ostream &operator<<(ostream &outstream, const CFlight &flight) {
     outstream << "Flight" << flight.flightInfo << flight.plane << crewString;
     outstream << "There are " << flight.crewMemberAmount << " crew members in flight:\n";
-    for (CCrewMember cm : flight.crewMembers)
-        outstream << cm;
+    for (int i = 0; i < flight.crewMemberAmount; i++)
+        outstream << flight.crewMembers[i];
     return outstream;
 }
 
@@ -53,8 +53,8 @@ bool CFlight::operator==(const CFlight &otherFlight) const {
 }
 
 CFlight::~CFlight() {
-    for (CCrewMember *crewMember : this->crewMembers)
-        crewMember->~CCrewMember();
+    for (int i = 0; i < this->crewMemberAmount; i++)
+        ~(crewMembers[i]);
     plane->~CPlane();
     delete flightInfo;
 }
