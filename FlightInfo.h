@@ -23,7 +23,7 @@ public:
     void SetDuration(int duration);
     int GetDistance();
     void SetDistance(int distance);
-    friend ostream& operator<<(ostream& outstream, const CFlightInfo& flightInfo);
+    friend ostream& operator<<(ostream& outstream, const CFlightInfo& otherFlightInfo);
     bool operator==(const CFlightInfo& otherFlightInfo) const;
     bool operator!=(const CFlightInfo& otherFlightInfo) const;
     operator int() const;

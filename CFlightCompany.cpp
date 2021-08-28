@@ -29,7 +29,7 @@ void CFlightCompany::Print(ostream& outstream) {
 	outstream << "Flight company: " << nameOfCompany << "\n";
 }
 
-bool CFlightCompany::AddCrewMember(CCrewMember newMember) {
+bool CFlightCompany::AddCrewMember(CCrewMember& newMember) {
     if (crewMemberAmount >= MAX_CREWS)
         return false;
     for (int i = 0; i < crewMemberAmount; i++) 
@@ -41,7 +41,7 @@ bool CFlightCompany::AddCrewMember(CCrewMember newMember) {
     return true;
 }
 
-bool CFlightCompany::AddPlane(CPlane newPlane) {
+bool CFlightCompany::AddPlane(CPlane& newPlane) {
     if (planeAmount >= MAX_PLANES)
         return false;
     for (int i = 0; i < planeAmount; i++) 

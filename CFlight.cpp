@@ -33,7 +33,8 @@ void CFlight::operator+(CCrewMember newCrewMember) {
 }
 
 ostream &operator<<(ostream &outstream, const CFlight &flight) {
-    outstream << "Flight" << flight.flightInfo << flight.plane;
+    outstream << "Flight" << *(flight.flightInfo);
+    flight.plane == NULL ? outstream  << "No plane set yet.\n" : outstream << *flight.plane;
     outstream << "There are " << flight.crewMemberAmount << " crew members in flight:\n";
     for (int i = 0; i < flight.crewMemberAmount; i++)
         outstream << flight.crewMembers[i];

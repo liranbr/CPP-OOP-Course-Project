@@ -46,7 +46,7 @@ void CFlightInfo::SetDistance(int distance) {
     this->distance = distance;
 }
 
-ostream &operator<<(ostream &outstream, const CFlightInfo &otherFlightInfo) {
+ostream& operator<<(ostream& outstream, const CFlightInfo& otherFlightInfo) {
     return outstream << "Flight Info dest: " << otherFlightInfo.destination <<
                      " Number " << otherFlightInfo.flightNum << " minutes " << otherFlightInfo.duration <<
                      " KM " << otherFlightInfo.distance << "\n";
