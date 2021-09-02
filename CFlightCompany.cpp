@@ -53,11 +53,11 @@ bool CFlightCompany::AddPlane(CPlane& newPlane) {
     return true;
 }
 
-bool CFlightCompany::AddFlight(CFlight newFlight) {
+bool CFlightCompany::AddFlight(CFlight& newFlight) {
     if (flightAmount >= MAX_FLIGHTS)
         return false;
     for (int i = 0; i < flightAmount; i++) 
-        if (*(*(this->flights + i)) == newFlight)
+        if (*(*(this->flights + i)) == &newFlight)
             return false;
     
     this->flights[flightAmount] = new CFlight(newFlight);

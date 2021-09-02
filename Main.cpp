@@ -121,7 +121,7 @@ int main()
 
 	for (int i = 0; i < 2; i++)
 		delete FArr[i];
-	/*
+	
 	cout << "******** After adding Flights *********" << endl;
 	pDelta->Print(cout);
 
@@ -132,7 +132,7 @@ int main()
 
 	cout << "******** After adding Crew to Flight *********" << endl;
 	pDelta->Print(cout);
-	*/
+	
 	delete pDelta;
 	system("pause");
 }

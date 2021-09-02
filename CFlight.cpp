@@ -41,13 +41,13 @@ ostream &operator<<(ostream &outstream, const CFlight &flight) {
     return outstream;
 }
 
-bool CFlight::operator==(const CFlight& otherFlight) const {
-    if (!(this->flightInfo == otherFlight.flightInfo &&
-          this->plane == otherFlight.plane &&
-          this->crewMemberAmount == otherFlight.crewMemberAmount))
+bool CFlight::operator==(CFlight* otherFlight)  {
+    if (!(this->flightInfo == otherFlight->flightInfo &&
+          this->plane == otherFlight->plane &&
+          this->crewMemberAmount == otherFlight->crewMemberAmount))
         return false;
     for (int i = 0; i < crewMemberAmount; i++) {
-        if (!(this->crewMembers[i] == otherFlight.crewMembers[i]))
+        if (!(this->crewMembers[i] == otherFlight->crewMembers[i]))
             return false;
     }
     return true;

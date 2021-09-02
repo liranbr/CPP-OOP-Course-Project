@@ -26,7 +26,7 @@ public:
 		void Print(ostream& outstream);
 		bool AddCrewMember(CCrewMember& newMember);
 		bool AddPlane(CPlane& newPlane);
-		bool AddFlight(CFlight newFlight);
+		bool AddFlight(CFlight& newFlight);
 		CPlane* GetPlane(int planeIndex);
 		CFlight* GetFlight(int flightID);
 		CCrewMember GetCrewMember(int memberID);

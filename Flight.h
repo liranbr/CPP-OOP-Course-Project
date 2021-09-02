@@ -23,7 +23,7 @@ public:
 	void SetPlane(CPlane* newPlane);
 	void operator+(CCrewMember newCrewMember);
 	friend ostream& operator<<(ostream& outstream, const CFlight& flight);
-	bool operator==(const CFlight& otherFlight) const;
+	bool operator==(CFlight* otherFlight) ;
 	int GetFNum();
 	~CFlight();
 };
