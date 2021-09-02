@@ -80,7 +80,7 @@ CCrewMember CFlightCompany::GetCrewMember(int memberID) {
 }
 
 CPlane* CFlightCompany::GetPlane(int planeIndex) {
-    if (planeIndex > 0 && planeIndex <= planeAmount - 1)
+    if (planeIndex >= 0 && planeIndex <= planeAmount - 1)
         return planes[planeIndex];
     return nullptr;
 }

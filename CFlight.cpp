@@ -15,7 +15,7 @@ CFlight::CFlight(CFlightInfo &flightInfo, CPlane* plane) {
 }
 
 void CFlight::SetPlane(CPlane* newPlane) {
-    this->plane = new CPlane(plane);
+    this->plane = new CPlane(newPlane);
 }
 
 void CFlight::operator+(CCrewMember newCrewMember) {
