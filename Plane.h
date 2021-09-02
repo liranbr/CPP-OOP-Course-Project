@@ -13,7 +13,7 @@ private:
 	static int staticID;
 public:
 	CPlane(int numOfChairs, const char* modelName);
-	CPlane(const CPlane* other);
+	CPlane(const CPlane& other);
 	~CPlane();
 		int GetId();
 		char* GetModelName();

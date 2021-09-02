@@ -19,7 +19,7 @@ private:
 
 public:
 	CFlight(CFlightInfo& flightInfo);
-	CFlight(CFlightInfo& flightInfo, CPlane *plane);
+	CFlight(CFlightInfo& flightInfo, CPlane* plane);
 	void SetPlane(CPlane* newPlane);
 	void operator+(CCrewMember newCrewMember);
 	friend ostream& operator<<(ostream& outstream, const CFlight& flight);

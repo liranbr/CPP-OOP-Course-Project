@@ -19,7 +19,7 @@ private:
 	int flightAmount;
 public:
 	CFlightCompany(const char* nameOfCompany);
-	CFlightCompany(const CFlightCompany& other);
+	/*CFlightCompany(const CFlightCompany& other);*/
 	~CFlightCompany();
 		char* GetNameOfCompany();
 		void SetName(const char* nameOfCompany);
