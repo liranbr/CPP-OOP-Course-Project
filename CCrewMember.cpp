@@ -1,13 +1,14 @@
 #include "CrewMember.h"
 
 int CCrewMember::START_ID = 1000;
+int CCrewMember::STATIC_ID = CCrewMember::START_ID;
 
 CCrewMember::CCrewMember(const char* crewMemberName, int airMinutes) {
 	this->crewMemberName = new char[BUFFER];
 	strcpy(this->crewMemberName, crewMemberName);
 	this->airMinutes = airMinutes;
-	this->id = START_ID;
-	START_ID++;
+	this->id = STATIC_ID;
+	STATIC_ID++;
 }
 
 CCrewMember::CCrewMember(const CCrewMember& other) {

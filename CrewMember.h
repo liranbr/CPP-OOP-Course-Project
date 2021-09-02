@@ -13,6 +13,7 @@ private:
 	int id;
 public:
     static int START_ID;
+    static int STATIC_ID;
 	CCrewMember(const char* crewMemberName, int airMinutes = 0);
 	CCrewMember(const CCrewMember& other);
 	~CCrewMember();

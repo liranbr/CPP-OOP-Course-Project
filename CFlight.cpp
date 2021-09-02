@@ -30,17 +30,17 @@ void CFlight::SetPlane(CPlane* newPlane) {
     this->plane = new CPlane(*newPlane);
 }
 
-void CFlight::operator+(CCrewMember newCrewMember) {
+void CFlight::operator+(CCrewMember* newCrewMember) {
     //If there's no place on flight.
     if (crewMemberAmount == MAX_CREWS)
         return;
 
     //Check for duplicate crew members.
     for (int i = 0; i < this->crewMemberAmount; i++)
-        if (*crewMembers[i] == newCrewMember)
+        if (*crewMembers[i] == *newCrewMember)
             return;
 
-    this->crewMembers[crewMemberAmount] = &newCrewMember;
+    this->crewMembers[crewMemberAmount] = newCrewMember;
     crewMemberAmount++;
 }
 
