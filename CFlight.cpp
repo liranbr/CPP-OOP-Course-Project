@@ -14,6 +14,18 @@ CFlight::CFlight(CFlightInfo &flightInfo, CPlane* plane) {
     this->crewMemberAmount = 0;
 }
 
+CFlight::CFlight(const CFlight& other) {
+    this->flightInfo = new CFlightInfo(*other.flightInfo);
+    if (other.plane != nullptr)
+        this->plane = new CPlane(*other.plane);
+    else
+        this->plane = NULL;
+    this->crewMemberAmount = other.crewMemberAmount;
+    this->crewMembers = new CCrewMember* [MAX_CREWS];
+    for (int i = 0; i < crewMemberAmount; i++)
+        this->crewMembers[i] = new CCrewMember(*other.crewMembers[i]);
+}
+
 void CFlight::SetPlane(CPlane* newPlane) {
     this->plane = new CPlane(*newPlane);
 }
