@@ -8,6 +8,10 @@ CHost::CHost(const CHost& other) : CCrewMember(other.crewMemberName, other.airMi
 	this->hostType = other.hostType;
 }
 
+CHost::hostTypes CHost::GetHostType() {
+	return hostType;
+}
+
 void CHost::GetPresent() {
 	cout << this->crewMemberName << "thanking the company for receiving the holiday gift.\nI wasn’t expecting it";
 }

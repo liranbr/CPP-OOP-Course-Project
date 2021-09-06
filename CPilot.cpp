@@ -18,7 +18,6 @@ CPilot::CPilot(const CPilot& other) : CCrewMember(other.crewMemberName, other.ai
 
 CPilot::~CPilot() {
 	delete address;
-	delete[] crewMemberName;
 }
 
 void CPilot::GetPresent() {

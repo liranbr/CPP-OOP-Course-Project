@@ -22,6 +22,7 @@ public:
 	CFlight(CFlightInfo& flightInfo, CPlane* plane);
 	CFlight(const CFlight& other);
 	void SetPlane(CPlane* newPlane);
+	bool TakeOff();
 	void operator+(CCrewMember* newCrewMember);
 	friend ostream& operator<<(ostream& outstream, const CFlight& flight);
 	bool operator==(CFlight* otherFlight) ;

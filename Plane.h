@@ -22,6 +22,7 @@ public:
 		bool operator==(CPlane* otherPlane);
 		void operator++();
 		void operator++(int);
+		void TakeOff(int flightDuration);
 //		void Print(ostream& outstream);
 //		bool IsEqual(CPlane otherPlane);
 };

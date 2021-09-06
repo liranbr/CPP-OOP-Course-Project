@@ -47,6 +47,10 @@ void CPlane::operator++(int) {
     numOfChairs++;
 }
 
+void CPlane::TakeOff(int flightDuration) {
+	cout << "Passenger plane #" << id << ": taking off. Need to add " << flightDuration << " minutes to my logbook.\n";
+}
+
 //void CPlane::Print(ostream& outstream) {
 //	outstream << "Plane " << id << " degem " << modelName << " seats " << numOfChairs << "\n";
 //}

@@ -11,6 +11,7 @@ public:
 	enum hostTypes { eRegular, eSuper, eCalcelan };
 	CHost(const char* crewMemberName, hostTypes hostType, int airMinutes = 0);
 	CHost(const CHost& other);
+		hostTypes GetHostType();
 		void GetPresent();
 		void GetUniform();
 		void TakeOff(int flightMinutes);

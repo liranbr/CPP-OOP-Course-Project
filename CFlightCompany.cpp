@@ -1,4 +1,5 @@
 #include "FlightCompany.h"
+#include "Pilot.h"
 
 int CPlane::staticID = 100;
 
@@ -72,11 +73,10 @@ CFlight* CFlightCompany::GetFlight(int flightID) {
     return nullptr;
 }
 
-CCrewMember* CFlightCompany::GetCrewMember(char* name) {
-    for (int i = 0; i < crewMemberAmount; i++)
-        if (strcmp(crewMembers[i]->GetCrewMemberName(), name) == 0)
-            return crewMembers[i];
-    return nullptr;
+CCrewMember* CFlightCompany::GetCrewMember(int index) {
+    if (index < 0 || index >= crewMemberAmount)
+        return nullptr;
+    return crewMembers[index];
 }
 
 CPlane* CFlightCompany::GetPlane(int planeIndex) {
@@ -85,6 +85,34 @@ CPlane* CFlightCompany::GetPlane(int planeIndex) {
     return nullptr;
 }
 
-void CFlightCompany::AddCrewToFlight(int flightID, char* name) {
-    *GetFlight(flightID) + GetCrewMember(name);
+void CFlightCompany::AddCrewToFlight(int flightID, int crewIndex) {
+    *GetFlight(flightID) + GetCrewMember(crewIndex);
+}
+
+int CFlightCompany::GetCargoCount() {
+    int counter = 0;
+    for (int i = 0; i < planeAmount; i++)
+        if (strcmp(typeid(planes[i]).name(), "CCargo") == 0)
+            counter++;
+    return counter;
+}
+
+void CFlightCompany::PilotsToSimulator() {
+    for (int i = 0; i < crewMemberAmount; i++)
+        if (strcmp(typeid(crewMembers[i]).name(), "CPilot") == 0)
+            ((CPilot*)crewMembers[i])->InviteToSimulator();
+}
+
+void CFlightCompany::CrewGetPresent() {
+    for (int i = 0; i < crewMemberAmount; i++)
+        crewMembers[i]->GetPresent();
+}
+
+void CFlightCompany::CrewGetUniform() {
+    for (int i = 0; i < crewMemberAmount; i++)
+        crewMembers[i]->GetUniform();
+}
+
+bool CFlightCompany::TakeOffFlight(int flightID) {
+    return GetFlight(flightID)->TakeOff();
 }

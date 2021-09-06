@@ -1,4 +1,5 @@
 #include "Flight.h"
+#include "Host.h"
 
 CFlight::CFlight(CFlightInfo &flightInfo) {
     this->flightInfo = new CFlightInfo(flightInfo);
@@ -28,6 +29,32 @@ CFlight::CFlight(const CFlight& other) {
 
 void CFlight::SetPlane(CPlane* newPlane) {
     this->plane = new CPlane(*newPlane);
+}
+
+
+bool CFlight::TakeOff() {
+    if (plane == NULL)
+        return false;
+    int pilotAmount = 0;
+    int superHostAmount = 0;
+    for (int i = 0; i < crewMemberAmount; i++) { // count pilots and super-hosts
+        if (strcmp(typeid(crewMembers[i]).name(), "CPilot") == 0)
+            pilotAmount++;
+        else if (((CHost*)crewMembers[i])->GetHostType() == CHost::eSuper)
+            superHostAmount++;
+    }
+    if (strcmp(typeid(plane).name(), "CCargo") == 0) { // cargo plane
+        if (pilotAmount < 1)
+            return false;
+    }
+    else { // passenger plane
+        if (pilotAmount != 1 || superHostAmount > 1)
+            return false;
+    }
+    plane->TakeOff(flightInfo->GetDuration());
+    for (int i = 0; i < crewMemberAmount; i++)
+        crewMembers[i]->TakeOff(flightInfo->GetDuration());
+    return true;
 }
 
 void CFlight::operator+(CCrewMember* newCrewMember) {

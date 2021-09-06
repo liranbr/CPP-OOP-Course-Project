@@ -10,7 +10,7 @@ using namespace std;
 #include "FlightCompany.h"
 #include "address.h"
 #include "Pilot.h"
-//#include "Cargo.h"
+#include "Cargo.h"
 #include "Host.h"
 
 
