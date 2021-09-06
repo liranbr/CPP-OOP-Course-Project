@@ -7,17 +7,13 @@
 using namespace std;
 
 class CCrewMember {
-private:
+protected:
 	char* crewMemberName;
 	int airMinutes;
-	int id;
 public:
-    static int START_ID;
-    static int STATIC_ID;
 	CCrewMember(const char* crewMemberName, int airMinutes = 0);
 	CCrewMember(const CCrewMember& other);
 	~CCrewMember();
-        int GetId();
         int GetMinutes();
         char* GetCrewMemberName();
         void SetCrewMemberName(const char* newCrewMemberName);
@@ -25,7 +21,10 @@ public:
         bool operator+=(int newAirMinutes);
         bool operator==(CCrewMember& otherCrewMember);
 		bool UpdateMinutes(int newAirMinutes);
-//		void Print(ostream& outstream);
+		void Print(ostream& outstream);
 //		bool IsEqual(CCrewMember otherCrewMember);
+        void GetPresent();
+        virtual void GetUniform() = 0;
+        virtual void TakeOff(int flightMinutes) = 0;
 };
 #endif

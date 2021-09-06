@@ -9,7 +9,7 @@ using namespace std;
 #include "Flight.h"
 #include "FlightCompany.h"
 #include "address.h"
-//#include "Pilot.h"
+#include "Pilot.h"
 //#include "Cargo.h"
 #include "Host.h"
 
@@ -22,15 +22,17 @@ const int FLIGHT_COUNT = 3;
 
 void main()
 {
+	int i = 10;
+	cout << i * 1.1;
 	CFlightCompany Delta("Delta");
 	CAddress ad1(34, "DZ");
 
 	CCrewMember* cmArr[CM_COUNT];
-	//cmArr[0] = new CPilot("Soso", false, &ad1); //name, bcaptain, home add, no min
+	cmArr[0] = new CPilot("Soso", false, &ad1); //name, bcaptain, home add, no min
 	cmArr[1] = new CHost("Momo", CHost::eRegular);//name, type
 	cmArr[2] = new CHost("Lolo", CHost::eSuper);
 	cmArr[3] = new CHost("Popo", CHost::eCalcelan);
-	//cmArr[4] = new CPilot("Toto", true); //no address and min
+	cmArr[4] = new CPilot("Toto", true); //no address and min
 
 	//Check updateTime
 	for (int i = 0; i < CM_COUNT; i++)
@@ -48,12 +50,12 @@ void main()
 
 	cout << endl << "******** Trying add same CrewMember *********" << endl;
 	CHost h1((CHost&)(*cmArr[1])); //creating temp with different pointers.
-	//CPilot p1((CPilot&)(*cmArr[4]));
+	CPilot p1((CPilot&)(*cmArr[4]));
 	if (!Delta.AddCrewMember(h1))
 		cout << "Problem adding CrewMember h1" << endl;
 
-	//if (!Delta.AddCrewMember(p1))
-	//	cout << "Problem adding CrewMember p1" << endl;
+	if (!Delta.AddCrewMember(p1))
+		cout << "Problem adding CrewMember p1" << endl;
 
 	cout << endl << "******** After adding CrewMember *********" << endl;
 	Delta.Print(cout);
@@ -83,7 +85,6 @@ void main()
 
 	if (!((CCargo*)pArr[3])->Load(800, 1200))
 		cout << "error4 loading plane " << (*pArr[3]) << endl;
-	*/
 
 	for (int i = 0; i < PLANE_COUNT; i++)
 		if (!Delta.AddPlane(*pArr[i]))
@@ -184,6 +185,7 @@ void main()
 	cout << "******** final flight company print *********" << endl;
 	Delta.Print(cout);
 	cout << "********  *********" << endl;
+	*/
 
 
 

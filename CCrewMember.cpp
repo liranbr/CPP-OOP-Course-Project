@@ -1,28 +1,18 @@
 #include "CrewMember.h"
 
-int CCrewMember::START_ID = 1000;
-int CCrewMember::STATIC_ID = CCrewMember::START_ID;
-
 CCrewMember::CCrewMember(const char* crewMemberName, int airMinutes) {
 	this->crewMemberName = new char[BUFFER];
 	strcpy(this->crewMemberName, crewMemberName);
 	this->airMinutes = airMinutes;
-	this->id = STATIC_ID;
-	STATIC_ID++;
 }
 
 CCrewMember::CCrewMember(const CCrewMember& other) {
-	this->id = other.id;
 	this->crewMemberName = new char[BUFFER];
 	strcpy(this->crewMemberName, other.crewMemberName);
 	this->airMinutes = other.airMinutes;
 }
 CCrewMember::~CCrewMember() {
-	delete[]crewMemberName;
-}
-
-int CCrewMember::GetId() {
-    return id;
+	delete[] crewMemberName;
 }
 
 int CCrewMember::GetMinutes() {
@@ -50,7 +40,7 @@ bool CCrewMember::operator+=(int additionalAirMinutes) {
 }
 
 bool CCrewMember::operator==(CCrewMember& otherCrewMember) {
-    return this->id == otherCrewMember.id;
+    return strcmp(this->crewMemberName, otherCrewMember.crewMemberName) == 0;
 }
 
 bool CCrewMember::UpdateMinutes(int additionalAirMinutes) {
@@ -61,10 +51,14 @@ bool CCrewMember::UpdateMinutes(int additionalAirMinutes) {
     return false;
 }
 
-//void CCrewMember::Print(ostream& outstream) {
-//    outstream << "Crewmember " << crewMemberName << " minutes " << airMinutes << "\n";
-//}
+void CCrewMember::Print(ostream& outstream) {
+    outstream << "Crewmember " << crewMemberName << " minutes " << airMinutes << "\n";
+}
 
 //bool CCrewMember::IsEqual(CCrewMember otherCrewMember) {
 //	return this->id == otherCrewMember.id;
 //}
+
+void CCrewMember::GetPresent() {
+    cout << "Thanks.\n";
+}

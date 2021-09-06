@@ -39,6 +39,9 @@
     <ClInclude Include="Host.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Pilot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CAddress.cpp">
@@ -63,6 +66,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CHost.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPilot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

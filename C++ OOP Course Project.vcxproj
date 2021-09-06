@@ -148,6 +148,7 @@
     <ClInclude Include="FlightInfo.h" />
     <ClInclude Include="helper.h" />
     <ClInclude Include="Host.h" />
+    <ClInclude Include="Pilot.h" />
     <ClInclude Include="Plane.h" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,7 @@
     <ClCompile Include="CFlightCompany.cpp" />
     <ClCompile Include="CFlightInfo.cpp" />
     <ClCompile Include="CHost.cpp" />
+    <ClCompile Include="CPilot.cpp" />
     <ClCompile Include="CPlane.cpp" />
     <ClCompile Include="CFlight.cpp" />
     <ClCompile Include="Main.cpp" />
