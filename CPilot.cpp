@@ -1,6 +1,6 @@
 #include "Pilot.h"
 
-CPilot::CPilot(const char* crewMemberName, bool isCaptain, CAddress* address = nullptr, int airMinutes = 0) : CCrewMember(crewMemberName, airMinutes) {
+CPilot::CPilot(const char* crewMemberName, bool isCaptain, CAddress* address, int airMinutes) : CCrewMember(crewMemberName, airMinutes) {
 	this->isCaptain = isCaptain;
 	if (address != nullptr)
 		this->address = new CAddress(*address);
@@ -14,6 +14,11 @@ CPilot::CPilot(const CPilot& other) : CCrewMember(other.crewMemberName, other.ai
 		this->address = new CAddress(*other.address);
 	else
 		this->address = nullptr;
+}
+
+CPilot::~CPilot() {
+	delete address;
+	delete[] crewMemberName;
 }
 
 void CPilot::GetPresent() {
@@ -35,10 +40,11 @@ void CPilot::TakeOff(int flightMinutes) {
 bool CPilot::operator+=(int additionalAirMinutes) {
 	if (additionalAirMinutes <= 0)
 		return false;
-	this->airMinutes += additionalAirMinutes * 1.1;
+	this->airMinutes += (int) additionalAirMinutes * 1.1;
 	return true;
 }
 
 bool CPilot::operator==(CPilot& otherPilot) {
 	return CCrewMember::operator==(otherPilot) && this->address->operator==(*otherPilot.address);
 }
+

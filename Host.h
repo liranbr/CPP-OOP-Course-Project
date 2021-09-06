@@ -6,7 +6,7 @@
 #include "CrewMember.h"
 using namespace std;
 
-class CHost : virtual public CCrewMember {
+class CHost : public CCrewMember {
 public:
 	enum hostTypes { eRegular, eSuper, eCalcelan };
 	CHost(const char* crewMemberName, hostTypes hostType, int airMinutes = 0);

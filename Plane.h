@@ -6,7 +6,7 @@
 using namespace std;
 
 class CPlane {
-private:
+protected:
 	int id;
 	char* modelName;
 	int numOfChairs;

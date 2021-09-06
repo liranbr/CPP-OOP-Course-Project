@@ -7,10 +7,11 @@
 #include "Address.h"
 using namespace std;
 
-class CPilot : virtual public CCrewMember {
+class CPilot : public CCrewMember {
 public:
 	CPilot(const char* crewMemberName, bool isCaptain, CAddress* address = nullptr, int airMinutes = 0);
 	CPilot(const CPilot& other);
+	~CPilot();
 	void GetPresent();
 	void GetUniform();
 	void TakeOff(int flightMinutes);

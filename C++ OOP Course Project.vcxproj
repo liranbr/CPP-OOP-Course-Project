@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Address.h" />
+    <ClInclude Include="Cargo.h" />
     <ClInclude Include="CrewMember.h" />
     <ClInclude Include="Flight.h" />
     <ClInclude Include="FlightCompany.h" />
@@ -153,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CAddress.cpp" />
+    <ClCompile Include="CCargo.cpp" />
     <ClCompile Include="CCrewMember.cpp" />
     <ClCompile Include="CFlightCompany.cpp" />
     <ClCompile Include="CFlightInfo.cpp" />

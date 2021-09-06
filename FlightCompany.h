@@ -29,7 +29,7 @@ public:
 		bool AddFlight(CFlight& newFlight);
 		CPlane* GetPlane(int planeIndex);
 		CFlight* GetFlight(int flightID);
-		CCrewMember* GetCrewMember(int memberID);
-		void AddCrewToFlight(int flightID, int memberID);
+		CCrewMember* GetCrewMember(char* name);
+		void AddCrewToFlight(int flightID, char* name);
 };
 #endif // !__FLIGHT_COMPANY_H

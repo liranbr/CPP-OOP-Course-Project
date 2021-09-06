@@ -24,7 +24,7 @@ public:
 		void Print(ostream& outstream);
 //		bool IsEqual(CCrewMember otherCrewMember);
         void GetPresent();
-        virtual void GetUniform() = 0;
-        virtual void TakeOff(int flightMinutes) = 0;
+        void GetUniform();
+        void TakeOff(int flightMinutes);
 };
 #endif

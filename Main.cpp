@@ -47,7 +47,7 @@ void main()
 		if (!Delta.AddCrewMember(*cmArr[i]))
 			cout << "Problem adding CrewMember " << i << endl;
 	}
-
+	
 	cout << endl << "******** Trying add same CrewMember *********" << endl;
 	CHost h1((CHost&)(*cmArr[1])); //creating temp with different pointers.
 	CPilot p1((CPilot&)(*cmArr[4]));
@@ -56,7 +56,7 @@ void main()
 
 	if (!Delta.AddCrewMember(p1))
 		cout << "Problem adding CrewMember p1" << endl;
-
+	/*
 	cout << endl << "******** After adding CrewMember *********" << endl;
 	Delta.Print(cout);
 
@@ -69,7 +69,7 @@ void main()
 	pArr[0] = new CPlane(100, "Boing373"); //seats and degem
 	pArr[1] = new CPlane(50, "Boing373");
 	pArr[2] = new CPlane(1, "Boing3");
-	/*
+	
 	pArr[3] = new CCargo(4, "Lift400", 4000, 5000); //seats, degem, max kg, max volume
 
 	//checking load cargo

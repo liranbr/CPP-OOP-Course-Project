@@ -1,6 +1,6 @@
 #include "Host.h"
 
-CHost::CHost(const char* crewMemberName, hostTypes hostType, int airMinutes = 0) : CCrewMember(crewMemberName, airMinutes) {
+CHost::CHost(const char* crewMemberName, hostTypes hostType, int airMinutes) : CCrewMember(crewMemberName, airMinutes) {
 	this->hostType = hostType;
 }
 
