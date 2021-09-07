@@ -18,6 +18,7 @@ public:
 	void InviteToSimulator();
 	bool operator+=(int additionalAirMinutes);
 	bool operator==(CPilot& otherPilot);
+	void Print(ostream& outstream);
 private:
 	bool isCaptain;
 	CAddress* address;

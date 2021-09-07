@@ -11,8 +11,9 @@ public:
 		float maxVolume, float currentWeight = 0, float currentVolume = 0);
 	CCargo(const CCargo& other);
 	~CCargo();
-	bool load(float incomingWeight, float incomingVolume);
+	bool Load(float incomingWeight, float incomingVolume);
 	void TakeOff(int flightDuration);
+	void Print(ostream& outstream);
 
 };
 

@@ -1,5 +1,8 @@
 #include "FlightCompany.h"
 #include "Pilot.h"
+#include "CrewMember.h"
+#include "Host.h"
+#include "Pilot.h"
 
 int CPlane::staticID = 100;
 
@@ -28,16 +31,27 @@ void CFlightCompany::SetName(const char* nameOfCompany) {
 
 void CFlightCompany::Print(ostream& outstream) {
 	outstream << "Flight company: " << nameOfCompany << "\n";
+    outstream << "There are " << crewMemberAmount << " Crew members:\n";
+    for (int i = 0; i < crewMemberAmount; i++)
+        crewMembers[i]->Print(outstream);
+    outstream << "There are " << planeAmount << " Planes:\n";
+    for (int i = 0; i < planeAmount; i++)
+        outstream << *planes[i];
+    outstream << "There are " << flightAmount << " Flights:\n";
+    for (int i = 0; i < flightAmount; i++)
+        outstream << *flights[i];
 }
 
 bool CFlightCompany::AddCrewMember(CCrewMember& newMember) {
     if (crewMemberAmount >= MAX_CREWS)
         return false;
     for (int i = 0; i < crewMemberAmount; i++) 
-        if (*(*(this->crewMembers + i)) == newMember)
+        if (*this->crewMembers[i] == newMember)
             return false;
-    
-    this->crewMembers[crewMemberAmount] = new CCrewMember(newMember);
+    if (strcmp(typeid(newMember).name(), "class CHost") == 0)
+        this->crewMembers[crewMemberAmount] = new CHost(*(CHost*)&newMember);
+    else if (strcmp(typeid(newMember).name(), "class CPilot") == 0)
+        this->crewMembers[crewMemberAmount] = new CPilot(*(CPilot*)&newMember);
     crewMemberAmount++;
     return true;
 }
@@ -66,7 +80,7 @@ bool CFlightCompany::AddFlight(CFlight& newFlight) {
     return true;
 }
 
-CFlight* CFlightCompany::GetFlight(int flightID) {
+CFlight* CFlightCompany::GetFlightByNum(int flightID) {
     for (int i = 0; i < flightAmount; i++)
         if (flights[i]->GetFNum() == flightID)
             return flights[i];
@@ -86,7 +100,7 @@ CPlane* CFlightCompany::GetPlane(int planeIndex) {
 }
 
 void CFlightCompany::AddCrewToFlight(int flightID, int crewIndex) {
-    *GetFlight(flightID) + GetCrewMember(crewIndex);
+    *GetFlightByNum(flightID) + GetCrewMember(crewIndex);
 }
 
 int CFlightCompany::GetCargoCount() {
@@ -114,5 +128,5 @@ void CFlightCompany::CrewGetUniform() {
 }
 
 bool CFlightCompany::TakeOffFlight(int flightID) {
-    return GetFlight(flightID)->TakeOff();
+    return GetFlightByNum(flightID)->TakeOff();
 }

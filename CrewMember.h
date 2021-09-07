@@ -21,10 +21,10 @@ public:
         bool operator+=(int newAirMinutes);
         bool operator==(CCrewMember& otherCrewMember);
 		bool UpdateMinutes(int newAirMinutes);
-		void Print(ostream& outstream);
+		virtual void Print(ostream& outstream);
 //		bool IsEqual(CCrewMember otherCrewMember);
         void GetPresent();
-        void GetUniform();
+        virtual void GetUniform();
         void TakeOff(int flightMinutes);
 };
 #endif

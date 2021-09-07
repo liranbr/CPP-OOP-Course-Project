@@ -15,15 +15,11 @@ using namespace std;
 
 
 const int CM_COUNT = 5;
-//const int PLANE_COUNT = 4;
-const int PLANE_COUNT = 3;
-//const int FLIGHT_COUNT = 4;
-const int FLIGHT_COUNT = 3;
+const int PLANE_COUNT = 4;
+const int FLIGHT_COUNT = 4;
 
 void main()
 {
-	int i = 10;
-	cout << i * 1.1;
 	CFlightCompany Delta("Delta");
 	CAddress ad1(34, "DZ");
 
@@ -56,7 +52,6 @@ void main()
 
 	if (!Delta.AddCrewMember(p1))
 		cout << "Problem adding CrewMember p1" << endl;
-	/*
 	cout << endl << "******** After adding CrewMember *********" << endl;
 	Delta.Print(cout);
 
@@ -69,7 +64,6 @@ void main()
 	pArr[0] = new CPlane(100, "Boing373"); //seats and degem
 	pArr[1] = new CPlane(50, "Boing373");
 	pArr[2] = new CPlane(1, "Boing3");
-	
 	pArr[3] = new CCargo(4, "Lift400", 4000, 5000); //seats, degem, max kg, max volume
 
 	//checking load cargo
@@ -185,7 +179,6 @@ void main()
 	cout << "******** final flight company print *********" << endl;
 	Delta.Print(cout);
 	cout << "********  *********" << endl;
-	*/
 
 
 

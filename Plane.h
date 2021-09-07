@@ -18,12 +18,12 @@ public:
 		int GetId();
 		char* GetModelName();
 		int GetNumOfChairs();
-		friend ostream& operator<<(ostream& outstream, const CPlane& plane);
+		friend ostream& operator<<(ostream& outstream, CPlane& plane);
 		bool operator==(CPlane* otherPlane);
 		void operator++();
 		void operator++(int);
 		void TakeOff(int flightDuration);
-//		void Print(ostream& outstream);
+		virtual void Print(ostream& outstream);
 //		bool IsEqual(CPlane otherPlane);
 };
 #endif

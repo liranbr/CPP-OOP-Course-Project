@@ -21,6 +21,7 @@ public:
 	CFlight(CFlightInfo& flightInfo);
 	CFlight(CFlightInfo& flightInfo, CPlane* plane);
 	CFlight(const CFlight& other);
+	CFlightInfo* GetFlightInfo();
 	void SetPlane(CPlane* newPlane);
 	bool TakeOff();
 	void operator+(CCrewMember* newCrewMember);

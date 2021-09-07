@@ -25,11 +25,11 @@ void CPilot::GetPresent() {
 }
 
 void CPilot::GetUniform() {
-	cout << this->crewMemberName << " this is the fifth time I get a new uniform – this is a waste of money!";
+	cout << this->crewMemberName << " this is the fifth time I get a new uniform – this is a waste of money!\n";
 }
 
 void CPilot::InviteToSimulator() {
-	cout << "Pilot " << this->crewMemberName << "got the message will come soon.";
+	cout << "Pilot " << this->crewMemberName << "got the message will come soon.\n";
 }
 
 void CPilot::TakeOff(int flightMinutes) {
@@ -39,7 +39,7 @@ void CPilot::TakeOff(int flightMinutes) {
 bool CPilot::operator+=(int additionalAirMinutes) {
 	if (additionalAirMinutes <= 0)
 		return false;
-	this->airMinutes += (int) additionalAirMinutes * 1.1;
+	this->airMinutes += ((int) additionalAirMinutes * 1.1);
 	return true;
 }
 
@@ -47,3 +47,11 @@ bool CPilot::operator==(CPilot& otherPilot) {
 	return CCrewMember::operator==(otherPilot) && this->address->operator==(*otherPilot.address);
 }
 
+void CPilot::Print(ostream& outstream) {
+	outstream << "Pilot " << crewMemberName << " minutes " << airMinutes;
+	if (address != nullptr)
+		outstream << " Home " << *address;
+	else
+		outstream << "\n";
+	outstream << (isCaptain ? "    a Captain\n" : "    not a Captain\n");
+}

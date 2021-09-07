@@ -31,8 +31,10 @@ int CPlane::GetNumOfChairs() {
 	return numOfChairs;
 }
 
-ostream& operator<<(ostream& outstream, const CPlane& plane) {
-	return outstream << "Plane " << plane.id << " degem " << plane.modelName << " seats " << plane.numOfChairs << "\n";
+ostream& operator<<(ostream& outstream, CPlane& plane) {
+	//return outstream << "Plane " << plane.id << " degem " << plane.modelName << " seats " << plane.numOfChairs << "\n";
+	plane.Print(outstream);
+	return outstream;
 }
 
 bool CPlane::operator==(CPlane* otherPlane) {
@@ -51,9 +53,9 @@ void CPlane::TakeOff(int flightDuration) {
 	cout << "Passenger plane #" << id << ": taking off. Need to add " << flightDuration << " minutes to my logbook.\n";
 }
 
-//void CPlane::Print(ostream& outstream) {
-//	outstream << "Plane " << id << " degem " << modelName << " seats " << numOfChairs << "\n";
-//}
+void CPlane::Print(ostream& outstream) {
+	outstream << "Plane " << id << " degem " << modelName << " seats " << numOfChairs << "\n";
+}
 
 //bool CPlane::IsEqual(CPlane otherPlane) {
 //	return this->id == otherPlane.GetId();

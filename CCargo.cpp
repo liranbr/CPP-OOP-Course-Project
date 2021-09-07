@@ -20,7 +20,7 @@ CCargo::~CCargo() {
 	delete[] modelName;
 }
 
-bool CCargo::load(float incomingWeight, float incomingVolume) {
+bool CCargo::Load(float incomingWeight, float incomingVolume) {
 	float tempWeight = incomingWeight + currentWeight;
 	float tempVolume = incomingVolume + currentVolume;
 	if (tempWeight > maxWeight || tempVolume > maxVolume)
@@ -32,4 +32,16 @@ bool CCargo::load(float incomingWeight, float incomingVolume) {
 
 void CCargo::TakeOff(int flightDuration) {
 	cout << "Need to add " << flightDuration << " to my log book.\n";
+}
+
+/*
+ostream& operator<<(ostream& outstream, const CCargo& plane) {
+	outstream << "Plane " << plane.id << " degem " << plane.modelName << " seats " << plane.numOfChairs << "\n";
+	outstream << "Cargo M_vol " << plane.maxVolume << " M_Kg " << plane.maxWeight << " C_vol " << plane.currentVolume << " C_Kg " << plane.currentWeight << "\n";
+	return outstream;
+}*/
+
+void CCargo::Print(ostream& outstream) {
+	outstream << "Plane " << id << " degem " << modelName << " seats " << numOfChairs << "\n";
+	outstream << "Cargo M_vol " << maxVolume << " M_Kg " << maxWeight << " C_vol " << currentVolume << " C_Kg " << currentWeight << "\n";
 }

@@ -27,6 +27,10 @@ CFlight::CFlight(const CFlight& other) {
         this->crewMembers[i] = new CCrewMember(*other.crewMembers[i]);
 }
 
+CFlightInfo* CFlight::GetFlightInfo() {
+    return new CFlightInfo(*flightInfo);
+}
+
 void CFlight::SetPlane(CPlane* newPlane) {
     this->plane = new CPlane(*newPlane);
 }
@@ -56,6 +60,7 @@ bool CFlight::TakeOff() {
         crewMembers[i]->TakeOff(flightInfo->GetDuration());
     return true;
 }
+
 
 void CFlight::operator+(CCrewMember* newCrewMember) {
     //If there's no place on flight.

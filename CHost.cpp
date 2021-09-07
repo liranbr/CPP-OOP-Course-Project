@@ -13,13 +13,14 @@ CHost::hostTypes CHost::GetHostType() {
 }
 
 void CHost::GetPresent() {
-	cout << this->crewMemberName << "thanking the company for receiving the holiday gift.\nI wasn’t expecting it";
+	cout << this->crewMemberName << "thanking the company for receiving the holiday gift.\nI wasn’t expecting it\n";
 }
 
 void CHost::GetUniform() {
-	cout << "I think the new uniform is very nice!";
+	cout << "I think the new uniform is very nice!\n";
 }
 
-void CHost::TakeOff(int flightMinutes) {
-	this->operator+=(flightMinutes); // add flight minutes to air time
+
+void CHost::Print(ostream& outstream) {
+	outstream << "Host " << hostTypeNames[hostType] << " " << crewMemberName << " minutes " << airMinutes << "\n";
 }
