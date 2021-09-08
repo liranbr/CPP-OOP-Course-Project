@@ -12,14 +12,15 @@ protected:
 	int numOfChairs;
 	static int staticID;
 public:
-	CPlane(int numOfChairs, const char* modelName);
+	CPlane(int numOfChairs, const char* modelName, int id = -1);
+	//CPlane(int numOfChairs, const char* modelName, int id);
 	CPlane(const CPlane& other);
 	~CPlane();
 		int GetId();
 		char* GetModelName();
 		int GetNumOfChairs();
 		friend ostream& operator<<(ostream& outstream, CPlane& plane);
-		bool operator==(CPlane* otherPlane);
+		bool operator==(const CPlane& otherPlane);
 		void operator++();
 		void operator++(int);
 		void TakeOff(int flightDuration);

@@ -13,11 +13,11 @@ CHost::hostTypes CHost::GetHostType() {
 }
 
 void CHost::GetPresent() {
-	cout << this->crewMemberName << "thanking the company for receiving the holiday gift.\nI wasn’t expecting it\n";
+	cout << this->crewMemberName << " thanking the company for receiving the holiday gift.\nI wasn't expecting it\n";
 }
 
 void CHost::GetUniform() {
-	cout << "I think the new uniform is very nice!\n";
+	cout << crewMemberName <<": I think the new uniform is very nice!\n";
 }
 
 

@@ -12,7 +12,6 @@ public:
 	CCargo(const CCargo& other);
 	~CCargo();
 	bool Load(float incomingWeight, float incomingVolume);
-	void TakeOff(int flightDuration);
 	void Print(ostream& outstream);
 
 };

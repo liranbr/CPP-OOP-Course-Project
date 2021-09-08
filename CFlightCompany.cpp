@@ -3,6 +3,7 @@
 #include "CrewMember.h"
 #include "Host.h"
 #include "Pilot.h"
+#include "Cargo.h"
 
 int CPlane::staticID = 100;
 
@@ -60,10 +61,12 @@ bool CFlightCompany::AddPlane(CPlane& newPlane) {
     if (planeAmount >= MAX_PLANES)
         return false;
     for (int i = 0; i < planeAmount; i++) 
-        if (*(*(this->planes + i)) == &newPlane)
+        if (*(*(this->planes + i)) == newPlane)
             return false;
-    
-    this->planes[planeAmount] = new CPlane(newPlane);
+    if (strcmp(typeid(newPlane).name(), "class CPlane") == 0)
+        this->planes[planeAmount] = new CPlane(newPlane);
+    else if (strcmp(typeid(newPlane).name(), "class CCargo") == 0)
+        this->planes[planeAmount] = new CCargo(*(CCargo*)&newPlane);
     planeAmount++;
     return true;
 }
@@ -106,14 +109,14 @@ void CFlightCompany::AddCrewToFlight(int flightID, int crewIndex) {
 int CFlightCompany::GetCargoCount() {
     int counter = 0;
     for (int i = 0; i < planeAmount; i++)
-        if (strcmp(typeid(planes[i]).name(), "CCargo") == 0)
+        if (strcmp(typeid(*planes[i]).name(), "class CCargo") == 0)
             counter++;
     return counter;
 }
 
 void CFlightCompany::PilotsToSimulator() {
     for (int i = 0; i < crewMemberAmount; i++)
-        if (strcmp(typeid(crewMembers[i]).name(), "CPilot") == 0)
+        if (strcmp(typeid(*crewMembers[i]).name(), "class CPilot") == 0)
             ((CPilot*)crewMembers[i])->InviteToSimulator();
 }
 

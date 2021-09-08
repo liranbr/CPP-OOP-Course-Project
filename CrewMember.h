@@ -18,12 +18,12 @@ public:
         char* GetCrewMemberName();
         void SetCrewMemberName(const char* newCrewMemberName);
         friend ostream& operator<<(ostream& outstream, const CCrewMember& crewMember);
-        bool operator+=(int newAirMinutes);
+        virtual bool operator+=(int newAirMinutes);
         bool operator==(CCrewMember& otherCrewMember);
 		bool UpdateMinutes(int newAirMinutes);
 		virtual void Print(ostream& outstream);
 //		bool IsEqual(CCrewMember otherCrewMember);
-        void GetPresent();
+        virtual void GetPresent();
         virtual void GetUniform();
         void TakeOff(int flightMinutes);
 };

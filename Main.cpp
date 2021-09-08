@@ -118,14 +118,13 @@ void main()
 			cout << "Problem adding flight " << FArr[i]->GetFlightInfo();
 
 	cout << "******** After adding Flights *********" << endl;
-	Delta.Print(cout);
+		Delta.Print(cout);
 	cout << "********  *********" << endl;
 
 	for (int i = 0; i < FLIGHT_COUNT; i++) {
 		delete fInfoArr[i];
 		delete FArr[i];
 	}
-
 	CFlight* pF2 = Delta.GetFlightByNum(706);
 
 	CCrewMember* pCmTemp;
@@ -144,6 +143,7 @@ void main()
 	}
 	else
 		cout << "flight 706 was not found " << endl;
+	
 
 	pF2 = Delta.GetFlightByNum(343);
 	if (pF2 != NULL) {
@@ -165,7 +165,7 @@ void main()
 	cout << "********  *********" << endl;
 
 	cout << "******** Simulator is on *********" << endl;
-	//Delta.PilotsToSimulator();
+	Delta.PilotsToSimulator();
 	cout << "********  *********" << endl;
 
 	cout << "******** Uniform to all *********" << endl;
@@ -174,7 +174,7 @@ void main()
 
 	cout << "******** Counting cargo planes *********" << endl;
 
-	//cout << "Delta has " << Delta.GetCargoCount() << " cargo planes" << endl;
+	cout << "Delta has " << Delta.GetCargoCount() << " cargo planes" << endl;
 
 	cout << "******** final flight company print *********" << endl;
 	Delta.Print(cout);

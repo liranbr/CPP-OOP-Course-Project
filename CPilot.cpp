@@ -25,11 +25,11 @@ void CPilot::GetPresent() {
 }
 
 void CPilot::GetUniform() {
-	cout << this->crewMemberName << " this is the fifth time I get a new uniform – this is a waste of money!\n";
+	cout << this->crewMemberName << ": this is the fifth time I get a new uniform, this is a waste of money!\n";
 }
 
 void CPilot::InviteToSimulator() {
-	cout << "Pilot " << this->crewMemberName << "got the message will come soon.\n";
+	cout << "Pilot " << this->crewMemberName << " got the message will come soon.\n";
 }
 
 void CPilot::TakeOff(int flightMinutes) {

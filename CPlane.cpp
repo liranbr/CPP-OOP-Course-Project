@@ -1,12 +1,22 @@
 #include "Plane.h"
 
-CPlane::CPlane(int numOfChairs, const char* modelName) {
-	this->id = staticID;
-	staticID++;
+CPlane::CPlane(int numOfChairs, const char* modelName, int id) {
+	this->id = id;
+	if (this->id == -1) {
+		this->id = staticID;
+		staticID++;
+	}
 	this->numOfChairs = numOfChairs;
 	this->modelName = new char[BUFFER];
 	strcpy(this->modelName, modelName);
 }
+
+//CPlane::CPlane(int numOfChairs, const char* modelName, int id) {
+//	this->id = id;
+//	this->numOfChairs = numOfChairs;
+//	this->modelName = new char[BUFFER];
+//	strcpy(this->modelName, modelName);
+//}
 
 CPlane::CPlane(const CPlane& other) {
 	this->id = other.id;
@@ -37,8 +47,8 @@ ostream& operator<<(ostream& outstream, CPlane& plane) {
 	return outstream;
 }
 
-bool CPlane::operator==(CPlane* otherPlane) {
-    return this->id == otherPlane->id;
+bool CPlane::operator==(const CPlane& otherPlane) {
+    return this->id == otherPlane.id;
 }
 
 void CPlane::operator++() {
@@ -50,7 +60,7 @@ void CPlane::operator++(int) {
 }
 
 void CPlane::TakeOff(int flightDuration) {
-	cout << "Passenger plane #" << id << ": taking off. Need to add " << flightDuration << " minutes to my logbook.\n";
+	cout << "Need to add " << flightDuration << " minutes to my logbook.\n";
 }
 
 void CPlane::Print(ostream& outstream) {

@@ -1,5 +1,6 @@
 #include "Flight.h"
 #include "Host.h"
+#include "Pilot.h"
 
 CFlight::CFlight(CFlightInfo &flightInfo) {
     this->flightInfo = new CFlightInfo(flightInfo);
@@ -27,8 +28,8 @@ CFlight::CFlight(const CFlight& other) {
         this->crewMembers[i] = new CCrewMember(*other.crewMembers[i]);
 }
 
-CFlightInfo* CFlight::GetFlightInfo() {
-    return new CFlightInfo(*flightInfo);
+CFlightInfo& CFlight::GetFlightInfo() {
+    return *new CFlightInfo(*flightInfo);
 }
 
 void CFlight::SetPlane(CPlane* newPlane) {
@@ -42,7 +43,7 @@ bool CFlight::TakeOff() {
     int pilotAmount = 0;
     int superHostAmount = 0;
     for (int i = 0; i < crewMemberAmount; i++) { // count pilots and super-hosts
-        if (strcmp(typeid(crewMembers[i]).name(), "CPilot") == 0)
+        if (strcmp(typeid(*crewMembers[i]).name(), "class CPilot") == 0)
             pilotAmount++;
         else if (((CHost*)crewMembers[i])->GetHostType() == CHost::eSuper)
             superHostAmount++;
@@ -71,23 +72,25 @@ void CFlight::operator+(CCrewMember* newCrewMember) {
     for (int i = 0; i < this->crewMemberAmount; i++)
         if (*crewMembers[i] == *newCrewMember)
             return;
-
-    this->crewMembers[crewMemberAmount] = newCrewMember;
+    if (strcmp(typeid(*newCrewMember).name(), "class CHost") == 0)
+        this->crewMembers[crewMemberAmount] =  new CHost(*(CHost*)newCrewMember);
+    else if (strcmp(typeid(*newCrewMember).name(), "class CPilot") == 0)
+        this->crewMembers[crewMemberAmount] = new CPilot(*(CPilot*)newCrewMember);
     crewMemberAmount++;
 }
 
 ostream &operator<<(ostream &outstream, const CFlight &flight) {
-    outstream << "Flight" << *(flight.flightInfo);
+    outstream << "Flight " << *(flight.flightInfo);
     flight.plane == NULL ? outstream  << "No plane set yet.\n" : outstream << *flight.plane;
     outstream << "There are " << flight.crewMemberAmount << " crew members in flight:\n";
     for (int i = 0; i < flight.crewMemberAmount; i++)
-        outstream << flight.crewMembers[i];
+        flight.crewMembers[i]->Print(outstream);
     return outstream;
 }
 
 bool CFlight::operator==(CFlight* otherFlight)  {
-    if (!(this->flightInfo == otherFlight->flightInfo &&
-          this->plane == otherFlight->plane &&
+    if (!(*this->flightInfo == *otherFlight->flightInfo &&
+          *this->plane == *otherFlight->plane &&
           this->crewMemberAmount == otherFlight->crewMemberAmount))
         return false;
     for (int i = 0; i < crewMemberAmount; i++) {

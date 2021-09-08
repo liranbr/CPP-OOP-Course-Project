@@ -9,7 +9,7 @@ CCargo::CCargo(int numOfChairs, const char* modelName, float maxWeight,
 	this->currentVolume = currentVolume;
 }
 
-CCargo::CCargo(const CCargo& other) : CPlane(other.numOfChairs, other.modelName) {
+CCargo::CCargo(const CCargo& other) : CPlane(other.numOfChairs, other.modelName, other.id) {
 	this->maxWeight = other.maxWeight;
 	this->maxVolume = other.maxVolume;
 	this->currentWeight = other.currentWeight;
@@ -28,10 +28,6 @@ bool CCargo::Load(float incomingWeight, float incomingVolume) {
 	currentWeight = tempWeight;
 	currentVolume = tempVolume;
 	return true;
-}
-
-void CCargo::TakeOff(int flightDuration) {
-	cout << "Need to add " << flightDuration << " to my log book.\n";
 }
 
 /*
