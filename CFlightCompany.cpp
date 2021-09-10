@@ -4,6 +4,7 @@
 #include "Host.h"
 #include "Pilot.h"
 #include "Cargo.h"
+#include "FlightCompException.h"
 
 int CPlane::staticID = 100;
 
@@ -31,6 +32,8 @@ void CFlightCompany::SetName(const char* nameOfCompany) {
 }
 
 void CFlightCompany::Print(ostream& outstream) {
+    if (strlen(nameOfCompany) == 0)
+        throw CCompStringException("nameOfCompany doesn't exist!");
 	outstream << "Flight company: " << nameOfCompany << "\n";
     outstream << "There are " << crewMemberAmount << " Crew members:\n";
     for (int i = 0; i < crewMemberAmount; i++)
@@ -96,10 +99,10 @@ CCrewMember* CFlightCompany::GetCrewMember(int index) {
     return crewMembers[index];
 }
 
-CPlane* CFlightCompany::GetPlane(int planeIndex) {
+CPlane& CFlightCompany::operator[](int planeIndex) throw(CCompLimitException) {
     if (planeIndex >= 0 && planeIndex <= planeAmount - 1)
-        return planes[planeIndex];
-    return nullptr;
+        return *planes[planeIndex];
+    throw CCompLimitException(planeIndex);
 }
 
 void CFlightCompany::AddCrewToFlight(int flightID, int crewIndex) {
@@ -131,5 +134,10 @@ void CFlightCompany::CrewGetUniform() {
 }
 
 bool CFlightCompany::TakeOffFlight(int flightID) {
-    return GetFlightByNum(flightID)->TakeOff();
+    try {
+        return GetFlightByNum(flightID)->TakeOff();
+    }
+    catch (CCompStringException& e) {
+        e.Show();
+    }
 }

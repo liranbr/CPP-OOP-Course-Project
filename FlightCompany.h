@@ -28,7 +28,7 @@ public:
         bool AddFlight(CFlight& newFlight);
         CFlight* GetFlightByNum(int flightID);
         CCrewMember* GetCrewMember(int index);
-        CPlane* GetPlane(int planeIndex);
+        CPlane& operator[](int planeIndex);
         void AddCrewToFlight(int flightID, int crewIndex);
         int GetCargoCount();
         void PilotsToSimulator();

@@ -1,6 +1,12 @@
 #include "Plane.h"
-
-CPlane::CPlane(int numOfChairs, const char* modelName, int id) {
+#include "FlightCompException.h"
+CPlane::CPlane(int numOfChairs, const char* modelName, int id) throw (CCompStringException) {
+	if (id < -1)
+		delete[] modelName;
+		throw CCompStringException("ID is smaller than -1.");
+	if (numOfChairs < 0)
+		delete[] modelName;
+		throw CCompStringException("numOfChairs is smaller than -1.");
 	this->id = id;
 	if (this->id == -1) {
 		this->id = staticID;

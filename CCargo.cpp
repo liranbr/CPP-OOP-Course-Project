@@ -1,8 +1,12 @@
 #include "Cargo.h"
-
+#include "FlightCompException.h"
 CCargo::CCargo(int numOfChairs, const char* modelName, float maxWeight,
-	float maxVolume, float currentWeight, float currentVolume) :
+	float maxVolume, float currentWeight, float currentVolume) throw (CCompStringException) :
 	CPlane(numOfChairs, modelName) {
+	if (currentWeight < 0 || currentVolume < 0)
+		throw CCompStringException("currentWeight or currentVolume cannot be lower than 0.");
+	if (maxWeight < 0 || maxVolume < 0)
+		throw CCompStringException("maxWeight or maxVolume cannot be lower than 0.");
 	this->maxWeight = maxWeight;
 	this->maxVolume = maxVolume;
 	this->currentWeight = currentWeight;

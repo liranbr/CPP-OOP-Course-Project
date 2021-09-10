@@ -1,4 +1,5 @@
 #include "CrewMember.h"
+#include "FlightCompException.h"
 
 CCrewMember::CCrewMember(const char* crewMemberName, int airMinutes) {
 	this->crewMemberName = new char[BUFFER];
@@ -32,9 +33,9 @@ ostream& operator<<(ostream& outstream, const CCrewMember& crewMember) {
         " minutes " << crewMember.airMinutes << "\n";
 }
 
-bool CCrewMember::operator+=(int additionalAirMinutes) {
+bool CCrewMember::operator+=(int additionalAirMinutes) throw (CCompStringException) {
     if (additionalAirMinutes <= 0)
-        return false;
+        throw CCompStringException("additionalAirMinutes cannot be under 0!\n");
     this->airMinutes += additionalAirMinutes;
     return true;
 }

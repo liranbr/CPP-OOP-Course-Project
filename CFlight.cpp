@@ -1,6 +1,7 @@
 #include "Flight.h"
 #include "Host.h"
 #include "Pilot.h"
+#include "FlightCompException.h"
 
 CFlight::CFlight(CFlightInfo &flightInfo) {
     this->flightInfo = new CFlightInfo(flightInfo);
@@ -37,9 +38,9 @@ void CFlight::SetPlane(CPlane* newPlane) {
 }
 
 
-bool CFlight::TakeOff() {
+bool CFlight::TakeOff() throw (CCompStringException) {
     if (plane == NULL)
-        return false;
+        throw CCompStringException("CFlight: TakeOff: plane cannot be null.\n");
     int pilotAmount = 0;
     int superHostAmount = 0;
     for (int i = 0; i < crewMemberAmount; i++) { // count pilots and super-hosts
@@ -48,13 +49,13 @@ bool CFlight::TakeOff() {
         else if (((CHost*)crewMembers[i])->GetHostType() == CHost::eSuper)
             superHostAmount++;
     }
-    if (strcmp(typeid(plane).name(), "CCargo") == 0) { // cargo plane
+    if (strcmp(typeid(plane).name(), "class CCargo") == 0) { // cargo plane
         if (pilotAmount < 1)
-            return false;
+            throw CCompStringException("CFlight: TakeOff: pilotAmount cannot be under 1 for a cargo plane!\n");
     }
     else { // passenger plane
         if (pilotAmount != 1 || superHostAmount > 1)
-            return false;
+                throw CCompStringException("CFlight: TakeOff: pilotAmount cannot be 1 and superHostAmount cannot be over 1 for a passenger plane!\n");
     }
     plane->TakeOff(flightInfo->GetDuration());
     for (int i = 0; i < crewMemberAmount; i++)
