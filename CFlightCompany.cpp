@@ -5,6 +5,9 @@
 #include "Pilot.h"
 #include "Cargo.h"
 #include "FlightCompException.h"
+#include <iostream>
+#include <fstream>
+#include "PlaneCrewFactory.h"
 
 int CPlane::staticID = 100;
 
@@ -17,6 +20,37 @@ CFlightCompany::CFlightCompany(const char* nameOfCompany) {
     this->planeAmount = 0;
     this->flights = new CFlight*[MAX_FLIGHTS];
     this->flightAmount = 0;
+}
+
+CFlightCompany::CFlightCompany(const char* filePath, int muda) : CFlightCompany("") {
+    char buffer[BUFFER];
+    char buffer2[BUFFER];
+    ifstream inFile(filePath);
+    inFile >> nameOfCompany; // set name of company
+
+    inFile >> buffer; // read crew member amount
+    int amount = atoi(buffer);
+    for (int i = 0; i < amount; i++) { // read crew members
+        CCrewMember* cm = CPlaneCrewFactory::GetCrewMemberFromFile(inFile);
+        AddCrewMember(*cm);
+    }
+
+    inFile >> buffer; // read plane amount
+    amount = atoi(buffer);
+    for (int i = 0; i < amount; i++) { // read planes
+        CPlane* p = CPlaneCrewFactory::GetPlaneFromFile(inFile);
+        AddPlane(*p);
+    }
+
+    inFile >> buffer; // read flight amount
+    amount = atoi(buffer);
+    for (int i = 0; i < amount; i++) { // read flights
+        inFile >> buffer;
+        CFlight* f;
+        f = fuckthisshit;
+    }
+
+    inFile.close();
 }
 
 CFlightCompany::~CFlightCompany() {

@@ -20,6 +20,8 @@ using namespace std;
 //const int FLIGHT_COUNT = 4;
 
 void main()
+// TODO: try moving all includes to helper.h
+// TODO: replace conditions using typeid to use GetType from Factory
 {
 
 	CFlightCompany* pDelta = NULL;
@@ -103,7 +105,7 @@ void main()
 
 	//call a static function that get plane or customer from user.
 
-	CPlaneCrewFactory::GetCompanyDataFromUser(*pDelta);
+	//CPlaneCrewFactory::GetCompanyDataFromUser(*pDelta);
 
 
 	CFlightInfo Info("Paris", 343, 320, 5000);
@@ -113,6 +115,7 @@ void main()
 
 	CFlight* pF = pDelta->GetFlightByNum(343);
 	CCrewMember* pCmTemp;
+	/*
 	if (pF != NULL) {
 		cout << "flight 343 was found " << endl;
 		for (int i = 0; i < pDelta->GetCrewCount(); i++) {
@@ -130,7 +133,7 @@ void main()
 	}
 	catch (const CFlightCompException& e) {
 		e.Show();
-	}
+	}*/
 
 
 	delete pDelta;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include "helper.h"
 using namespace std;
 
 class CFlightCompException
@@ -17,6 +18,7 @@ private:
 public:
 
 	CCompStringException(const char* message) {
+		this->message = new char[BUFFER];
 		strcpy(this->message, message);
 	}
 
@@ -40,7 +42,10 @@ class CCompFileException : public CFlightCompException {
 private:
 	char* fileName;
 public:
-	CCompFileException(char* fileName) : fileName(fileName) {}
+	CCompFileException(char* fileName) {
+		this->fileName = new char[BUFFER];
+		strcpy(this->fileName, fileName);
+	}
 
 	virtual void Show() {
 		cout << "The file: " << fileName << " has caused the error!\n";
