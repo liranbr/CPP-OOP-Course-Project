@@ -11,9 +11,12 @@
 #include "Cargo.h"
 #include "Host.h"
 #include "FlightCompException.h"
+#include "String.h"
 #include "helper.h"
 
 using namespace std;
+
+bool CPlaneCrewFactory::haveReadID = false;
 
  PlaneType CPlaneCrewFactory::GetPlaneType(const CPlane* pPlane) {
 	return strcmp(typeid(pPlane).name(), "class CPlane") == 0 ? PlaneType::eRegular : PlaneType::eCargo;
@@ -36,85 +39,56 @@ using namespace std;
 }
 
 
- CCrewMember* CPlaneCrewFactory::GetCrewMemberFromFile(ifstream& inFile) {
-	char buffer[BUFFER];
-	char buffer2[BUFFER];
-	CCrewMember* cm;
+CCrewMember* CPlaneCrewFactory::GetCrewMemberFromFile(ifstream& inFile) {
+	CCrewMember* cm = nullptr;
 	try {
-		inFile >> buffer
-		strcpy(buffer2, buffer);
-		char* tokens[MAX];
-		int i = 0;
-		tokens[i] = strtok(buffer2, " ");
-		while (tokens[i] != NULL) {
-			i++;
-			tokens[i] = strtok(NULL, " ");
-		}
-		const char* tempName = tokens[1];
-		CHost::hostTypes tempType = (CHost::hostTypes)atoi(tokens[3]);
-		if (atoi(tokens[0]) == 0) {
-			cm = new CHost(tempName, tempType, atoi(tokens[2]));
-			//CHost(name, type, minutes)
-			return cm;
-		}
-		else {
-			//CPilot(const char* crewMemberName, bool isCaptain, CAddress * address = nullptr, int airMinutes = 0);
-			if (atoi(tokens[3]) == 1) { // Captain has an address.
-				bool tempCaptain = atoi(tokens[7]);
-				CAddress* tempAddress = new CAddress(atoi(tokens[4]), tokens[5], tokens[6]);
-				cm = new CPilot(tempName, tempCaptain, tempAddress, atoi(tokens[2]));
-				//CPilot(name, isCaptain, address, minutes);
-				return cm;
+		int minutes, pilotOrHost; // 1 => pilot, 0 => host
+		char name[BUFFER];
+		inFile >> pilotOrHost >> name >> minutes;
+		if (pilotOrHost) { // is a pilot
+			bool hasAddress;
+			inFile >> hasAddress;
+			CAddress* address = nullptr;
+			if (hasAddress) {
+				int houseNum;
+				char street[BUFFER], city[BUFFER];
+				inFile >> houseNum >> street >> city;
+				address = new CAddress(houseNum, street, city);
 			}
-			//Captain doesn't have an address.
-			bool tempCaptain = atoi(tokens[4]);
-			CAddress* tempAddress = nullptr;
-			cm = new CPilot(tempName, tempCaptain, tempAddress, atoi(tokens[2]));
-			//CPilot(name, isCaptain, nullAddress, minutes);
-			return cm;
+			bool isCaptain;
+			inFile >> isCaptain;
+			cm = new CPilot(name, isCaptain, address, minutes);
+		} 
+		else { // is a host
+			int typeNum;
+			inFile >> typeNum;
+			cm = new CHost(name, (CHost::hostTypes)typeNum, minutes);
 		}
 	}
 	catch (CCompFileException& e) {
 		e.Show();
 	}
+	return cm;
 }
 
  CPlane* CPlaneCrewFactory::GetPlaneFromFile(ifstream& inFile) {
-    char buffer[BUFFER];
-	char buffer2[BUFFER];
 	CPlane* p = nullptr;
 	try {
-		inFile >> buffer;
-		strcpy(buffer2, buffer);
-		char* tokens[MAX];
-		int i = 0;
-		tokens[i] = strtok(buffer2, " ");
-		while (tokens[i] != NULL) {
-			i++;
-			tokens[i] = strtok(NULL, " ");
+		int cargoOrPlane, id, seats; // 1 => cargo, 0 => plane
+		char degem[BUFFER];
+		inFile >> cargoOrPlane;
+		if (!haveReadID) { // if first plane, essentially
+			inFile >> CPlane::lastID;
+			haveReadID = true;
 		}
-		int isFirst = 0; // if first plane, there's an additional lastID field........
-		if (i == 5) {
-			CPlane::lastID = atoi(tokens[1]);
-			isFirst = 1;
+		inFile >> id >> degem >> seats;
+		if (cargoOrPlane) { // if cargo
+			float maxVolume, maxKG, volume, kg;
+			inFile >> maxVolume >> maxKG >> volume >> kg;
+			p = new CCargo(seats, degem, maxKG, maxVolume, kg, volume);
 		}
-		if (atoi(tokens[0]) == 0) // if regular plane
-			p = new CPlane(atoi(tokens[3 + isFirst]), tokens[2 + isFirst], atoi(tokens[1 + isFirst]));
-			// CPlane(seats, degem, id)
-
-		else { // if cargo plane
-			inFile >> buffer2; // cargo also requires next line as input
-			i = 0;
-			char* tokens2[MAX];
-			tokens2[i] = strtok(buffer2, " ");
-			while (tokens2[i] != NULL) {
-				i++;
-				tokens2[i] = strtok(NULL, " ");
-			}
-			// CCargo(seats, id, degem,
-			//	maxWeight, maxVolume, weight, volume)
-			p = new CCargo(atoi(tokens[3 + isFirst]), atoi(tokens[1 + isFirst]), tokens[2 + isFirst],
-				atof(tokens2[1]), atof(tokens2[0]), atof(tokens2[3]), atof(tokens2[2]));
+		else { // if plane
+			p = new CPlane(seats, degem, id);
 		}
 	}
 	catch (CCompFileException& e) {

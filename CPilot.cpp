@@ -48,10 +48,9 @@ bool CPilot::operator==(CPilot& otherPilot) {
 }
 
 void CPilot::Print(ostream& outstream) {
-	outstream << "Pilot " << crewMemberName << " minutes " << airMinutes;
+	outstream << "Pilot " << crewMemberName << " minutes " << airMinutes << (isCaptain ? ", a Captain. " : ", not a Captain. ");
 	if (address != nullptr)
-		outstream << " Home " << *address;
+		outstream << "Home: " << *address;
 	else
 		outstream << "\n";
-	outstream << (isCaptain ? "    a Captain\n" : "    not a Captain\n");
 }

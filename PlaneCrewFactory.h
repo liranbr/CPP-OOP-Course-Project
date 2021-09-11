@@ -23,7 +23,6 @@ using namespace std;
 const string PlaneType_TITLE[nofPlaneType] = { "Regular","Cargo" };
 const string CrewType_TITLE[nofCrewType] = { "Host","Pilot" };
 
-
 class CPlane;
 class CCrewMember;
 class CFlightCompany;
@@ -41,6 +40,8 @@ public:
 
 	static CCrewMember* GetCrewMemberFromFile(ifstream& inFile);
 	static CPlane* GetPlaneFromFile(ifstream& inFile);
+
+	static bool haveReadID;
 
 
 private:
