@@ -5,12 +5,10 @@
 
 CPlane::CPlane(int numOfChairs, const char* modelName, int id) throw (CCompStringException) {
 	if (id < -1) {
-		delete[] modelName;
-		throw CCompStringException("ID is smaller than -1.");
+		throw CCompStringException("ID is smaller than -1.\n");
 	}
 	if (numOfChairs < 0) {
-		delete[] modelName;
-		throw CCompStringException("numOfChairs is smaller than -1.");
+		throw CCompStringException("numOfChairs is smaller than -1.\n");
 	}
 	this->id = id;
 	if (this->id == -1) {

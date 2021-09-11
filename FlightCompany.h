@@ -36,5 +36,6 @@ public:
         void CrewGetPresent();
         void CrewGetUniform();
         bool TakeOffFlight(int flightID);
+        CFlight* GetFlightFromFile(ifstream& inFile);
 };
 #endif // !__FLIGHT_COMPANY_H

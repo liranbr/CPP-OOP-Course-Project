@@ -35,6 +35,7 @@ public:
 	static PlaneType GetPlaneType(const CPlane* pPlane);
 	static CrewType GetCrewType(const CCrewMember* pCrew);
 	static void GetCompanyDataFromUser(CFlightCompany& comp);
+
 	static CPlane* GetPlaneFromUser();
 	static CCrewMember* GetCrewFromUser();
 

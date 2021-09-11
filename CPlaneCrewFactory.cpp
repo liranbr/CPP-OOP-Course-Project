@@ -96,3 +96,4 @@ CCrewMember* CPlaneCrewFactory::GetCrewMemberFromFile(ifstream& inFile) {
 	}
 	return p;
 }
+

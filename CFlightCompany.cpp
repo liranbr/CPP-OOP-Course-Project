@@ -42,10 +42,41 @@ CFlightCompany::CFlightCompany(const char* filePath, int muda) : CFlightCompany(
 
     inFile >> amount; // read flight amount
     for (int i = 0; i < amount; i++) { // read flights
-        // write something please
+        CFlight* f = GetFlightFromFile(inFile);
+        AddFlight(*f);
     }
 
     inFile.close();
+}
+
+CFlight* CFlightCompany::GetFlightFromFile(ifstream& inFile) {
+    CFlight* f = nullptr;
+    try {
+        char destination[BUFFER];
+        int flightNum, duration, distance;
+        bool hasPlane; // 1 => has plane, 0 => no plane
+        inFile >> destination >> flightNum >> duration >> distance >> hasPlane;
+        CFlightInfo* fi = new CFlightInfo(destination, flightNum, duration, distance);
+        f = new CFlight(*fi);
+        if (hasPlane) {
+            int planeId;
+            inFile >> planeId;
+            for (int i = 0; i < planeAmount; i++)
+                if (planes[i]->GetId() == planeId)
+                    f->SetPlane(planes[i]);
+        }
+        int amount;
+        inFile >> amount;
+        for (int i = 0; i < amount; i++) {
+            CCrewMember* cm = CPlaneCrewFactory::GetCrewMemberFromFile(inFile);
+            cm->Print(cout);
+            *f + cm;
+        }
+    }
+    catch (CCompFileException& e) {
+        e.Show();
+    }
+    return f;
 }
 
 CFlightCompany::~CFlightCompany() {
