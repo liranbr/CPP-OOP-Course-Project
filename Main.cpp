@@ -93,6 +93,9 @@ void main()
 	} catch (CCompStringException& e){
 		e.Show();
 	}
+	catch (...) {
+		printf("ayy...");
+	}
 	try {
 		CPlane p0 = (*pDelta)[9];
 	}

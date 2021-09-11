@@ -9,8 +9,8 @@ CPlane::CPlane(int numOfChairs, const char* modelName, int id) throw (CCompStrin
 		throw CCompStringException("numOfChairs is smaller than -1.");
 	this->id = id;
 	if (this->id == -1) {
-		this->id = staticID;
-		staticID++;
+		this->id = lastID;
+		lastID++;
 	}
 	this->numOfChairs = numOfChairs;
 	this->modelName = new char[BUFFER];

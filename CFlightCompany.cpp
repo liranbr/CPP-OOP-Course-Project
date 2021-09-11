@@ -9,7 +9,7 @@
 #include <fstream>
 #include "PlaneCrewFactory.h"
 
-int CPlane::staticID = 100;
+int CPlane::lastID = 100;
 
 CFlightCompany::CFlightCompany(const char* nameOfCompany) {
 	this->nameOfCompany = new char[BUFFER];
@@ -31,15 +31,15 @@ CFlightCompany::CFlightCompany(const char* filePath, int muda) : CFlightCompany(
     inFile >> buffer; // read crew member amount
     int amount = atoi(buffer);
     for (int i = 0; i < amount; i++) { // read crew members
-        CCrewMember* cm = CPlaneCrewFactory::GetCrewMemberFromFile(inFile);
-        AddCrewMember(*cm);
+        //CCrewMember* cm = CPlaneCrewFactory::GetCrewMemberFromFile(inFile);
+        //AddCrewMember(*cm);
     }
 
     inFile >> buffer; // read plane amount
     amount = atoi(buffer);
     for (int i = 0; i < amount; i++) { // read planes
-        CPlane* p = CPlaneCrewFactory::GetPlaneFromFile(inFile);
-        AddPlane(*p);
+        //CPlane* p = CPlaneCrewFactory::GetPlaneFromFile(inFile);
+        //AddPlane(*p);
     }
 
     inFile >> buffer; // read flight amount
@@ -47,7 +47,7 @@ CFlightCompany::CFlightCompany(const char* filePath, int muda) : CFlightCompany(
     for (int i = 0; i < amount; i++) { // read flights
         inFile >> buffer;
         CFlight* f;
-        f = fuckthisshit;
+
     }
 
     inFile.close();

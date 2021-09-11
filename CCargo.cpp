@@ -13,6 +13,19 @@ CCargo::CCargo(int numOfChairs, const char* modelName, float maxWeight,
 	this->currentVolume = currentVolume;
 }
 
+CCargo::CCargo(int numOfChairs, int id, const char* modelName, float maxWeight,
+	float maxVolume, float currentWeight = 0, float currentVolume = 0) throw (CCompStringException) : 
+	CPlane(numOfChairs, modelName, id) {
+	if (currentWeight < 0 || currentVolume < 0)
+		throw CCompStringException("currentWeight or currentVolume cannot be lower than 0.");
+	if (maxWeight < 0 || maxVolume < 0)
+		throw CCompStringException("maxWeight or maxVolume cannot be lower than 0.");
+	this->maxWeight = maxWeight;
+	this->maxVolume = maxVolume;
+	this->currentWeight = currentWeight;
+	this->currentVolume = currentVolume;
+}
+
 CCargo::CCargo(const CCargo& other) : CPlane(other.numOfChairs, other.modelName, other.id) {
 	this->maxWeight = other.maxWeight;
 	this->maxVolume = other.maxVolume;

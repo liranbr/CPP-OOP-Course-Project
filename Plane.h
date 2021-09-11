@@ -10,8 +10,8 @@ protected:
 	int id;
 	char* modelName;
 	int numOfChairs;
-	static int staticID;
 public:
+	static int lastID;
 	CPlane(int numOfChairs, const char* modelName, int id = -1);
 	//CPlane(int numOfChairs, const char* modelName, int id);
 	CPlane(const CPlane& other);

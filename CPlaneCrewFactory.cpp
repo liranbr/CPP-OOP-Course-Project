@@ -53,13 +53,41 @@ static CPlane* GetPlaneFromFile(ifstream& inFile) {
     char buffer[BUFFER];
 	char buffer2[BUFFER];
 	CPlane* p;
+
+
 	try {
 		inFile >> buffer;
-		if (buffer[0] == 0)
-			p = new CPlane(buffer);
-		else {
+
+		strcpy(buffer2, buffer);
+		char* tokens[MAX];
+		int i = 0;
+		tokens[i] = strtok(buffer2, " ");
+		while (tokens[i] != NULL) {
+			i++;
+			tokens[i] = strtok(NULL, " ");
+		}
+		int isFirst = 0; // if first plane, there's an additional lastID field........
+		if (i == 5) {
+			CPlane::lastID = atoi(tokens[1]);
+			isFirst = 1;
+		}
+		if (atoi(tokens[0]) == 0) // if regular plane
+			p = new CPlane(atoi(tokens[3 + isFirst]), tokens[2 + isFirst], atoi(tokens[1 + isFirst]));
+			// CPlane(seats, degem, id)
+
+		else { // if cargo plane
 			inFile >> buffer2; // cargo also requires next line as input
-			p = new CCargo(buffer, buffer2);
+			i = 0;
+			char* tokens2[MAX];
+			tokens2[i] = strtok(buffer2, " ");
+			while (tokens2[i] != NULL) {
+				i++;
+				tokens2[i] = strtok(NULL, " ");
+			}
+			// CCargo(seats, id, degem,
+			//	maxWeight, maxVolume, weight, volume)
+			p = new CCargo(atoi(tokens[3 + isFirst]), atoi(tokens[1 + isFirst]), tokens[2 + isFirst],
+				atof(tokens2[1]), atof(tokens2[0]), atof(tokens2[3]), atof(tokens2[2]));
 		}
 	}
 	catch (CCompFileException& e) {
