@@ -167,6 +167,7 @@
     <ClCompile Include="CFlight.cpp" />
     <ClCompile Include="CPlaneCrewFactory.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PlaneCrewFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Delta.txt" />

@@ -31,15 +31,15 @@ CFlightCompany::CFlightCompany(const char* filePath, int muda) : CFlightCompany(
     inFile >> buffer; // read crew member amount
     int amount = atoi(buffer);
     for (int i = 0; i < amount; i++) { // read crew members
-        //CCrewMember* cm = CPlaneCrewFactory::GetCrewMemberFromFile(inFile);
-        //AddCrewMember(*cm);
+        CCrewMember* cm = CPlaneCrewFactory::GetCrewMemberFromFile(inFile);
+        AddCrewMember(*cm);
     }
 
     inFile >> buffer; // read plane amount
     amount = atoi(buffer);
     for (int i = 0; i < amount; i++) { // read planes
-        //CPlane* p = CPlaneCrewFactory::GetPlaneFromFile(inFile);
-        //AddPlane(*p);
+        CPlane* p = CPlaneCrewFactory::GetPlaneFromFile(inFile);
+        AddPlane(*p);
     }
 
     inFile >> buffer; // read flight amount

@@ -1,5 +1,7 @@
 #include "CrewMember.h"
 #include "FlightCompException.h"
+#include <iostream>
+#include <fstream>
 
 CCrewMember::CCrewMember(const char* crewMemberName, int airMinutes) {
 	this->crewMemberName = new char[BUFFER];

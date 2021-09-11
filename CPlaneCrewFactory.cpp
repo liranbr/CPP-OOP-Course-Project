@@ -11,53 +11,80 @@
 #include "Cargo.h"
 #include "Host.h"
 #include "FlightCompException.h"
+#include "helper.h"
+
 using namespace std;
 
-static PlaneType GetPlaneType(const CPlane* pPlane) {
+ PlaneType CPlaneCrewFactory::GetPlaneType(const CPlane* pPlane) {
 	return strcmp(typeid(pPlane).name(), "class CPlane") == 0 ? PlaneType::eRegular : PlaneType::eCargo;
 }
 
-static CrewType GetCrewType(const CCrewMember* pCrew) {
+ CrewType CPlaneCrewFactory::GetCrewType(const CCrewMember* pCrew) {
 	return strcmp(typeid(pCrew).name(), "class CHost") == 0 ? CrewType::eHost : CrewType::ePilot;
 }
 
-static void GetCompanyDataFromUser(CFlightCompany& comp) {
+ void CPlaneCrewFactory::GetCompanyDataFromUser(CFlightCompany& comp) {
 
 }
 
-static CPlane* GetPlaneFromUser() {
-
+ CPlane* CPlaneCrewFactory::GetPlaneFromUser() {
+	 return nullptr;
 }
 
-static CCrewMember* GetCrewFromUser() {
-
+ CCrewMember* CPlaneCrewFactory::GetCrewFromUser() {
+	 return nullptr;
 }
 
-static CCrewMember* GetCrewMemberFromFile(ifstream& inFile) {
+
+ CCrewMember* CPlaneCrewFactory::GetCrewMemberFromFile(ifstream& inFile) {
 	char buffer[BUFFER];
+	char buffer2[BUFFER];
 	CCrewMember* cm;
 	try {
-		inFile >> buffer;
-		if (buffer[0] == 0)
-			cm = new CHost(buffer);
-		else
-			cm = new CPilot(buffer);
+		inFile >> buffer
+		strcpy(buffer2, buffer);
+		char* tokens[MAX];
+		int i = 0;
+		tokens[i] = strtok(buffer2, " ");
+		while (tokens[i] != NULL) {
+			i++;
+			tokens[i] = strtok(NULL, " ");
+		}
+		const char* tempName = tokens[1];
+		CHost::hostTypes tempType = (CHost::hostTypes)atoi(tokens[3]);
+		if (atoi(tokens[0]) == 0) {
+			cm = new CHost(tempName, tempType, atoi(tokens[2]));
+			//CHost(name, type, minutes)
+			return cm;
+		}
+		else {
+			//CPilot(const char* crewMemberName, bool isCaptain, CAddress * address = nullptr, int airMinutes = 0);
+			if (atoi(tokens[3]) == 1) { // Captain has an address.
+				bool tempCaptain = atoi(tokens[7]);
+				CAddress* tempAddress = new CAddress(atoi(tokens[4]), tokens[5], tokens[6]);
+				cm = new CPilot(tempName, tempCaptain, tempAddress, atoi(tokens[2]));
+				//CPilot(name, isCaptain, address, minutes);
+				return cm;
+			}
+			//Captain doesn't have an address.
+			bool tempCaptain = atoi(tokens[4]);
+			CAddress* tempAddress = nullptr;
+			cm = new CPilot(tempName, tempCaptain, tempAddress, atoi(tokens[2]));
+			//CPilot(name, isCaptain, nullAddress, minutes);
+			return cm;
+		}
 	}
 	catch (CCompFileException& e) {
 		e.Show();
 	}
-	return cm;
 }
 
-static CPlane* GetPlaneFromFile(ifstream& inFile) {
+ CPlane* CPlaneCrewFactory::GetPlaneFromFile(ifstream& inFile) {
     char buffer[BUFFER];
 	char buffer2[BUFFER];
-	CPlane* p;
-
-
+	CPlane* p = nullptr;
 	try {
 		inFile >> buffer;
-
 		strcpy(buffer2, buffer);
 		char* tokens[MAX];
 		int i = 0;

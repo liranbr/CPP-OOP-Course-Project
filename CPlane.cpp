@@ -1,5 +1,8 @@
 #include "Plane.h"
 #include "FlightCompException.h"
+#include <iostream>
+#include <fstream>
+
 CPlane::CPlane(int numOfChairs, const char* modelName, int id) throw (CCompStringException) {
 	if (id < -1)
 		delete[] modelName;
