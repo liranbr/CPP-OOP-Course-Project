@@ -142,7 +142,7 @@ CCrewMember* CPlaneCrewFactory::GetCrewFromUser() {
 		int typeNum = ReadInt("Host type (0 for Regular, 1 for Super, 2 for Calcelan): ");
 		cm = new CHost(name, (CHost::hostTypes)typeNum, minutes);
 	}
-	return nullptr;
+	return cm;
 }
 
 
