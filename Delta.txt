@@ -1,19 +1,20 @@
 Delta
-3
+4
 0 momo 100 1
 1 koko 400 1 2 dsf sdfs 1
 1 asd 12 1 12 Tel Aviv 1
+0 Nahum 100 0
 3
-0 109 100 eee 100
-1 105 rrrr 4
+0 107 100 eee 100
+1 101 rrrr 4
 20000 1000 0 0
-1 106 ACar 123
-1233 2330 0 0
+0 107 asd 123
 2
 Paris 343 320 5000 1 100
-3
+4
 0 momo 100 1
 1 koko 400 1 2 dsf sdfs 1
 1 asd 12 1 12 Tel Aviv 1
+0 Nahum 100 0
 Paris 343 320 5000 1 100
 0

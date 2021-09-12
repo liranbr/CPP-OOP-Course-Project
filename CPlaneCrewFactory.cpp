@@ -72,7 +72,7 @@ CPlane* CPlaneCrewFactory::GetPlaneFromFile(ifstream& inFile) {
 		if (cargoOrPlane) { // if cargo
 			float maxVolume, maxKG, volume, kg;
 			inFile >> maxVolume >> maxKG >> volume >> kg;
-			p = new CCargo(seats, degem, maxKG, maxVolume, kg, volume);
+			p = new CCargo(seats, id, degem, maxKG, maxVolume, kg, volume);
 		}
 		else { // if plane
 			p = new CPlane(seats, degem, id);

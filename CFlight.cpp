@@ -20,7 +20,7 @@ CFlight::CFlight(CFlightInfo &flightInfo, CPlane* plane) {
 CFlight::CFlight(const CFlight& other) {
     this->flightInfo = new CFlightInfo(*other.flightInfo);
     if (other.plane != nullptr)
-        this->plane = new CPlane(*other.plane);
+        this->plane = new CPlane(*other.plane );
     else
         this->plane = NULL;
     this->crewMemberAmount = other.crewMemberAmount;
