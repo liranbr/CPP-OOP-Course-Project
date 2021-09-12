@@ -27,12 +27,23 @@ CFlight::CFlight(const CFlight& other) {
     this->crewMembers = new CCrewMember * [MAX_CREWS];
 
     for (int i = 0; i < crewMemberAmount; i++) {
-        cout << typeid(other.crewMembers[i]).name();
         if (strcmp(typeid(*other.crewMembers[i]).name(), "class CHost") == 0)
             this->crewMembers[i] = new CHost(*(CHost*)other.crewMembers[i]);
         else if (strcmp(typeid(*other.crewMembers[i]).name(), "class CPilot") == 0)
             this->crewMembers[i] = new CPilot(*(CPilot*)other.crewMembers[i]);
     }
+}
+
+int CFlight::GetCrewMemberAmount() {
+    return crewMemberAmount;
+}
+
+CCrewMember** CFlight::GetCrewMembers() {
+    return crewMembers;
+}  
+
+CPlane* CFlight::GetPlane() {
+    return plane;
 }
 
 CFlightInfo& CFlight::GetFlightInfo() {

@@ -37,6 +37,23 @@ CCargo::~CCargo() {
 	delete[] modelName;
 }
 
+float CCargo::GetMaxVolume() {
+	return maxVolume;
+}
+
+float CCargo::GetMaxWeight() {
+	return maxWeight;
+
+}
+
+float CCargo::GetCurrentVolume() {
+	return currentVolume;
+}
+
+float CCargo::GetCurrentWeight() {
+	return currentWeight;
+}
+
 bool CCargo::Load(float incomingWeight, float incomingVolume) {
 	float tempWeight = incomingWeight + currentWeight;
 	float tempVolume = incomingVolume + currentVolume;

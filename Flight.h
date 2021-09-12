@@ -23,6 +23,9 @@ public:
 	CFlight(const CFlight& other);
 	CFlightInfo& GetFlightInfo();
 	void SetPlane(CPlane* newPlane);
+	CPlane* GetPlane();
+	int GetCrewMemberAmount();
+	CCrewMember** GetCrewMembers();
 	bool TakeOff();
 	void operator+(CCrewMember* newCrewMember);
 	friend ostream& operator<<(ostream& outstream, const CFlight& flight);

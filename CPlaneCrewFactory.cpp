@@ -18,26 +18,13 @@ using namespace std;
 
 bool CPlaneCrewFactory::haveReadID = false;
 
- PlaneType CPlaneCrewFactory::GetPlaneType(const CPlane* pPlane) {
+PlaneType CPlaneCrewFactory::GetPlaneType(const CPlane* pPlane) {
 	return strcmp(typeid(pPlane).name(), "class CPlane") == 0 ? PlaneType::eRegular : PlaneType::eCargo;
 }
 
- CrewType CPlaneCrewFactory::GetCrewType(const CCrewMember* pCrew) {
+CrewType CPlaneCrewFactory::GetCrewType(const CCrewMember* pCrew) {
 	return strcmp(typeid(pCrew).name(), "class CHost") == 0 ? CrewType::eHost : CrewType::ePilot;
 }
-
- void CPlaneCrewFactory::GetCompanyDataFromUser(CFlightCompany& comp) {
-
-}
-
- CPlane* CPlaneCrewFactory::GetPlaneFromUser() {
-	 return nullptr;
-}
-
- CCrewMember* CPlaneCrewFactory::GetCrewFromUser() {
-	 return nullptr;
-}
-
 
 CCrewMember* CPlaneCrewFactory::GetCrewMemberFromFile(ifstream& inFile) {
 	CCrewMember* cm = nullptr;
@@ -58,7 +45,7 @@ CCrewMember* CPlaneCrewFactory::GetCrewMemberFromFile(ifstream& inFile) {
 			bool isCaptain;
 			inFile >> isCaptain;
 			cm = new CPilot(name, isCaptain, address, minutes);
-		} 
+		}
 		else { // is a host
 			int typeNum;
 			inFile >> typeNum;
@@ -71,7 +58,7 @@ CCrewMember* CPlaneCrewFactory::GetCrewMemberFromFile(ifstream& inFile) {
 	return cm;
 }
 
- CPlane* CPlaneCrewFactory::GetPlaneFromFile(ifstream& inFile) {
+CPlane* CPlaneCrewFactory::GetPlaneFromFile(ifstream& inFile) {
 	CPlane* p = nullptr;
 	try {
 		int cargoOrPlane, id, seats; // 1 => cargo, 0 => plane
@@ -97,3 +84,78 @@ CCrewMember* CPlaneCrewFactory::GetCrewMemberFromFile(ifstream& inFile) {
 	return p;
 }
 
+void CPlaneCrewFactory::GetCompanyDataFromUser(CFlightCompany& comp) {
+	int crewOrPlane = ReadInt("To add a plane, enter 0. To add a crew member, enter 1: ");
+	if (crewOrPlane) // add crew member
+		comp.AddCrewMember(*GetCrewFromUser());
+	else // add plane
+		comp.AddPlane(*GetPlaneFromUser());
+	cout << "Added to " << comp.GetNameOfCompany() << endl;
+}
+
+
+CPlane* CPlaneCrewFactory::GetPlaneFromUser() {
+	CPlane* p = nullptr;
+	int cargoOrPlane = ReadInt("To add a regular plane, enter 0. To add a cargo plane, enter 1: ");
+	cout << "Enter the plane's details.\n";
+	int id = ReadInt("ID: ");
+	cout << "Model name: ";
+	char degem[BUFFER];
+	cin >> degem;
+	int seats = ReadInt("Amount of seats: ");
+	if (cargoOrPlane) {
+		cout << "Enter the cargo details.\n";
+		float maxKG = ReadFloat("Maximum cargo weight: ");
+		float maxVolume = ReadFloat("Maximum cargo volume: ");
+		float kg = ReadFloat("Current cargo weight: ");
+		float volume = ReadFloat("Current cargo volume: ");
+		p = new CCargo(seats, id, degem, maxKG, maxVolume, kg, volume);
+	}
+	else
+		p = new CPlane(seats, degem, id);
+	return p;
+}
+
+CCrewMember* CPlaneCrewFactory::GetCrewFromUser() {
+	CCrewMember* cm = nullptr;
+	int pilotOrHost = ReadInt("To add a host, enter 0. To add a pilot, enter 1: ");
+	cout << "Enter their details.\nName: ";
+	char name[BUFFER];
+	cin >> name;
+	int minutes = ReadInt("Air minutes: ");
+	if (pilotOrHost) { // is a pilot
+		int hasAddress = ReadInt("Do they have a home address? enter 1(yes) or 0(no): ");
+		CAddress* address = nullptr;
+		if (hasAddress) {
+			int houseNum = ReadInt("House number: ");
+			char street[BUFFER], city[BUFFER];
+			cout << "Street: ";
+			cin >> street;
+			cout << "City: ";
+			cin >> city;
+			address = new CAddress(houseNum, street, city);
+		}
+		int isCaptain = ReadInt("Is the pilot a Captain? enter 1(yes) or 0(no): ");
+		cm = new CPilot(name, isCaptain, address, minutes);
+	}
+	else { // is a host
+		int typeNum = ReadInt("Host type (0 for Regular, 1 for Super, 2 for Calcelan): ");
+		cm = new CHost(name, (CHost::hostTypes)typeNum, minutes);
+	}
+	return nullptr;
+}
+
+
+int CPlaneCrewFactory::ReadInt(const char* instruction) {
+	cout << instruction;
+	int i;
+	cin >> i;
+	return i;
+}
+
+float CPlaneCrewFactory::ReadFloat(const char* instruction) {
+	cout << instruction;
+	float f;
+	cin >> f;
+	return f;
+}

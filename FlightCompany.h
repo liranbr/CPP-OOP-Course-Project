@@ -32,10 +32,12 @@ public:
         CPlane& operator[](int planeIndex);
         void AddCrewToFlight(int flightID, int crewIndex);
         int GetCargoCount();
+        int GetCrewCount();
         void PilotsToSimulator();
         void CrewGetPresent();
         void CrewGetUniform();
         bool TakeOffFlight(int flightID);
         CFlight* GetFlightFromFile(ifstream& inFile);
+        void SaveToFile(const char* fileName);
 };
 #endif // !__FLIGHT_COMPANY_H

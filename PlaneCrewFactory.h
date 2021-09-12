@@ -44,6 +44,8 @@ public:
 
 	static bool haveReadID;
 
+	static float ReadFloat(const char* instruction);
+	static int ReadInt(const char* instruction);
 
 private:
 	CPlaneCrewFactory(void) { ; }

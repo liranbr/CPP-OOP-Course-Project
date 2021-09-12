@@ -20,6 +20,10 @@ CPilot::~CPilot() {
 	delete address;
 }
 
+CAddress* CPilot::GetAddress() {
+	return address;
+}
+
 void CPilot::GetPresent() {
 	cout << this->crewMemberName << " thanking the company for receiving the holiday gift.\n";
 }
@@ -53,4 +57,8 @@ void CPilot::Print(ostream& outstream) {
 		outstream << "Home: " << *address;
 	else
 		outstream << "\n";
+}
+
+bool CPilot::CheckIfCaptain() {
+	return isCaptain;
 }

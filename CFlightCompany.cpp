@@ -177,6 +177,10 @@ int CFlightCompany::GetCargoCount() {
     return counter;
 }
 
+int CFlightCompany::GetCrewCount() {
+    return crewMemberAmount;
+}
+
 void CFlightCompany::PilotsToSimulator() {
     for (int i = 0; i < crewMemberAmount; i++)
         if (strcmp(typeid(*crewMembers[i]).name(), "class CPilot") == 0)
@@ -200,4 +204,101 @@ bool CFlightCompany::TakeOffFlight(int flightID) {
     catch (CCompStringException& e) {
         e.Show();
     }
+}
+
+void CFlightCompany::SaveToFile(const char* fileName) {
+    ofstream outFile(fileName, ios::trunc);
+    outFile << nameOfCompany << "\n";
+
+    outFile << crewMemberAmount << "\n";
+    for (int i = 0; i < crewMemberAmount; i++) {
+        CCrewMember* cm = crewMembers[i];
+        if (strcmp(typeid(*cm).name(), "class CHost") == 0) {
+            outFile << "0 " << cm->GetCrewMemberName() << " " <<
+                cm->GetMinutes() << " " << ((CHost*)cm)->GetHostType() << "\n";;
+        }
+        else if (strcmp(typeid(*cm).name(), "class CPilot") == 0) {
+            outFile << "1 " << cm->GetCrewMemberName() << " " <<
+                cm->GetMinutes() << " ";
+            CAddress* address = ((CPilot*)cm)->GetAddress();
+            if (address != nullptr) {
+                outFile << "1 " << address->GetHouseNum() << " " <<
+                    address->GetCity() << " " << address->GetStreet();
+            }
+            else {
+                outFile << "0 ";
+            }
+            if (((CPilot*)cm)->CheckIfCaptain())
+                outFile << "1\n";
+            else
+                outFile << "0\n";
+        }
+    }
+
+    outFile << planeAmount << "\n";
+    for (int i = 0; i < planeAmount; i++) {
+        CPlane* p = planes[i];
+        if (strcmp(typeid(*p).name(), "class CPlane") == 0) {
+            outFile << "0 ";
+            if (i == 0) {
+                outFile << CPlane::lastID << " ";
+            }
+            outFile << p->GetId() << " " << p->GetModelName() <<
+                " " << p->GetNumOfChairs() << "\n";
+        }
+        else if (strcmp(typeid(*p).name(), "class CCargo") == 0) {
+            outFile << "1 ";
+            if (i == 0) {
+                outFile << CPlane::lastID;
+            }
+            outFile << p->GetId() << " " << p->GetModelName() <<
+                " " << p->GetNumOfChairs() << "\n" <<
+                ((CCargo*)p)->GetMaxVolume() << " " << ((CCargo*)p)->GetMaxWeight() <<
+                " " << ((CCargo*)p)->GetCurrentVolume() << " " <<
+                ((CCargo*)p)->GetCurrentWeight() << "\n";
+        }
+    }
+
+    outFile << flightAmount << "\n";
+    for (int i = 0; i < flightAmount; i++) {
+        CFlightInfo fi = flights[i]->GetFlightInfo();
+        outFile << fi.GetDest() << " " <<
+            fi.GetFNum() << " " <<
+            fi.GetDuration() << " " <<
+            fi.GetDistance() << " ";
+        if (flights[i]->GetPlane() != NULL) {
+            outFile << "1 " << flights[i]->GetPlane()->GetId() << "\n";
+        }
+        else {
+            outFile << "0 ";
+        }
+        int crewMemberAmount = flights[i]->GetCrewMemberAmount();
+        outFile << crewMemberAmount << "\n";
+        for (int j = 0; j < crewMemberAmount; j++) {
+            CCrewMember* cm = flights[i]->GetCrewMembers()[j];
+            if (strcmp(typeid(*cm).name(), "class CHost") == 0) {
+                outFile << "0 " << cm->GetCrewMemberName() <<
+                    " " << cm->GetMinutes() << " " <<
+                    ((CHost*)cm)->GetHostType() << "\n";
+            }
+            else if (strcmp(typeid(*cm).name(), "class CPilot") == 0) {
+                outFile << "1 " << cm->GetCrewMemberName() <<
+                    " " << cm->GetMinutes() << " ";
+                CAddress * address = ((CPilot*)cm)->GetAddress();
+                if (address != nullptr) {
+                    outFile << "1 " << address->GetHouseNum() << " " <<
+                        address->GetCity() << " " << address->GetStreet();
+                }
+                else {
+                    outFile << "0 ";
+                }
+                if (((CPilot*)cm)->CheckIfCaptain())
+                    outFile << " 1\n";
+                else
+                    outFile << " 0\n";
+                }
+        }
+    }
+
+    outFile.close();
 }

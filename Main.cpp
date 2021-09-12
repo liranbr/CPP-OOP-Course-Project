@@ -37,77 +37,77 @@ void main()
 		pDelta = new CFlightCompany("Delta");
 	}
 
-	//Checking some of the exception put try and catch for each section	
-	try {
-		CPlane p1(-34, "AirBus");
-	}
-	catch (CCompStringException& e) {
-		e.Show();
-	}
-	try {
-		CCargo c1(45, "Jumbo", -560, 200);
-	}
-	catch (CCompStringException& e) {
-		e.Show();
-	}
-	try {
-		CCargo c2(45, "Jumbo", 560, -200);
-	}
-	catch (CCompStringException& e) {
-		e.Show();
-	}
-	try {
-		CFlightInfo f1("London", -23, 120, 5000);
-	}
-	catch (CCompStringException& e) {
-		e.Show();
-	}
-	try {
-		CFlightInfo f2("LondonVeryLong", 23, 120, 5000);
-	}
-	catch (CCompStringException& e) {
-		e.Show();
-	}
-	try {
-		CFlightInfo f3("London", 23, -120, 5000);
-	}
-	catch (CCompStringException& e) {
-		e.Show();
-	}
-	try {
-		CFlightInfo f4("London", 23, 120, -5000);
-	}
-	catch (CCompStringException& e) {
-		e.Show();
-	}
-	try {
-		CCrewMember* pC1 = pDelta->GetCrewMember(-1);
-	}
-	catch (CCompLimitException& e) {
-		e.Show();
-	}
-	try {
-		CCrewMember* pC2 = pDelta->GetCrewMember(0);
-		(*pC2) += -4;
-	} catch (CCompStringException& e){
-		e.Show();
-	}
-	catch (...) {
-		printf("ayy...");
-	}
-	try {
-		CPlane p0 = (*pDelta)[9];
-	}
-	catch (CCompLimitException& e) {
-		e.Show();
-	}
+	////Checking some of the exception put try and catch for each section	
+	//try {
+	//	CPlane p1(-34, "AirBus");
+	//}
+	//catch (CCompStringException& e) {
+	//	e.Show();
+	//}
+	//try {
+	//	CCargo c1(45, "Jumbo", -560, 200);
+	//}
+	//catch (CCompStringException& e) {
+	//	e.Show();
+	//}
+	//try {
+	//	CCargo c2(45, "Jumbo", 560, -200);
+	//}
+	//catch (CCompStringException& e) {
+	//	e.Show();
+	//}
+	//try {
+	//	CFlightInfo f1("London", -23, 120, 5000);
+	//}
+	//catch (CCompStringException& e) {
+	//	e.Show();
+	//}
+	//try {
+	//	CFlightInfo f2("LondonVeryLong", 23, 120, 5000);
+	//}
+	//catch (CCompStringException& e) {
+	//	e.Show();
+	//}
+	//try {
+	//	CFlightInfo f3("London", 23, -120, 5000);
+	//}
+	//catch (CCompStringException& e) {
+	//	e.Show();
+	//}
+	//try {
+	//	CFlightInfo f4("London", 23, 120, -5000);
+	//}
+	//catch (CCompStringException& e) {
+	//	e.Show();
+	//}
+	//try {
+	//	CCrewMember* pC1 = pDelta->GetCrewMember(-1);
+	//}
+	//catch (CCompLimitException& e) {
+	//	e.Show();
+	//}
+	//try {
+	//	CCrewMember* pC2 = pDelta->GetCrewMember(0);
+	//	(*pC2) += -4;
+	//} catch (CCompStringException& e){
+	//	e.Show();
+	//}
+	//catch (...) {
+	//	printf("ayy...");
+	//}
+	//try {
+	//	CPlane p0 = (*pDelta)[9];
+	//}
+	//catch (CCompLimitException& e) {
+	//	e.Show();
+	//}
 	
 
 
 
 	////call a static function that get plane or customer from user.
 
-	////CPlaneCrewFactory::GetCompanyDataFromUser(*pDelta);
+	//CPlaneCrewFactory::GetCompanyDataFromUser(*pDelta);
 
 
 	//CFlightInfo Info("Paris", 343, 320, 5000);
@@ -115,27 +115,27 @@ void main()
 	//pDelta->AddFlight(flight1);
 
 
-	//CFlight* pF = pDelta->GetFlightByNum(343);
-	//CCrewMember* pCmTemp;
-	///*
-	//if (pF != NULL) {
-	//	cout << "flight 343 was found " << endl;
-	//	for (int i = 0; i < pDelta->GetCrewCount(); i++) {
-	//		pCmTemp = pDelta->GetCrewMember(i);
-	//		*pF + pCmTemp;
-	//	}
-	//}
+	CFlight* pF = pDelta->GetFlightByNum(343);
+	CCrewMember* pCmTemp;
+	
+	if (pF != NULL) {
+		cout << "flight 343 was found " << endl;
+		for (int i = 0; i < pDelta->GetCrewCount(); i++) {
+			pCmTemp = pDelta->GetCrewMember(i);
+			*pF + pCmTemp;
+		}
+	}
+	
 
+	try
+	{
 
-	//try
-	//{
+		pDelta->SaveToFile("Delta.txt");
 
-	//	pDelta->SaveToFile("Delta.txt");
-
-	//}
-	//catch (const CFlightCompException& e) {
-	//	e.Show();
-	//}*/
+	}
+	catch (const CFlightCompException& e) {
+		e.Show();
+	}*/
 
 
 	delete pDelta;

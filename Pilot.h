@@ -12,8 +12,10 @@ public:
 	CPilot(const char* crewMemberName, bool isCaptain, CAddress* address = nullptr, int airMinutes = 0);
 	CPilot(const CPilot& other);
 	~CPilot();
+	CAddress* GetAddress();
 	void GetPresent();
 	void GetUniform();
+	bool CheckIfCaptain();
 	void TakeOff(int flightMinutes);
 	void InviteToSimulator();
 	bool operator+=(int additionalAirMinutes);

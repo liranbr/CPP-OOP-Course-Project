@@ -14,6 +14,10 @@ public:
 	// we put ID before the char*, to make the two constructors discernable
 	CCargo(const CCargo& other);
 	~CCargo();
+	float GetMaxVolume();
+	float GetMaxWeight();
+	float GetCurrentVolume();
+	float GetCurrentWeight();
 	bool Load(float incomingWeight, float incomingVolume);
 	void Print(ostream& outstream);
 
