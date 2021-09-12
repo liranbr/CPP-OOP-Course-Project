@@ -59,6 +59,12 @@ void CPilot::Print(ostream& outstream) {
 		outstream << "\n";
 }
 
+void CPilot::PrintToFile(ofstream& outFile) {
+	outFile << "1 " << crewMemberName << " " << airMinutes << " ";
+	(address != nullptr ? outFile << "1 " <<*address : outFile << "0\n");
+	outFile << (isCaptain ? "1\n" : "0\n");
+}
+
 bool CPilot::CheckIfCaptain() {
 	return isCaptain;
 }

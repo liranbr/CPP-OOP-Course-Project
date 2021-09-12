@@ -91,21 +91,6 @@ void CFlightCompany::SetName(const char* nameOfCompany) {
 	strcpy(this->nameOfCompany, nameOfCompany);
 }
 
-void CFlightCompany::Print(ostream& outstream) {
-    if (strlen(nameOfCompany) == 0)
-        throw CCompStringException("nameOfCompany doesn't exist!");
-	outstream << "Flight company: " << nameOfCompany << "\n";
-    outstream << "There are " << crewMemberAmount << " Crew members:\n";
-    for (int i = 0; i < crewMemberAmount; i++)
-        crewMembers[i]->Print(outstream);
-    outstream << "There are " << planeAmount << " Planes:\n";
-    for (int i = 0; i < planeAmount; i++)
-        outstream << *planes[i];
-    outstream << "There are " << flightAmount << " Flights:\n";
-    for (int i = 0; i < flightAmount; i++)
-        outstream << *flights[i];
-}
-
 bool CFlightCompany::AddCrewMember(CCrewMember& newMember) {
     if (crewMemberAmount >= MAX_CREWS)
         return false;
@@ -206,99 +191,45 @@ bool CFlightCompany::TakeOffFlight(int flightID) {
     }
 }
 
-void CFlightCompany::SaveToFile(const char* fileName) {
-    ofstream outFile(fileName, ios::trunc);
-    outFile << nameOfCompany << "\n";
 
+void CFlightCompany::Print(ostream& outstream) {
+    if (strlen(nameOfCompany) == 0)
+        throw CCompStringException("nameOfCompany doesn't exist!");
+    outstream << "Flight company: " << nameOfCompany << "\n";
+    outstream << "There are " << crewMemberAmount << " Crew members:\n";
+    for (int i = 0; i < crewMemberAmount; i++)
+        crewMembers[i]->Print(outstream);
+    outstream << "There are " << planeAmount << " Planes:\n";
+    for (int i = 0; i < planeAmount; i++)
+        outstream << *planes[i];
+    outstream << "There are " << flightAmount << " Flights:\n";
+    for (int i = 0; i < flightAmount; i++)
+        outstream << *flights[i];
+}
+
+
+void CFlightCompany::PrintFile(ofstream& outFile) throw ( CCompStringException) {
+    if (strlen(nameOfCompany) == 0)
+        throw CCompStringException("nameOfCompany doesn't exist!");
+
+    outFile << nameOfCompany << "\n";
     outFile << crewMemberAmount << "\n";
-    for (int i = 0; i < crewMemberAmount; i++) {
-        CCrewMember* cm = crewMembers[i];
-        if (strcmp(typeid(*cm).name(), "class CHost") == 0) {
-            outFile << "0 " << cm->GetCrewMemberName() << " " <<
-                cm->GetMinutes() << " " << ((CHost*)cm)->GetHostType() << "\n";;
-        }
-        else if (strcmp(typeid(*cm).name(), "class CPilot") == 0) {
-            outFile << "1 " << cm->GetCrewMemberName() << " " <<
-                cm->GetMinutes() << " ";
-            CAddress* address = ((CPilot*)cm)->GetAddress();
-            if (address != nullptr) {
-                outFile << "1 " << address->GetHouseNum() << " " <<
-                    address->GetCity() << " " << address->GetStreet();
-            }
-            else {
-                outFile << "0 ";
-            }
-            if (((CPilot*)cm)->CheckIfCaptain())
-                outFile << "1\n";
-            else
-                outFile << "0\n";
-        }
-    }
+    for (int i = 0; i < crewMemberAmount; i++)
+        crewMembers[i]->PrintToFile(outFile);
 
     outFile << planeAmount << "\n";
-    for (int i = 0; i < planeAmount; i++) {
-        CPlane* p = planes[i];
-        if (strcmp(typeid(*p).name(), "class CPlane") == 0) {
-            outFile << "0 ";
-            if (i == 0) {
-                outFile << CPlane::lastID << " ";
-            }
-            outFile << p->GetId() << " " << p->GetModelName() <<
-                " " << p->GetNumOfChairs() << "\n";
-        }
-        else if (strcmp(typeid(*p).name(), "class CCargo") == 0) {
-            outFile << "1 ";
-            if (i == 0) {
-                outFile << CPlane::lastID;
-            }
-            outFile << p->GetId() << " " << p->GetModelName() <<
-                " " << p->GetNumOfChairs() << "\n" <<
-                ((CCargo*)p)->GetMaxVolume() << " " << ((CCargo*)p)->GetMaxWeight() <<
-                " " << ((CCargo*)p)->GetCurrentVolume() << " " <<
-                ((CCargo*)p)->GetCurrentWeight() << "\n";
-        }
-    }
+    for (int i = 0; i < planeAmount; i++)
+        planes[i]->PrintToFile(outFile, i);
 
     outFile << flightAmount << "\n";
-    for (int i = 0; i < flightAmount; i++) {
-        CFlightInfo fi = flights[i]->GetFlightInfo();
-        outFile << fi.GetDest() << " " <<
-            fi.GetFNum() << " " <<
-            fi.GetDuration() << " " <<
-            fi.GetDistance() << " ";
-        if (flights[i]->GetPlane() != NULL) {
-            outFile << "1 " << flights[i]->GetPlane()->GetId() << "\n";
-        }
-        else {
-            outFile << "0 ";
-        }
-        int crewMemberAmount = flights[i]->GetCrewMemberAmount();
-        outFile << crewMemberAmount << "\n";
-        for (int j = 0; j < crewMemberAmount; j++) {
-            CCrewMember* cm = flights[i]->GetCrewMembers()[j];
-            if (strcmp(typeid(*cm).name(), "class CHost") == 0) {
-                outFile << "0 " << cm->GetCrewMemberName() <<
-                    " " << cm->GetMinutes() << " " <<
-                    ((CHost*)cm)->GetHostType() << "\n";
-            }
-            else if (strcmp(typeid(*cm).name(), "class CPilot") == 0) {
-                outFile << "1 " << cm->GetCrewMemberName() <<
-                    " " << cm->GetMinutes() << " ";
-                CAddress * address = ((CPilot*)cm)->GetAddress();
-                if (address != nullptr) {
-                    outFile << "1 " << address->GetHouseNum() << " " <<
-                        address->GetCity() << " " << address->GetStreet();
-                }
-                else {
-                    outFile << "0 ";
-                }
-                if (((CPilot*)cm)->CheckIfCaptain())
-                    outFile << " 1\n";
-                else
-                    outFile << " 0\n";
-                }
-        }
-    }
+    for (int i = 0; i < flightAmount; i++)
+        flights[i]->PrintToFile(outFile);
+}
 
+void CFlightCompany::SaveToFile(const char* fileName) throw (CCompFileException) {
+    ofstream outFile(fileName, ios::trunc);
+    if (!outFile)
+        throw CCompFileException(fileName);
+    PrintFile(outFile);
     outFile.close();
 }

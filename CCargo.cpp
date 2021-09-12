@@ -75,3 +75,10 @@ void CCargo::Print(ostream& outstream) {
 	outstream << "Plane " << id << " degem " << modelName << " seats " << numOfChairs << "\n";
 	outstream << "Cargo M_vol " << maxVolume << " M_Kg " << maxWeight << " C_vol " << currentVolume << " C_Kg " << currentWeight << "\n";
 }
+
+void CCargo::PrintToFile(ofstream& outFile, int index) {
+	outFile << "1 ";
+	(index == 0 ? outFile << CPlane::lastID << " " : outFile << "");
+	outFile << id << " " << modelName << " " << numOfChairs << "\n";
+	outFile << maxVolume << " " << maxWeight << " " << currentVolume << " " << currentWeight << "\n";
+}

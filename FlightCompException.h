@@ -40,11 +40,10 @@ public:
 
 class CCompFileException : public CFlightCompException {
 private:
-	char* fileName;
+	const char* fileName;
 public:
-	CCompFileException(char* fileName) {
-		this->fileName = new char[BUFFER];
-		strcpy(this->fileName, fileName);
+	CCompFileException(const char* fileName) {
+		this->fileName = fileName;
 	}
 
 	virtual void Show() {

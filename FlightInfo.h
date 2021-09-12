@@ -3,6 +3,7 @@
 
 
 #include <iostream>
+#include <fstream>
 #include "helper.h"
 using namespace std;
 
@@ -24,6 +25,7 @@ public:
     int GetDistance();
     void SetDistance(int distance);
     friend ostream& operator<<(ostream& outstream, const CFlightInfo& otherFlightInfo);
+    void PrintToFile(ofstream& outFile);
     bool operator==(const CFlightInfo& otherFlightInfo) const;
     bool operator!=(const CFlightInfo& otherFlightInfo) const;
     operator int() const;

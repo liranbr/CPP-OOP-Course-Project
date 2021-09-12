@@ -2,6 +2,7 @@
 #define __PILOT_H
 
 #include <iostream>
+#include <fstream>
 #include "helper.h"
 #include "CrewMember.h"
 #include "Address.h"
@@ -21,6 +22,7 @@ public:
 	bool operator+=(int additionalAirMinutes);
 	bool operator==(CPilot& otherPilot);
 	void Print(ostream& outstream);
+	void PrintToFile(ofstream& outFile);
 private:
 	bool isCaptain;
 	CAddress* address;

@@ -1,5 +1,7 @@
 #pragma once
 #include "Plane.h"
+#include <fstream>
+
 class CCargo : public CPlane {
 private:
 	float maxWeight;
@@ -20,6 +22,7 @@ public:
 	float GetCurrentWeight();
 	bool Load(float incomingWeight, float incomingVolume);
 	void Print(ostream& outstream);
+	void PrintToFile(ofstream& outFile, int index);
 
 };
 

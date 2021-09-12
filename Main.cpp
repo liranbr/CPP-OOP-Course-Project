@@ -135,7 +135,7 @@ void main()
 	}
 	catch (const CFlightCompException& e) {
 		e.Show();
-	}*/
+	}
 
 
 	delete pDelta;

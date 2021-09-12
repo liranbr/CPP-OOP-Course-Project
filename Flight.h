@@ -2,6 +2,7 @@
 #define __FLIGHT_H
 
 #include <iostream>
+#include <fstream>
 #include "helper.h"
 #include "FlightInfo.h"
 #include "Plane.h"
@@ -29,7 +30,8 @@ public:
 	bool TakeOff();
 	void operator+(CCrewMember* newCrewMember);
 	friend ostream& operator<<(ostream& outstream, const CFlight& flight);
-	bool operator==(CFlight* otherFlight) ;
+	void PrintToFile(ofstream& outFile);
+	bool operator==(CFlight* otherFlight);
 	int GetFNum();
 	~CFlight();
 };

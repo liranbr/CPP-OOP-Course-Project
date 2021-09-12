@@ -1,7 +1,5 @@
 #include "Plane.h"
 #include "FlightCompException.h"
-#include <iostream>
-#include <fstream>
 
 CPlane::CPlane(int numOfChairs, const char* modelName, int id) throw (CCompStringException) {
 	if (id < -1) {
@@ -76,7 +74,12 @@ void CPlane::Print(ostream& outstream) {
 	outstream << "Plane " << id << " degem " << modelName << " seats " << numOfChairs << "\n";
 }
 
+void CPlane::PrintToFile(ofstream& outFile, int index) {
+	outFile << "0 "; 
+	(index == 0 ? outFile << CPlane::lastID << " " : outFile << "");
+	outFile << id << " " << modelName << " " << numOfChairs << "\n";
+}
+
 //bool CPlane::IsEqual(CPlane otherPlane) {
 //	return this->id == otherPlane.GetId();
 //}
-

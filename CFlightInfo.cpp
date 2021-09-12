@@ -61,6 +61,10 @@ ostream& operator<<(ostream& outstream, const CFlightInfo& otherFlightInfo) {
                      " KM " << otherFlightInfo.distance << "\n";
 }
 
+void CFlightInfo::PrintToFile(ofstream& outFile) {
+    outFile << destination << " " << flightNum << " " << duration << " " << distance << " ";
+}
+
 bool CFlightInfo::operator==(const CFlightInfo &otherFlightInfo) const {
     return strcmp(this->destination, otherFlightInfo.destination) == 0 &&
            this->flightNum == otherFlightInfo.flightNum &&

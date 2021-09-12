@@ -107,6 +107,14 @@ ostream &operator<<(ostream &outstream, const CFlight &flight) {
     return outstream;
 }
 
+void CFlight::PrintToFile(ofstream& outFile) {
+    flightInfo->PrintToFile(outFile);
+    (plane == NULL ? outFile << "0\n" : outFile << "1 " << plane->GetId()) << "\n";
+    outFile << crewMemberAmount << "\n";
+    for (int i = 0; i < crewMemberAmount; i++)
+        crewMembers[i]->PrintToFile(outFile);
+}
+
 bool CFlight::operator==(CFlight* otherFlight)  {
     if (!(*this->flightInfo == *otherFlight->flightInfo &&
           *this->plane == *otherFlight->plane &&

@@ -24,6 +24,7 @@ public:
         char* GetNameOfCompany();
         void SetName(const char* nameOfCompany);
         void Print(ostream& outstream);
+        void PrintFile(ofstream& outFile);
         bool AddCrewMember(CCrewMember& newMember);
         bool AddPlane(CPlane& newPlane);
         bool AddFlight(CFlight& newFlight);
