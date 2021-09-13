@@ -159,7 +159,6 @@
     <ClCompile Include="CCargo.cpp" />
     <ClCompile Include="CCrewMember.cpp" />
     <ClCompile Include="CFlightCompany.cpp" />
-    <ClCompile Include="CFlightCompException.cpp" />
     <ClCompile Include="CFlightInfo.cpp" />
     <ClCompile Include="CHost.cpp" />
     <ClCompile Include="CPilot.cpp" />
@@ -167,7 +166,6 @@
     <ClCompile Include="CFlight.cpp" />
     <ClCompile Include="CPlaneCrewFactory.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="PlaneCrewFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Delta.txt" />

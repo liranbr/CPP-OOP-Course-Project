@@ -20,7 +20,6 @@ using namespace std;
 //const int FLIGHT_COUNT = 4;
 
 void main()
-// TODO: try moving all includes to helper.h
 {
 
 	CFlightCompany* pDelta = NULL;
