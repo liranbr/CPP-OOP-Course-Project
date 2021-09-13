@@ -1,0 +1,10 @@
+Delta2Crewmember momo minutes 100
+Crewmember koko minutes 400
+2Plane 100 degem eee seats 100
+Plane 102 degem rrrr seats 4
+Cargo M_vol 20000 M_Kg 1000 C_vol 0 C_Kg 0
+1Flight Flight Info dest: Paris Number 343 minutes 320 KM 5000
+Plane 100 degem eee seats 100
+There are 2 crew members in flight:
+Host Super momo minutes 100
+Pilot koko minutes 400, a Captain. Home: dsf 2, sdfs

@@ -20,6 +20,10 @@ CPilot::~CPilot() {
 	delete address;
 }
 
+CAddress* CPilot::GetAddress() {
+	return address;
+}
+
 void CPilot::GetPresent() {
 	cout << this->crewMemberName << " thanking the company for receiving the holiday gift.\n";
 }
@@ -48,10 +52,19 @@ bool CPilot::operator==(CPilot& otherPilot) {
 }
 
 void CPilot::Print(ostream& outstream) {
-	outstream << "Pilot " << crewMemberName << " minutes " << airMinutes;
+	outstream << "Pilot " << crewMemberName << " minutes " << airMinutes << (isCaptain ? ", a Captain. " : ", not a Captain. ");
 	if (address != nullptr)
-		outstream << " Home " << *address;
+		outstream << "Home: " << *address << "\n";
 	else
 		outstream << "\n";
-	outstream << (isCaptain ? "    a Captain\n" : "    not a Captain\n");
+}
+
+void CPilot::PrintToFile(ofstream& outFile) {
+	outFile << "1 " << crewMemberName << " " << airMinutes << " ";
+	(address != nullptr ? outFile << "1 " <<*address : outFile << "0\n");
+	outFile << (isCaptain ? " 1\n" : " 0\n");
+}
+
+bool CPilot::CheckIfCaptain() {
+	return isCaptain;
 }

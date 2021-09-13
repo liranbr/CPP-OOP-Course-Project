@@ -22,6 +22,7 @@ public:
         bool operator==(CCrewMember& otherCrewMember);
 		bool UpdateMinutes(int newAirMinutes);
 		virtual void Print(ostream& outstream);
+		virtual void PrintToFile(ofstream& outFile) = 0;
 //		bool IsEqual(CCrewMember otherCrewMember);
         virtual void GetPresent();
         virtual void GetUniform();

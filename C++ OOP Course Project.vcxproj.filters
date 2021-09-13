@@ -45,6 +45,12 @@
     <ClInclude Include="Cargo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlaneCrewFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FlightCompException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CAddress.cpp">
@@ -77,5 +83,13 @@
     <ClCompile Include="CCargo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CPlaneCrewFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Delta.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -1,10 +1,21 @@
 #include "Plane.h"
+#include "FlightCompException.h"
 
-CPlane::CPlane(int numOfChairs, const char* modelName, int id) {
+CPlane::CPlane(int numOfChairs, const char* modelName, int id) throw (CCompStringException) {
+	if (id < -1) {
+		throw CCompStringException("ID is smaller than -1.\n");
+	}
+	if (numOfChairs < 0) {
+		throw CCompStringException("numOfChairs is smaller than -1.\n");
+	}
 	this->id = id;
+
+	if (this->id > lastID)
+		lastID = this->id;
+
 	if (this->id == -1) {
-		this->id = staticID;
-		staticID++;
+		this->id = lastID;
+		lastID++;
 	}
 	this->numOfChairs = numOfChairs;
 	this->modelName = new char[BUFFER];
@@ -67,7 +78,12 @@ void CPlane::Print(ostream& outstream) {
 	outstream << "Plane " << id << " degem " << modelName << " seats " << numOfChairs << "\n";
 }
 
+void CPlane::PrintToFile(ofstream& outFile, int index) {
+	outFile << "0 "; 
+	(index == 0 ? outFile << CPlane::lastID << " " : outFile << "");
+	outFile << id << " " << modelName << " " << numOfChairs << "\n";
+}
+
 //bool CPlane::IsEqual(CPlane otherPlane) {
 //	return this->id == otherPlane.GetId();
 //}
-

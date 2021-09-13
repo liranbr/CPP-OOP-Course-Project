@@ -24,3 +24,7 @@ void CHost::GetUniform() {
 void CHost::Print(ostream& outstream) {
 	outstream << "Host " << hostTypeNames[hostType] << " " << crewMemberName << " minutes " << airMinutes << "\n";
 }
+
+void CHost::PrintToFile(ofstream& outFile) {
+	outFile << "0 " << crewMemberName << " " << airMinutes << " " << CHost::hostType << "\n";
+}

@@ -1,6 +1,7 @@
 #include "Flight.h"
 #include "Host.h"
 #include "Pilot.h"
+#include "FlightCompException.h"
 
 CFlight::CFlight(CFlightInfo &flightInfo) {
     this->flightInfo = new CFlightInfo(flightInfo);
@@ -19,13 +20,30 @@ CFlight::CFlight(CFlightInfo &flightInfo, CPlane* plane) {
 CFlight::CFlight(const CFlight& other) {
     this->flightInfo = new CFlightInfo(*other.flightInfo);
     if (other.plane != nullptr)
-        this->plane = new CPlane(*other.plane);
+        this->plane = new CPlane(*other.plane );
     else
         this->plane = NULL;
     this->crewMemberAmount = other.crewMemberAmount;
-    this->crewMembers = new CCrewMember* [MAX_CREWS];
-    for (int i = 0; i < crewMemberAmount; i++)
-        this->crewMembers[i] = new CCrewMember(*other.crewMembers[i]);
+    this->crewMembers = new CCrewMember * [MAX_CREWS];
+
+    for (int i = 0; i < crewMemberAmount; i++) {
+        if (strcmp(typeid(*other.crewMembers[i]).name(), "class CHost") == 0)
+            this->crewMembers[i] = new CHost(*(CHost*)other.crewMembers[i]);
+        else if (strcmp(typeid(*other.crewMembers[i]).name(), "class CPilot") == 0)
+            this->crewMembers[i] = new CPilot(*(CPilot*)other.crewMembers[i]);
+    }
+}
+
+int CFlight::GetCrewMemberAmount() {
+    return crewMemberAmount;
+}
+
+CCrewMember** CFlight::GetCrewMembers() {
+    return crewMembers;
+}  
+
+CPlane* CFlight::GetPlane() {
+    return plane;
 }
 
 CFlightInfo& CFlight::GetFlightInfo() {
@@ -37,9 +55,9 @@ void CFlight::SetPlane(CPlane* newPlane) {
 }
 
 
-bool CFlight::TakeOff() {
+bool CFlight::TakeOff() throw (CCompStringException) {
     if (plane == NULL)
-        return false;
+        throw CCompStringException("CFlight: TakeOff: plane cannot be null.\n");
     int pilotAmount = 0;
     int superHostAmount = 0;
     for (int i = 0; i < crewMemberAmount; i++) { // count pilots and super-hosts
@@ -48,13 +66,13 @@ bool CFlight::TakeOff() {
         else if (((CHost*)crewMembers[i])->GetHostType() == CHost::eSuper)
             superHostAmount++;
     }
-    if (strcmp(typeid(plane).name(), "CCargo") == 0) { // cargo plane
+    if (strcmp(typeid(plane).name(), "class CCargo") == 0) { // cargo plane
         if (pilotAmount < 1)
-            return false;
+            throw CCompStringException("CFlight: TakeOff: pilotAmount cannot be under 1 for a cargo plane!\n");
     }
     else { // passenger plane
         if (pilotAmount != 1 || superHostAmount > 1)
-            return false;
+                throw CCompStringException("CFlight: TakeOff: pilotAmount cannot be 1 and superHostAmount cannot be over 1 for a passenger plane!\n");
     }
     plane->TakeOff(flightInfo->GetDuration());
     for (int i = 0; i < crewMemberAmount; i++)
@@ -72,6 +90,7 @@ void CFlight::operator+(CCrewMember* newCrewMember) {
     for (int i = 0; i < this->crewMemberAmount; i++)
         if (*crewMembers[i] == *newCrewMember)
             return;
+
     if (strcmp(typeid(*newCrewMember).name(), "class CHost") == 0)
         this->crewMembers[crewMemberAmount] =  new CHost(*(CHost*)newCrewMember);
     else if (strcmp(typeid(*newCrewMember).name(), "class CPilot") == 0)
@@ -86,6 +105,14 @@ ostream &operator<<(ostream &outstream, const CFlight &flight) {
     for (int i = 0; i < flight.crewMemberAmount; i++)
         flight.crewMembers[i]->Print(outstream);
     return outstream;
+}
+
+void CFlight::PrintToFile(ofstream& outFile) {
+    flightInfo->PrintToFile(outFile);
+    (plane == NULL ? outFile << "0\n" : outFile << "1 " << plane->GetId()) << "\n";
+    outFile << crewMemberAmount << "\n";
+    for (int i = 0; i < crewMemberAmount; i++)
+        crewMembers[i]->PrintToFile(outFile);
 }
 
 bool CFlight::operator==(CFlight* otherFlight)  {

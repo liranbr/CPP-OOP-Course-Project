@@ -4,8 +4,12 @@
 #include "Host.h"
 #include "Pilot.h"
 #include "Cargo.h"
+#include "FlightCompException.h"
+#include <iostream>
+#include <fstream>
+#include "PlaneCrewFactory.h"
 
-int CPlane::staticID = 100;
+int CPlane::lastID = 100;
 
 CFlightCompany::CFlightCompany(const char* nameOfCompany) {
 	this->nameOfCompany = new char[BUFFER];
@@ -18,6 +22,63 @@ CFlightCompany::CFlightCompany(const char* nameOfCompany) {
     this->flightAmount = 0;
 }
 
+CFlightCompany::CFlightCompany(const char* filePath, int muda) : CFlightCompany("") {
+    ifstream inFile(filePath);
+    inFile >> nameOfCompany; // set name of company
+    int amount;
+
+    inFile >> amount; // read crew member amount
+    for (int i = 0; i < amount; i++) { // read crew members
+        CCrewMember* cm = CPlaneCrewFactory::GetCrewMemberFromFile(inFile);
+        AddCrewMember(*cm);
+    }
+
+    inFile >> amount; // read plane amount
+    CPlaneCrewFactory::haveReadID = false; // about to read it from the first plane
+    for (int i = 0; i < amount; i++) { // read planes
+        CPlane* p = CPlaneCrewFactory::GetPlaneFromFile(inFile);
+        AddPlane(*p);
+    }
+
+    inFile >> amount; // read flight amount
+    for (int i = 0; i < amount; i++) { // read flights
+        CFlight* f = GetFlightFromFile(inFile);
+        AddFlight(*f);
+    }
+
+    inFile.close();
+}
+
+CFlight* CFlightCompany::GetFlightFromFile(ifstream& inFile) {
+    CFlight* f = nullptr;
+    try {
+        char destination[BUFFER];
+        int flightNum, duration, distance;
+        bool hasPlane; // 1 => has plane, 0 => no plane
+        inFile >> destination >> flightNum >> duration >> distance >> hasPlane;
+        CFlightInfo* fi = new CFlightInfo(destination, flightNum, duration, distance);
+        f = new CFlight(*fi);
+        if (hasPlane) {
+            int planeId;
+            inFile >> planeId;
+            for (int i = 0; i < planeAmount; i++)
+                if (planes[i]->GetId() == planeId)
+                    f->SetPlane(planes[i]);
+        }
+        int amount;
+        inFile >> amount;
+        for (int i = 0; i < amount; i++) {
+            CCrewMember* cm = CPlaneCrewFactory::GetCrewMemberFromFile(inFile);
+            cm->Print(cout);
+            *f + cm;
+        }
+    }
+    catch (CCompFileException& e) {
+        e.Show();
+    }
+    return f;
+}
+
 CFlightCompany::~CFlightCompany() {
 	delete[]nameOfCompany;
 }
@@ -28,19 +89,6 @@ char* CFlightCompany::GetNameOfCompany() {
 
 void CFlightCompany::SetName(const char* nameOfCompany) {
 	strcpy(this->nameOfCompany, nameOfCompany);
-}
-
-void CFlightCompany::Print(ostream& outstream) {
-	outstream << "Flight company: " << nameOfCompany << "\n";
-    outstream << "There are " << crewMemberAmount << " Crew members:\n";
-    for (int i = 0; i < crewMemberAmount; i++)
-        crewMembers[i]->Print(outstream);
-    outstream << "There are " << planeAmount << " Planes:\n";
-    for (int i = 0; i < planeAmount; i++)
-        outstream << *planes[i];
-    outstream << "There are " << flightAmount << " Flights:\n";
-    for (int i = 0; i < flightAmount; i++)
-        outstream << *flights[i];
 }
 
 bool CFlightCompany::AddCrewMember(CCrewMember& newMember) {
@@ -96,10 +144,10 @@ CCrewMember* CFlightCompany::GetCrewMember(int index) {
     return crewMembers[index];
 }
 
-CPlane* CFlightCompany::GetPlane(int planeIndex) {
+CPlane& CFlightCompany::operator[](int planeIndex) throw(CCompLimitException) {
     if (planeIndex >= 0 && planeIndex <= planeAmount - 1)
-        return planes[planeIndex];
-    return nullptr;
+        return *planes[planeIndex];
+    throw CCompLimitException(planeIndex);
 }
 
 void CFlightCompany::AddCrewToFlight(int flightID, int crewIndex) {
@@ -112,6 +160,10 @@ int CFlightCompany::GetCargoCount() {
         if (strcmp(typeid(*planes[i]).name(), "class CCargo") == 0)
             counter++;
     return counter;
+}
+
+int CFlightCompany::GetCrewCount() {
+    return crewMemberAmount;
 }
 
 void CFlightCompany::PilotsToSimulator() {
@@ -131,5 +183,53 @@ void CFlightCompany::CrewGetUniform() {
 }
 
 bool CFlightCompany::TakeOffFlight(int flightID) {
-    return GetFlightByNum(flightID)->TakeOff();
+    try {
+        return GetFlightByNum(flightID)->TakeOff();
+    }
+    catch (CCompStringException& e) {
+        e.Show();
+    }
+}
+
+
+void CFlightCompany::Print(ostream& outstream) {
+    if (strlen(nameOfCompany) == 0)
+        throw CCompStringException("nameOfCompany doesn't exist!");
+    outstream << "Flight company: " << nameOfCompany << "\n";
+    outstream << "There are " << crewMemberAmount << " Crew members:\n";
+    for (int i = 0; i < crewMemberAmount; i++)
+        crewMembers[i]->Print(outstream);
+    outstream << "There are " << planeAmount << " Planes:\n";
+    for (int i = 0; i < planeAmount; i++)
+        outstream << *planes[i];
+    outstream << "There are " << flightAmount << " Flights:\n";
+    for (int i = 0; i < flightAmount; i++)
+        outstream << *flights[i];
+}
+
+
+void CFlightCompany::PrintFile(ofstream& outFile) throw ( CCompStringException) {
+    if (strlen(nameOfCompany) == 0)
+        throw CCompStringException("nameOfCompany doesn't exist!");
+
+    outFile << nameOfCompany << "\n";
+    outFile << crewMemberAmount << "\n";
+    for (int i = 0; i < crewMemberAmount; i++)
+        crewMembers[i]->PrintToFile(outFile);
+
+    outFile << planeAmount << "\n";
+    for (int i = 0; i < planeAmount; i++)
+        planes[i]->PrintToFile(outFile, i);
+
+    outFile << flightAmount << "\n";
+    for (int i = 0; i < flightAmount; i++)
+        flights[i]->PrintToFile(outFile);
+}
+
+void CFlightCompany::SaveToFile(const char* fileName) throw (CCompFileException) {
+    ofstream outFile(fileName, ios::trunc);
+    if (!outFile)
+        throw CCompFileException(fileName);
+    PrintFile(outFile);
+    outFile.close();
 }

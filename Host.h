@@ -2,6 +2,7 @@
 #define __HOST_H
 
 #include <iostream>
+#include <fstream>
 #include "helper.h"
 #include "CrewMember.h"
 using namespace std;
@@ -16,6 +17,7 @@ public:
 		void GetPresent();
 		void GetUniform();
 		void Print(ostream& outstream);
+		void PrintToFile(ofstream& outFile);
 private:
 	enum hostTypes hostType;
 };

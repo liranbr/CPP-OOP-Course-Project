@@ -146,11 +146,13 @@
     <ClInclude Include="CrewMember.h" />
     <ClInclude Include="Flight.h" />
     <ClInclude Include="FlightCompany.h" />
+    <ClInclude Include="FlightCompException.h" />
     <ClInclude Include="FlightInfo.h" />
     <ClInclude Include="helper.h" />
     <ClInclude Include="Host.h" />
     <ClInclude Include="Pilot.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="PlaneCrewFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CAddress.cpp" />
@@ -162,7 +164,11 @@
     <ClCompile Include="CPilot.cpp" />
     <ClCompile Include="CPlane.cpp" />
     <ClCompile Include="CFlight.cpp" />
+    <ClCompile Include="CPlaneCrewFactory.cpp" />
     <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Delta.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
